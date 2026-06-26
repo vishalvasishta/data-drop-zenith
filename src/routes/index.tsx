@@ -3,6 +3,7 @@ import {
   Menu,
   X,
   ArrowRight,
+  ArrowUpRight,
   Download,
   Star,
   ShieldCheck,
@@ -15,6 +16,11 @@ import {
   Code2,
   Github,
   CheckCircle2,
+  CalendarDays,
+  Layers,
+  Users,
+  Compass,
+  Briefcase,
 } from "lucide-react";
 import { useState } from "react";
 
@@ -45,6 +51,7 @@ function Index() {
       <BackgroundMesh />
       <Navbar />
       <Hero />
+      <TrustSection />
     </div>
   );
 }
@@ -571,5 +578,91 @@ function VSCodeGlyph() {
     <svg viewBox="0 0 24 24" className="h-3.5 w-3.5" fill="currentColor">
       <path d="M17 2 7 11 4 9 2 10v4l2 1 3-2 10 9 5-2V4l-5-2Zm0 5v10l-7-5 7-5Z" />
     </svg>
+  );
+}
+
+/* -------------------------- Trust Section -------------------------- */
+
+const trustCards = [
+  {
+    icon: CalendarDays,
+    title: "18 Months",
+    desc: "A comprehensive, paced journey from fundamentals to job-ready expertise.",
+  },
+  {
+    icon: Layers,
+    title: "50+ Projects",
+    desc: "Build a portfolio that stands out with real-world, industry-grade projects.",
+  },
+  {
+    icon: Users,
+    title: "Live Mentorship",
+    desc: "Weekly live sessions with AI engineers who have shipped at top tech companies.",
+  },
+  {
+    icon: Compass,
+    title: "Career Guidance",
+    desc: "Personalised roadmaps, resume reviews, and LinkedIn optimisation.",
+  },
+  {
+    icon: Award,
+    title: "Certificate",
+    desc: "Industry-recognised credential that signals real competence to recruiters.",
+  },
+  {
+    icon: Briefcase,
+    title: "Placement Preparation",
+    desc: "Mock interviews, coding rounds, and company-specific preparation modules.",
+  },
+];
+
+function TrustSection() {
+  return (
+    <section className="relative bg-white">
+      {/* subtle top fade from hero mesh into white */}
+      <div className="pointer-events-none absolute inset-x-0 -top-24 h-24 bg-gradient-to-b from-transparent to-white" />
+
+      <div className="mx-auto max-w-7xl px-5 pt-28 pb-28 sm:px-8 lg:pt-36 lg:pb-36">
+        {/* headline */}
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[oklch(0.9_0.02_270)] bg-[oklch(0.98_0.005_260)] px-3 py-1 text-[11px] font-semibold tracking-widest text-[oklch(0.55_0.18_275)] uppercase">
+            <Sparkles className="h-3 w-3" />
+            Why Data Drop
+          </span>
+          <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl">
+            Trusted by Future{" "}
+            <span className="text-gradient-brand">AI Professionals.</span>
+          </h2>
+          <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
+            Everything you need to launch your AI career, built into one
+            transformative program.
+          </p>
+        </div>
+
+        {/* cards */}
+        <div className="mt-16 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {trustCards.map((card, i) => (
+            <div
+              key={card.title}
+              className="trust-card animate-card-rise rounded-3xl p-7"
+              style={{ animationDelay: `${i * 0.08}s` }}
+            >
+              <div className="flex items-start justify-between">
+                <span className="trust-icon grid h-12 w-12 place-items-center rounded-2xl">
+                  <card.icon className="h-5 w-5" strokeWidth={2} />
+                </span>
+                <ArrowUpRight className="h-4 w-4 text-muted-foreground/40 transition-colors group-hover:text-[oklch(0.55_0.18_275)]" />
+              </div>
+              <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
+                {card.title}
+              </h3>
+              <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+                {card.desc}
+              </p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
