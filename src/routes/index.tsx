@@ -4,6 +4,7 @@ import {
   X,
   ArrowRight,
   ArrowUpRight,
+  ArrowDown,
   Download,
   Star,
   ShieldCheck,
@@ -21,7 +22,18 @@ import {
   Users,
   Compass,
   Briefcase,
+  GraduationCap,
+  ScrollText,
+  FolderX,
+  UserX,
+  AlertTriangle,
+  BookOpen,
+  Rocket,
+  FolderGit2,
+  MessagesSquare,
+  Trophy,
 } from "lucide-react";
+
 import { useState } from "react";
 
 export const Route = createFileRoute("/")({
@@ -52,6 +64,8 @@ function Index() {
       <Navbar />
       <Hero />
       <TrustSection />
+      <JourneySection />
+
     </div>
   );
 }
@@ -666,3 +680,189 @@ function TrustSection() {
     </section>
   );
 }
+
+/* -------------------------- Journey Section -------------------------- */
+
+const traditionalSteps = [
+  { icon: GraduationCap, title: "College", note: "Four years of theory" },
+  { icon: ScrollText, title: "Degree", note: "A certificate on paper" },
+  { icon: FolderX, title: "No Projects", note: "Nothing real to show" },
+  { icon: UserX, title: "No Portfolio", note: "Invisible to recruiters" },
+  { icon: AlertTriangle, title: "Job Struggles", note: "Endless applications, no callbacks" },
+];
+
+const dataDropSteps = [
+  { icon: BookOpen, title: "Learn Skills", note: "Python, ML, DL, GenAI — taught the way industry uses them" },
+  { icon: Rocket, title: "Projects", note: "50+ real-world builds, shipped end-to-end" },
+  { icon: FolderGit2, title: "Portfolio", note: "GitHub, case studies, and a personal site that ranks" },
+  { icon: MessagesSquare, title: "Interview Prep", note: "Mock interviews with engineers from top AI teams" },
+  { icon: Trophy, title: "Career Ready", note: "Confident, hired, and shipping from day one" },
+];
+
+function JourneySection() {
+  return (
+    <section className="relative bg-white">
+      <div className="pointer-events-none absolute inset-0 -z-0 opacity-60">
+        <div className="absolute -left-32 top-40 h-[420px] w-[420px] rounded-full bg-[oklch(0.92_0.06_265)] blur-[120px]" />
+        <div className="absolute -right-32 bottom-20 h-[460px] w-[460px] rounded-full bg-[oklch(0.92_0.07_300)] blur-[140px]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-32 sm:px-8 lg:pt-36 lg:pb-40">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[oklch(0.9_0.02_270)] bg-[oklch(0.98_0.005_260)] px-3 py-1 text-[11px] font-semibold tracking-widest text-[oklch(0.55_0.18_275)] uppercase">
+            <Compass className="h-3 w-3" />
+            The Two Paths
+          </span>
+          <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-[3.5rem]">
+            Why College Alone{" "}
+            <span className="text-gradient-brand">Isn't Enough.</span>
+          </h2>
+          <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
+            A degree opens a door. A portfolio of real work walks you through it.
+            Here's how the two journeys diverge.
+          </p>
+        </div>
+
+        {/* Split */}
+        <div className="relative mt-20 grid grid-cols-1 gap-10 lg:grid-cols-2 lg:gap-14">
+          {/* Divider on lg */}
+          <div className="pointer-events-none absolute left-1/2 top-8 hidden h-[calc(100%-4rem)] -translate-x-1/2 lg:block">
+            <div className="h-full w-px bg-gradient-to-b from-transparent via-[oklch(0.9_0.02_270)] to-transparent" />
+          </div>
+
+          <JourneyColumn
+            label="Traditional Education"
+            tone="muted"
+            tagline="The default path"
+            steps={traditionalSteps}
+          />
+          <JourneyColumn
+            label="Data Drop"
+            tone="brand"
+            tagline="The practical path"
+            steps={dataDropSteps}
+          />
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function JourneyColumn({
+  label,
+  tagline,
+  tone,
+  steps,
+}: {
+  label: string;
+  tagline: string;
+  tone: "muted" | "brand";
+  steps: { icon: React.ElementType; title: string; note: string }[];
+}) {
+  const isBrand = tone === "brand";
+  return (
+    <div className="relative">
+      {/* Column header */}
+      <div
+        className={
+          "mb-8 flex items-center justify-between rounded-2xl border px-5 py-4 backdrop-blur-xl " +
+          (isBrand
+            ? "border-[oklch(0.88_0.05_275)] bg-gradient-to-r from-[oklch(0.97_0.03_265)] to-[oklch(0.97_0.04_300)]"
+            : "border-[oklch(0.92_0.01_265)] bg-[oklch(0.985_0.003_260)]")
+        }
+      >
+        <div>
+          <p className={"text-[11px] font-semibold uppercase tracking-[0.18em] " + (isBrand ? "text-[oklch(0.5_0.2_275)]" : "text-muted-foreground")}>
+            {tagline}
+          </p>
+          <h3 className="mt-1 text-xl font-semibold tracking-tight text-foreground">
+            {label}
+          </h3>
+        </div>
+        <span
+          className={
+            "grid h-10 w-10 place-items-center rounded-xl " +
+            (isBrand
+              ? "bg-gradient-to-br from-[oklch(0.6_0.22_265)] to-[oklch(0.55_0.24_300)] text-white shadow-[0_8px_20px_-6px_oklch(0.55_0.22_275/0.45)]"
+              : "bg-[oklch(0.94_0.01_265)] text-muted-foreground")
+          }
+        >
+          {isBrand ? <Sparkles className="h-4 w-4" /> : <GraduationCap className="h-4 w-4" />}
+        </span>
+      </div>
+
+      {/* Timeline */}
+      <ol className="relative space-y-4">
+        {steps.map((step, i) => (
+          <li key={step.title}>
+            <div
+              className={
+                "group relative rounded-3xl border bg-white/70 p-5 backdrop-blur-xl transition-all duration-500 ease-out hover:-translate-y-0.5 " +
+                (isBrand
+                  ? "border-[oklch(0.9_0.03_275)] shadow-[0_12px_36px_-20px_oklch(0.55_0.22_275/0.35)] hover:shadow-[0_24px_60px_-24px_oklch(0.55_0.22_275/0.45)]"
+                  : "border-[oklch(0.93_0.01_265)] shadow-[0_8px_24px_-18px_oklch(0.2_0.04_265/0.4)]")
+              }
+            >
+              <div className="flex items-start gap-4">
+                <span
+                  className={
+                    "relative grid h-12 w-12 shrink-0 place-items-center rounded-2xl " +
+                    (isBrand
+                      ? "bg-gradient-to-br from-[oklch(0.95_0.04_265)] to-[oklch(0.93_0.06_300)] text-[oklch(0.45_0.2_275)]"
+                      : "bg-[oklch(0.96_0.005_260)] text-[oklch(0.5_0.03_265)]")
+                  }
+                >
+                  <step.icon className="h-5 w-5" strokeWidth={2} />
+                  <span
+                    className={
+                      "absolute -right-1.5 -top-1.5 grid h-5 w-5 place-items-center rounded-full text-[10px] font-semibold " +
+                      (isBrand
+                        ? "bg-[oklch(0.55_0.22_275)] text-white"
+                        : "bg-white text-muted-foreground ring-1 ring-[oklch(0.9_0.01_265)]")
+                    }
+                  >
+                    {i + 1}
+                  </span>
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-3">
+                    <h4 className="text-[15px] font-semibold tracking-tight text-foreground">
+                      {step.title}
+                    </h4>
+                    {isBrand && i === steps.length - 1 && (
+                      <span className="inline-flex items-center gap-1 rounded-full bg-[oklch(0.96_0.04_150)] px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider text-[oklch(0.45_0.15_150)]">
+                        <CheckCircle2 className="h-3 w-3" />
+                        Outcome
+                      </span>
+                    )}
+                  </div>
+                  <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                    {step.note}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* connector arrow */}
+            {i < steps.length - 1 && (
+              <div className="flex justify-center py-2" aria-hidden>
+                <span
+                  className={
+                    "grid h-7 w-7 place-items-center rounded-full " +
+                    (isBrand
+                      ? "bg-gradient-to-br from-[oklch(0.6_0.22_265)] to-[oklch(0.55_0.24_300)] text-white shadow-[0_6px_16px_-6px_oklch(0.55_0.22_275/0.55)]"
+                      : "bg-[oklch(0.95_0.005_260)] text-muted-foreground")
+                  }
+                >
+                  <ArrowDown className="h-3.5 w-3.5" strokeWidth={2.5} />
+                </span>
+              </div>
+            )}
+          </li>
+        ))}
+      </ol>
+    </div>
+  );
+}
+
