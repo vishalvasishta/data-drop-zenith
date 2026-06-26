@@ -40,7 +40,7 @@ import {
   CircuitBoard,
   LineChart,
   Eye,
-  ArrowUpRight as ArrowUpRightIcon,
+
 } from "lucide-react";
 
 
