@@ -40,7 +40,12 @@ import {
   CircuitBoard,
   LineChart,
   Eye,
-
+  FileText,
+  BarChart3,
+  Scan,
+  Mic,
+  Image,
+  ShieldAlert,
 } from "lucide-react";
 
 
@@ -77,8 +82,7 @@ function Index() {
       <JourneySection />
       <SalarySection />
       <RoadmapSection />
-
-
+      <ProjectsSection />
     </div>
   );
 }
