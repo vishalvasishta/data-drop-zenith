@@ -65,6 +65,8 @@ function Index() {
       <Hero />
       <TrustSection />
       <JourneySection />
+      <SalarySection />
+
 
     </div>
   );
