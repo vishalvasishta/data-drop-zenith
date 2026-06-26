@@ -32,7 +32,17 @@ import {
   FolderGit2,
   MessagesSquare,
   Trophy,
+  Building2,
+  Calculator,
+  Stethoscope,
+  Scale,
+  Bot,
+  CircuitBoard,
+  LineChart,
+  Eye,
+
 } from "lucide-react";
+
 
 import { useState } from "react";
 
@@ -65,6 +75,8 @@ function Index() {
       <Hero />
       <TrustSection />
       <JourneySection />
+      <SalarySection />
+
 
     </div>
   );
@@ -862,6 +874,214 @@ function JourneyColumn({
           </li>
         ))}
       </ol>
+    </div>
+  );
+}
+
+/* -------------------------- Salary Section -------------------------- */
+
+const traditionalRoles = [
+  { icon: Building2, role: "Business Analyst", salary: "6 LPA", range: "4 – 9 LPA" },
+  { icon: Calculator, role: "Chartered Accountant", salary: "8 LPA", range: "6 – 12 LPA" },
+  { icon: Stethoscope, role: "Medical Officer", salary: "7 LPA", range: "5 – 11 LPA" },
+  { icon: Scale, role: "Corporate Lawyer", salary: "9 LPA", range: "6 – 14 LPA" },
+];
+
+const aiRoles = [
+  { icon: Bot, role: "GenAI Engineer", salary: "32 LPA", range: "22 – 60 LPA", tag: "Hot" },
+  { icon: Brain, role: "ML Engineer", salary: "28 LPA", range: "18 – 55 LPA" },
+  { icon: CircuitBoard, role: "AI Research Engineer", salary: "42 LPA", range: "30 – 90 LPA", tag: "Top" },
+  { icon: Eye, role: "Computer Vision Engineer", salary: "26 LPA", range: "16 – 50 LPA" },
+];
+
+function SalarySection() {
+  return (
+    <section className="relative overflow-hidden bg-[oklch(0.18_0.04_265)] text-white">
+      {/* glow mesh */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-32 top-10 h-[520px] w-[520px] rounded-full bg-[oklch(0.55_0.22_265)] opacity-30 blur-[140px]" />
+        <div className="absolute -right-32 bottom-0 h-[560px] w-[560px] rounded-full bg-[oklch(0.55_0.24_305)] opacity-25 blur-[160px]" />
+        <div className="absolute inset-0 opacity-[0.06] [background-image:linear-gradient(oklch(1_0_0)_1px,transparent_1px),linear-gradient(90deg,oklch(1_0_0)_1px,transparent_1px)] [background-size:48px_48px]" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-32 sm:px-8 lg:pt-36 lg:pb-40">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/[0.06] px-3 py-1 text-[11px] font-semibold tracking-widest uppercase text-white/80 backdrop-blur-xl">
+            <TrendingUp className="h-3 w-3" />
+            Salary Outlook · 2026
+          </span>
+          <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.03em] sm:text-5xl lg:text-[3.5rem]">
+            AI is Creating the{" "}
+            <span className="bg-gradient-to-r from-[oklch(0.85_0.12_240)] via-[oklch(0.78_0.16_275)] to-[oklch(0.78_0.18_310)] bg-clip-text text-transparent">
+              Highest Paying Careers.
+            </span>
+          </h2>
+          <p className="mt-5 text-[17px] leading-relaxed text-white/65">
+            Across industries, AI roles now command 3–5× the compensation of
+            traditional career paths — and the gap is widening every quarter.
+          </p>
+        </div>
+
+        {/* Compare */}
+        <div className="relative mt-20 grid grid-cols-1 gap-8 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch lg:gap-6">
+          <SalaryColumn
+            kind="traditional"
+            label="Traditional Careers"
+            tagline="Established paths"
+            roles={traditionalRoles}
+            average="₹7.5 LPA"
+            averageLabel="Avg. mid-career"
+          />
+
+          {/* VS Pill */}
+          <div className="relative flex items-center justify-center lg:px-2">
+            <div className="absolute inset-y-0 left-1/2 hidden w-px -translate-x-1/2 bg-gradient-to-b from-transparent via-white/15 to-transparent lg:block" />
+            <span className="relative grid h-16 w-16 place-items-center rounded-full border border-white/15 bg-[oklch(0.22_0.05_265)] text-sm font-semibold tracking-widest text-white/80 shadow-[0_20px_60px_-20px_oklch(0.55_0.22_275/0.6)] backdrop-blur-xl">
+              VS
+            </span>
+          </div>
+
+          <SalaryColumn
+            kind="ai"
+            label="AI Careers"
+            tagline="The next decade"
+            roles={aiRoles}
+            average="₹32 LPA"
+            averageLabel="Avg. mid-career"
+          />
+        </div>
+
+        {/* Footnote */}
+        <p className="mt-12 text-center text-xs uppercase tracking-[0.2em] text-white/40">
+          Source · Glassdoor · LinkedIn Salary · Naukri · Levels.fyi · India 2026
+        </p>
+      </div>
+    </section>
+  );
+}
+
+function SalaryColumn({
+  kind,
+  label,
+  tagline,
+  roles,
+  average,
+  averageLabel,
+}: {
+  kind: "traditional" | "ai";
+  label: string;
+  tagline: string;
+  roles: { icon: React.ElementType; role: string; salary: string; range: string; tag?: string }[];
+  average: string;
+  averageLabel: string;
+}) {
+  const isAi = kind === "ai";
+  return (
+    <div
+      className={
+        "group relative overflow-hidden rounded-[28px] border p-7 backdrop-blur-2xl transition-all duration-500 ease-out sm:p-8 " +
+        (isAi
+          ? "border-white/15 bg-gradient-to-br from-[oklch(0.35_0.18_265)]/80 via-[oklch(0.3_0.16_280)]/70 to-[oklch(0.32_0.2_305)]/80 shadow-[0_40px_100px_-30px_oklch(0.55_0.22_275/0.7)]"
+          : "border-white/10 bg-white/[0.04]")
+      }
+    >
+      {/* inner glow */}
+      {isAi && (
+        <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-[oklch(0.78_0.18_310)] opacity-25 blur-3xl" />
+      )}
+
+      <div className="relative flex items-start justify-between gap-3">
+        <div>
+          <p className={"text-[11px] font-semibold uppercase tracking-[0.18em] " + (isAi ? "text-[oklch(0.85_0.12_280)]" : "text-white/45")}>
+            {tagline}
+          </p>
+          <h3 className="mt-1 text-xl font-semibold tracking-tight">{label}</h3>
+        </div>
+        {isAi && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-[oklch(0.96_0.04_150)]/95 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[oklch(0.35_0.15_150)]">
+            <TrendingUp className="h-3 w-3" /> +280%
+          </span>
+        )}
+      </div>
+
+      {/* Average headline */}
+      <div className="relative mt-7 flex items-end justify-between border-b border-white/10 pb-7">
+        <div>
+          <p className="text-[11px] uppercase tracking-[0.18em] text-white/45">
+            {averageLabel}
+          </p>
+          <p
+            className={
+              "mt-1 font-semibold leading-none tracking-[-0.04em] " +
+              (isAi
+                ? "bg-gradient-to-br from-white via-white to-[oklch(0.85_0.12_280)] bg-clip-text text-[3.2rem] text-transparent sm:text-[4rem]"
+                : "text-[3.2rem] text-white/85 sm:text-[4rem]")
+            }
+          >
+            {average}
+          </p>
+        </div>
+        <span
+          className={
+            "grid h-12 w-12 place-items-center rounded-2xl " +
+            (isAi
+              ? "bg-white/15 text-white shadow-inner"
+              : "bg-white/[0.06] text-white/60")
+          }
+        >
+          {isAi ? <LineChart className="h-5 w-5" /> : <Briefcase className="h-5 w-5" />}
+        </span>
+      </div>
+
+      {/* Roles */}
+      <ul className="relative mt-6 space-y-3">
+        {roles.map((r) => (
+          <li
+            key={r.role}
+            className={
+              "flex items-center gap-4 rounded-2xl border p-3.5 transition-all duration-300 hover:-translate-y-0.5 " +
+              (isAi
+                ? "border-white/10 bg-white/[0.05] hover:border-white/25 hover:bg-white/[0.09]"
+                : "border-white/10 bg-white/[0.025] hover:bg-white/[0.05]")
+            }
+          >
+            <span
+              className={
+                "grid h-10 w-10 shrink-0 place-items-center rounded-xl " +
+                (isAi
+                  ? "bg-gradient-to-br from-[oklch(0.7_0.18_265)] to-[oklch(0.65_0.22_305)] text-white"
+                  : "bg-white/[0.08] text-white/70")
+              }
+            >
+              <r.icon className="h-4 w-4" strokeWidth={2} />
+            </span>
+            <div className="min-w-0 flex-1">
+              <div className="flex items-center gap-2">
+                <p className="truncate text-[14px] font-medium text-white/90">
+                  {r.role}
+                </p>
+                {r.tag && (
+                  <span className="rounded-full bg-[oklch(0.96_0.04_150)]/15 px-1.5 py-0.5 text-[9px] font-semibold uppercase tracking-wider text-[oklch(0.85_0.18_150)]">
+                    {r.tag}
+                  </span>
+                )}
+              </div>
+              <p className="mt-0.5 text-[11px] uppercase tracking-wider text-white/40">
+                {r.range}
+              </p>
+            </div>
+            <p
+              className={
+                "shrink-0 text-right font-semibold tabular-nums tracking-tight " +
+                (isAi ? "text-[18px] text-white" : "text-[18px] text-white/75")
+              }
+            >
+              ₹{r.salary}
+            </p>
+          </li>
+        ))}
+      </ul>
     </div>
   );
 }
