@@ -3,6 +3,7 @@ import {
   Menu,
   X,
   ArrowRight,
+  ArrowUpRight,
   Download,
   Star,
   ShieldCheck,
@@ -15,6 +16,11 @@ import {
   Code2,
   Github,
   CheckCircle2,
+  CalendarDays,
+  Layers,
+  Users,
+  Compass,
+  Briefcase,
 } from "lucide-react";
 import { useState } from "react";
 
