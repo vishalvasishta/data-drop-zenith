@@ -76,6 +76,7 @@ function Index() {
       <TrustSection />
       <JourneySection />
       <SalarySection />
+      <RoadmapSection />
 
 
     </div>
