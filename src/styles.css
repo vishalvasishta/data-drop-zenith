@@ -174,12 +174,17 @@
   backdrop-filter: blur(20px) saturate(150%);
   border: 1px solid oklch(0.93 0.01 260 / 0.7);
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s ease;
-}
 
-@utility trust-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 32px 64px -20px oklch(0.55 0.22 265 / 0.15), 0 12px 28px -8px oklch(0.55 0.22 265 / 0.1);
-  border-color: oklch(0.85 0.04 270 / 0.9);
+  &:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 32px 64px -20px oklch(0.55 0.22 265 / 0.15), 0 12px 28px -8px oklch(0.55 0.22 265 / 0.1);
+    border-color: oklch(0.85 0.04 270 / 0.9);
+  }
+
+  &:hover .trust-icon {
+    transform: scale(1.08) rotate(-3deg);
+    box-shadow: 0 8px 20px -6px oklch(0.55 0.22 265 / 0.25);
+  }
 }
 
 @utility trust-icon {
@@ -188,7 +193,3 @@
   transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
 }
 
-@utility trust-card:hover .trust-icon {
-  transform: scale(1.08) rotate(-3deg);
-  box-shadow: 0 8px 20px -6px oklch(0.55 0.22 265 / 0.25);
-}
