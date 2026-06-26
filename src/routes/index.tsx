@@ -4,6 +4,7 @@ import {
   X,
   ArrowRight,
   ArrowUpRight,
+  ArrowDown,
   Download,
   Star,
   ShieldCheck,
@@ -21,7 +22,18 @@ import {
   Users,
   Compass,
   Briefcase,
+  GraduationCap,
+  ScrollText,
+  FolderX,
+  UserX,
+  AlertTriangle,
+  BookOpen,
+  Rocket,
+  FolderGit2,
+  MessagesSquare,
+  Trophy,
 } from "lucide-react";
+
 import { useState } from "react";
 
 export const Route = createFileRoute("/")({
