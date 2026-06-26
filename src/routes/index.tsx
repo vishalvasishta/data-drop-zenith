@@ -32,7 +32,17 @@ import {
   FolderGit2,
   MessagesSquare,
   Trophy,
+  Building2,
+  Calculator,
+  Stethoscope,
+  Scale,
+  Bot,
+  CircuitBoard,
+  LineChart,
+  Eye,
+  ArrowUpRight as ArrowUpRightIcon,
 } from "lucide-react";
+
 
 import { useState } from "react";
 
