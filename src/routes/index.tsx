@@ -64,6 +64,8 @@ function Index() {
       <Navbar />
       <Hero />
       <TrustSection />
+      <JourneySection />
+
     </div>
   );
 }
