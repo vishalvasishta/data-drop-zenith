@@ -51,6 +51,7 @@ function Index() {
       <BackgroundMesh />
       <Navbar />
       <Hero />
+      <TrustSection />
     </div>
   );
 }
