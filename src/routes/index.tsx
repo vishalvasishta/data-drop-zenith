@@ -96,7 +96,7 @@ function Navbar() {
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#" className="flex items-center gap-2.5">
           <span className="relative grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.55_0.22_260)] to-[oklch(0.55_0.26_300)] shadow-glass">
-            <Database className="h-4.5 w-4.5 text-white" strokeWidth={2.5} />
+            <Database className="h-4 w-4 text-white" strokeWidth={2.5} />
           </span>
           <span className="text-[17px] font-semibold tracking-tight">Data Drop</span>
         </a>
@@ -124,7 +124,7 @@ function Navbar() {
             className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-border bg-white/60 backdrop-blur md:hidden"
             aria-label="Toggle menu"
           >
-            {open ? <X className="h-4.5 w-4.5" /> : <Menu className="h-4.5 w-4.5" />}
+            {open ? <X className="h-4 w-4" /> : <Menu className="h-4 w-4" />}
           </button>
         </div>
       </nav>
