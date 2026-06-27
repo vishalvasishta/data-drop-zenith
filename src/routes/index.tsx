@@ -46,6 +46,8 @@ import {
   Mic,
   Image,
   ShieldAlert,
+  Zap,
+  Lock,
 } from "lucide-react";
 
 
