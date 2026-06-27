@@ -50,6 +50,21 @@ import {
 
 
 import { useState } from "react";
+import {
+  siPython,
+  siPandas,
+  siNumpy,
+  siScikitlearn,
+  siTensorflow,
+  siPytorch,
+  siOpencv,
+  siGithub,
+  siJupyter,
+  siFastapi,
+  siStreamlit,
+  siDocker,
+} from "simple-icons";
+import type { SimpleIcon } from "simple-icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
