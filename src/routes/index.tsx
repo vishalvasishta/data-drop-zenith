@@ -83,6 +83,7 @@ function Index() {
       <SalarySection />
       <RoadmapSection />
       <ProjectsSection />
+      <ToolsSection />
     </div>
   );
 }
