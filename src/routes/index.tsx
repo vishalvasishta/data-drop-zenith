@@ -1392,6 +1392,115 @@ function ProjectsSection() {
   );
 }
 
+/* --------------------------- Tools Section ---------------------------- */
+
+const toolCategories = [
+  {
+    label: "Programming",
+    hue: "260",
+    tools: ["Python", "VS Code", "Git & GitHub", "Jupyter Notebook", "Google Colab"],
+  },
+  {
+    label: "Machine Learning",
+    hue: "280",
+    tools: ["Pandas", "NumPy", "Scikit-learn", "TensorFlow", "PyTorch", "OpenCV"],
+  },
+  {
+    label: "Generative AI",
+    hue: "300",
+    tools: ["ChatGPT", "Gemini", "Claude", "Hugging Face", "LangChain", "LangGraph", "Ollama", "ChromaDB"],
+  },
+  {
+    label: "Deployment",
+    hue: "245",
+    tools: ["FastAPI", "Streamlit", "Docker", "REST APIs"],
+  },
+];
+
+function ToolsSection() {
+  return (
+    <section className="relative overflow-hidden bg-white">
+      {/* soft background glows */}
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-40 top-1/4 h-[500px] w-[500px] rounded-full bg-[oklch(0.9_0.08_260)] blur-[160px] opacity-40" />
+        <div className="absolute -right-40 bottom-1/4 h-[500px] w-[500px] rounded-full bg-[oklch(0.9_0.08_300)] blur-[160px] opacity-35" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-32 sm:px-8 lg:pt-36 lg:pb-40">
+        {/* Header */}
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[oklch(0.9_0.02_270)] bg-[oklch(0.98_0.005_260)] px-3 py-1 text-[11px] font-semibold tracking-widest text-[oklch(0.55_0.18_275)] uppercase">
+            <Cpu className="h-3 w-3" />
+            Tech Stack
+          </span>
+          <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-[3.5rem]">
+            Master{" "}
+            <span className="text-gradient-brand">Industry Tools.</span>
+          </h2>
+          <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
+            Work with the same tools used by engineers at Google, OpenAI, and
+            top AI startups. Not theory — hands-on fluency.
+          </p>
+        </div>
+
+        {/* Categories */}
+        <div className="mt-20 space-y-20">
+          {toolCategories.map((cat, ci) => (
+            <div key={cat.label}>
+              <div className="mb-8 flex items-center gap-3">
+                <span
+                  className="h-px flex-1"
+                  style={{
+                    background: `linear-gradient(to right, transparent, oklch(0.85 0.06 ${cat.hue}))`,
+                  }}
+                />
+                <h3 className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
+                  {cat.label}
+                </h3>
+                <span
+                  className="h-px flex-1"
+                  style={{
+                    background: `linear-gradient(to left, transparent, oklch(0.85 0.06 ${cat.hue}))`,
+                  }}
+                />
+              </div>
+
+              <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5">
+                {cat.tools.map((tool, ti) => {
+                  const initial = tool
+                    .split(" ")
+                    .map((w) => w[0])
+                    .join("")
+                    .slice(0, 2)
+                    .toUpperCase();
+                  return (
+                    <div
+                      key={tool}
+                      className="tool-card animate-card-rise group rounded-2xl p-5"
+                      style={{ animationDelay: `${(ci * 0.15) + (ti * 0.06)}s` }}
+                    >
+                      <div className="flex flex-col items-center gap-3.5 text-center">
+                        <span
+                          className="tool-icon grid h-12 w-12 place-items-center rounded-xl text-sm font-bold tracking-tight shadow-glass"
+                        >
+                          {initial}
+                        </span>
+                        <span className="text-sm font-semibold text-foreground">
+                          {tool}
+                        </span>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 function ProjectPreview({ type, hue }: { type: string; hue: string }) {
   const panel =
     "absolute rounded-md shadow-sm backdrop-blur-sm";
