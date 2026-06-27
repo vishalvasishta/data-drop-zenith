@@ -212,6 +212,20 @@
   }
 }
 
+@utility pricing-card {
+  background: linear-gradient(180deg, oklch(1 0 0 / 0.95) 0%, oklch(0.985 0.003 260 / 0.88) 100%);
+  backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid oklch(0.9 0.02 270 / 0.6);
+  transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1), border-color 0.4s ease;
+  box-shadow: 0 24px 60px -16px oklch(0.55 0.22 265 / 0.25), 0 8px 24px -8px oklch(0.2 0.04 265 / 0.08);
+
+  &:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 40px 80px -20px oklch(0.55 0.22 265 / 0.35), 0 16px 40px -12px oklch(0.55 0.22 265 / 0.15);
+    border-color: oklch(0.75 0.12 265 / 0.8);
+  }
+}
+
 @utility tool-card {
   background: linear-gradient(180deg, oklch(1 0 0 / 0.9) 0%, oklch(0.985 0.003 260 / 0.85) 100%);
   backdrop-filter: blur(20px) saturate(160%);
