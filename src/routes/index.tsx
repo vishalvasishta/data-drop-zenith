@@ -50,6 +50,21 @@ import {
 
 
 import { useState } from "react";
+import {
+  siPython,
+  siPandas,
+  siNumpy,
+  siScikitlearn,
+  siTensorflow,
+  siPytorch,
+  siOpencv,
+  siGithub,
+  siJupyter,
+  siFastapi,
+  siStreamlit,
+  siDocker,
+} from "simple-icons";
+import type { SimpleIcon } from "simple-icons";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -83,6 +98,7 @@ function Index() {
       <SalarySection />
       <RoadmapSection />
       <ProjectsSection />
+      <ToolsSection />
     </div>
   );
 }
@@ -1544,5 +1560,88 @@ function ProjectPreview({ type, hue }: { type: string; hue: string }) {
     default:
       return null;
   }
+}
+
+/* ------------------------- Tools Section ------------------------- */
+
+const tools: { name: string; icon: SimpleIcon | null }[] = [
+  { name: "Python", icon: siPython },
+  { name: "Pandas", icon: siPandas },
+  { name: "NumPy", icon: siNumpy },
+  { name: "Scikit Learn", icon: siScikitlearn },
+  { name: "TensorFlow", icon: siTensorflow },
+  { name: "PyTorch", icon: siPytorch },
+  { name: "OpenCV", icon: siOpencv },
+  { name: "GitHub", icon: siGithub },
+  { name: "VS Code", icon: null },
+  { name: "Jupyter", icon: siJupyter },
+  { name: "FastAPI", icon: siFastapi },
+  { name: "Streamlit", icon: siStreamlit },
+  { name: "Docker", icon: siDocker },
+];
+
+function ToolIcon({ icon, className }: { icon: SimpleIcon; className?: string }) {
+  return (
+    <svg role="img" viewBox="0 0 24 24" className={className} fill={`#${icon.hex}`}>
+      <path d={icon.path} />
+    </svg>
+  );
+}
+
+function VSCodeIcon({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 24 24" className={className} fill="currentColor">
+      <path d="M17 2 7 11 4 9 2 10v4l2 1 3-2 10 9 5-2V4l-5-2Zm0 5v10l-7-5 7-5Z" />
+    </svg>
+  );
+}
+
+function ToolsSection() {
+  return (
+    <section className="relative overflow-hidden bg-[oklch(0.985_0.003_265)]">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-32 top-20 h-[520px] w-[520px] rounded-full bg-[oklch(0.92_0.06_265)] blur-[160px] opacity-60" />
+        <div className="absolute -right-32 bottom-20 h-[520px] w-[520px] rounded-full bg-[oklch(0.92_0.06_300)] blur-[160px] opacity-50" />
+      </div>
+
+      <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-32 sm:px-8 lg:pt-36 lg:pb-40">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[oklch(0.9_0.02_270)] bg-[oklch(0.98_0.005_260)] px-3 py-1 text-[11px] font-semibold tracking-widest text-[oklch(0.55_0.18_275)] uppercase">
+            <Code2 className="h-3 w-3" />
+            Tech Stack
+          </span>
+          <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-[3.5rem]">
+            Master Industry{" "}
+            <span className="text-gradient-brand">Tools.</span>
+          </h2>
+          <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
+            Learn the exact tools and frameworks used by top AI engineers
+            at Google, OpenAI, Meta, and Fortune 500 companies.
+          </p>
+        </div>
+
+        <div className="mt-16 grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6">
+          {tools.map((t, i) => (
+            <div
+              key={t.name}
+              className="group tool-card animate-card-rise flex flex-col items-center justify-center rounded-2xl px-4 py-8"
+              style={{ animationDelay: `${i * 0.06}s` }}
+            >
+              <div className="tool-icon-wrap relative mb-4 grid h-16 w-16 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.95_0.04_265)] to-[oklch(0.93_0.06_300)] shadow-soft transition-all duration-500 group-hover:scale-110">
+                {t.name === "VS Code" ? (
+                  <VSCodeIcon className="h-8 w-8 text-[oklch(0.45_0.15_210)]" />
+                ) : t.icon ? (
+                  <ToolIcon icon={t.icon} className="h-8 w-8" />
+                ) : null}
+              </div>
+              <span className="text-sm font-semibold tracking-tight text-foreground">
+                {t.name}
+              </span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
 }
 
