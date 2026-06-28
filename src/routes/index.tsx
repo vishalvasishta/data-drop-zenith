@@ -1771,3 +1771,254 @@ function PricingSection() {
     </section>
   );
 }
+
+/* ----------------------------- FAQ Section ----------------------------- */
+
+const faqs = [
+  {
+    question: "Who is this course for?",
+    answer:
+      "This course is designed for anyone looking to break into AI and Machine Learning — students, working professionals, and career switchers. Whether you come from a technical background or are completely new to programming, our structured curriculum and mentor support will guide you from fundamentals to advanced AI engineering.",
+  },
+  {
+    question: "Is it beginner friendly?",
+    answer:
+      "Absolutely. We start from absolute basics — Python programming, logic building, and core math concepts. No prior coding or AI experience is required. Our live mentorship and step-by-step projects ensure you never feel lost, even if you're starting from scratch.",
+  },
+  {
+    question: "How long is the course?",
+    answer:
+      "The complete AI Career Program spans 18 months. This includes foundational training, hands-on projects, advanced specializations, and dedicated interview preparation. You also get lifetime access to all course materials and future updates.",
+  },
+  {
+    question: "Will I get projects?",
+    answer:
+      "Yes. You will build 50+ real-world projects throughout the program — from a ChatGPT clone and AI Resume Builder to Object Detection systems and Fraud Detection models. Each project is designed to be portfolio-ready and interview-worthy.",
+  },
+  {
+    question: "Will I receive a certificate?",
+    answer:
+      "Upon successful completion of the program and required projects, you will receive an industry-recognized certificate. This certificate validates your skills in Python, Machine Learning, Deep Learning, Generative AI, and AI Engineering.",
+  },
+  {
+    question: "Do you provide career guidance?",
+    answer:
+      "Yes, career support is a core part of our program. You get resume reviews, LinkedIn optimization, mock interviews, referral opportunities, and direct connections with hiring partners. Our goal is not just to teach you AI, but to help you land your dream job.",
+  },
+];
+
+function FAQSection() {
+  return (
+    <section id="faq" className="relative overflow-hidden bg-background">
+      <div className="pointer-events-none absolute inset-0">
+        <div className="absolute -left-32 top-1/4 h-[480px] w-[480px] rounded-full bg-[oklch(0.92_0.06_265)] blur-[160px] opacity-40" />
+        <div className="absolute -right-32 bottom-1/4 h-[480px] w-[480px] rounded-full bg-[oklch(0.92_0.06_300)] blur-[160px] opacity-40" />
+      </div>
+
+      <div className="relative mx-auto max-w-3xl px-5 pt-28 pb-32 sm:px-8 lg:pt-36 lg:pb-40">
+        <div className="mx-auto max-w-2xl text-center">
+          <span className="inline-flex items-center gap-1.5 rounded-full border border-[oklch(0.9_0.02_270)] bg-[oklch(0.98_0.005_260)] px-3 py-1 text-[11px] font-semibold tracking-widest text-[oklch(0.55_0.18_275)] uppercase">
+            <HelpCircle className="h-3 w-3" />
+            FAQ
+          </span>
+          <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.05] tracking-[-0.03em] text-foreground sm:text-5xl lg:text-[3.5rem]">
+            Frequently Asked{" "}
+            <span className="text-gradient-brand">Questions.</span>
+          </h2>
+          <p className="mt-5 text-[17px] leading-relaxed text-muted-foreground">
+            Everything you need to know about the program. Can&apos;t find what
+            you&apos;re looking for? Reach out to our team.
+          </p>
+        </div>
+
+        <Accordion type="single" collapsible className="mt-16 space-y-4">
+          {faqs.map((faq, i) => (
+            <AccordionItem
+              key={i}
+              value={`item-${i}`}
+              className="faq-card rounded-2xl px-6 py-1 border-b-0"
+            >
+              <AccordionTrigger className="py-5 text-left text-base font-semibold text-foreground hover:no-underline data-[state=open]:text-[oklch(0.55_0.22_265)]">
+                {faq.question}
+              </AccordionTrigger>
+              <AccordionContent className="pb-5 text-[15px] leading-relaxed text-muted-foreground">
+                {faq.answer}
+              </AccordionContent>
+            </AccordionItem>
+          ))}
+        </Accordion>
+      </div>
+    </section>
+  );
+}
+
+/* ----------------------------- Footer ----------------------------- */
+
+function Footer() {
+  return (
+    <footer className="relative border-t border-border/60 bg-white">
+      <div className="mx-auto max-w-7xl px-5 pt-20 pb-12 sm:px-8">
+        <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
+          {/* Brand + Newsletter */}
+          <div className="lg:col-span-4">
+            <a href="#" className="flex items-center gap-2.5">
+              <span className="relative grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.55_0.22_260)] to-[oklch(0.55_0.26_300)] shadow-glass">
+                <Database className="h-4 w-4 text-white" strokeWidth={2.5} />
+              </span>
+              <span className="text-[17px] font-semibold tracking-tight">
+                Data Drop
+              </span>
+            </a>
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
+              India&apos;s most practical AI career program. Master AI &amp; ML
+              through live mentorship, real-world projects, and career guidance.
+            </p>
+
+            <div className="mt-6">
+              <p className="text-sm font-medium text-foreground">
+                Subscribe to our newsletter
+              </p>
+              <div className="mt-2 flex gap-2">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="flex-1 rounded-xl border border-border bg-background px-4 py-2.5 text-sm outline-none ring-ring transition-all focus:ring-2"
+                />
+                <button className="inline-flex items-center justify-center rounded-xl bg-gradient-to-br from-[oklch(0.58_0.22_258)] to-[oklch(0.52_0.26_290)] px-4 py-2.5 text-white shadow-soft transition-all hover:-translate-y-0.5">
+                  <Send className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Link Columns */}
+          <div className="grid grid-cols-2 gap-8 sm:grid-cols-3 lg:col-span-8">
+            <div>
+              <h4 className="text-sm font-semibold text-foreground">
+                Quick Links
+              </h4>
+              <ul className="mt-4 space-y-3">
+                {["Curriculum", "Projects", "Pricing", "FAQ"].map((link) => (
+                  <li key={link}>
+                    <a
+                      href={`#${link.toLowerCase()}`}
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-foreground">Contact</h4>
+              <ul className="mt-4 space-y-3">
+                <li>
+                  <a
+                    href="mailto:hello@datadrop.in"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    hello@datadrop.in
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Support Center
+                  </a>
+                </li>
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Community
+                  </a>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <h4 className="text-sm font-semibold text-foreground">Legal</h4>
+              <ul className="mt-4 space-y-3">
+                {["Privacy Policy", "Refund Policy", "Terms"].map((link) => (
+                  <li key={link}>
+                    <a
+                      href="#"
+                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    >
+                      {link}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Bar */}
+        <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 sm:flex-row">
+          <p className="text-xs text-muted-foreground">
+            &copy; {new Date().getFullYear()} Data Drop. All rights reserved.
+          </p>
+
+          <div className="flex items-center gap-4">
+            <a
+              href="#"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="X (Twitter)"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+              </svg>
+            </a>
+            <a
+              href="#"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="LinkedIn"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+              </svg>
+            </a>
+            <a
+              href="#"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="Instagram"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+            </a>
+            <a
+              href="#"
+              className="text-muted-foreground transition-colors hover:text-foreground"
+              aria-label="YouTube"
+            >
+              <svg
+                className="h-5 w-5"
+                fill="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  );
+}
