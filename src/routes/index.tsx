@@ -111,6 +111,8 @@ function Index() {
       <ProjectsSection />
       <ToolsSection />
       <PricingSection />
+      <FAQSection />
+      <Footer />
     </div>
   );
 }
