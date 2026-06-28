@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import ddLogo from "@/assets/dd-logo.png.asset.json";
 import {
   Accordion,
   AccordionContent,
@@ -163,9 +164,7 @@ function Navbar() {
     <header className="glass-nav sticky top-0 z-50">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <a href="#" className="flex items-center gap-2.5">
-          <span className="relative grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.55_0.22_260)] to-[oklch(0.55_0.26_300)] shadow-glass">
-            <Database className="h-4 w-4 text-white" strokeWidth={2.5} />
-          </span>
+          <img src={ddLogo.url} alt="Data Drop logo" className="h-9 w-9 rounded-2xl object-contain" />
           <span className="text-[17px] font-semibold tracking-tight">Data Drop</span>
         </a>
 
@@ -1862,9 +1861,7 @@ function Footer() {
           {/* Brand + Newsletter */}
           <div className="lg:col-span-4">
             <a href="#" className="flex items-center gap-2.5">
-              <span className="relative grid h-9 w-9 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.55_0.22_260)] to-[oklch(0.55_0.26_300)] shadow-glass">
-                <Database className="h-4 w-4 text-white" strokeWidth={2.5} />
-              </span>
+              <img src={ddLogo.url} alt="Data Drop logo" className="h-9 w-9 rounded-2xl object-contain" />
               <span className="text-[17px] font-semibold tracking-tight">
                 Data Drop
               </span>
