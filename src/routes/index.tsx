@@ -54,6 +54,9 @@ import {
   ShieldAlert,
   Zap,
   Lock,
+  HelpCircle,
+  Mail,
+  Send,
 } from "lucide-react";
 
 
