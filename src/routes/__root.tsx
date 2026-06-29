@@ -120,9 +120,6 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
