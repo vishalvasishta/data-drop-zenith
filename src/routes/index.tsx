@@ -102,7 +102,6 @@ function Index() {
   return (
     <div className="relative min-h-screen overflow-x-hidden bg-background text-foreground">
       <BackgroundMesh />
-      <Navbar />
       <Hero />
       <TrustSection />
       <JourneySection />
@@ -112,7 +111,6 @@ function Index() {
       <ToolsSection />
       <PricingSection />
       <FAQSection />
-      <Footer />
     </div>
   );
 }
