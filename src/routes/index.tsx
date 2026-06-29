@@ -1,5 +1,4 @@
 import { createFileRoute } from "@tanstack/react-router";
-import ddLogo from "@/assets/dd-logo.png.asset.json";
 import {
   Accordion,
   AccordionContent,
