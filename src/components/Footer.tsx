@@ -69,14 +69,6 @@ export function Footer() {
               <ul className="mt-4 space-y-3">
                 <li>
                   <a
-                    href="mailto:hello@datadrop.in"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    hello@datadrop.in
-                  </a>
-                </li>
-                <li>
-                  <a
                     href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info"
                     target="_blank"
                     rel="noopener noreferrer"
