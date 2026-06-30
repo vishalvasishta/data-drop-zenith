@@ -1,6 +1,5 @@
 import { useState } from "react";
 import { Link } from "@tanstack/react-router";
-import ddLogo from "@/assets/dd-logo.png.asset.json";
 import { Menu, X, ArrowRight } from "lucide-react";
 
 export function Navbar() {
@@ -15,15 +14,12 @@ export function Navbar() {
   return (
     <header className="glass-nav sticky top-0 z-50">
       <nav className="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
-        <Link to="/" className="flex items-center gap-2.5">
+        <Link to="/" className="flex items-center">
           <img
-            src={ddLogo.url}
-            alt="Data Drop logo"
-            className="h-9 w-9 rounded-2xl object-contain"
+            src="/assets/logo.png"
+            alt="Data Drop Logo"
+            className="h-10 w-auto object-contain sm:h-12"
           />
-          <span className="text-[17px] font-semibold tracking-tight">
-            Data Drop
-          </span>
         </Link>
 
         <ul className="hidden items-center gap-1 md:flex">
