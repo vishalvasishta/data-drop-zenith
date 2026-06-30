@@ -1,32 +1,10 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useRef, useState } from "react";
-import {
-  MessagesSquare,
-  FileText,
-  BarChart3,
-  Scan,
-  Mic,
-  Image as ImageIcon,
-  ShieldAlert,
-  ShieldCheck,
-  FolderGit2,
-  Sparkles,
-  Clock,
-  ArrowRight,
-  Stethoscope,
-  TrendingUp,
-  UserSquare2,
-  ScanLine,
-  Rocket,
-  Download,
-  Cpu,
-  Layers,
-  Zap,
-} from "lucide-react";
+import { useEffect, useMemo, useRef, useState } from "react";
+import { MessagesSquare, FileText, ChartBar as BarChart3, Scan, Mic, Image as ImageIcon, ShieldAlert, ShieldCheck, FolderGit2, Sparkles, Clock, ArrowRight, Stethoscope, TrendingUp, SquareUser as UserSquare2, ScanLine, Rocket, Download, Cpu, Layers, Zap, Search, LayoutGrid, Star } from "lucide-react";
 
 type Difficulty = "Easy" | "Intermediate" | "Advanced";
 
-const projects: Array<{
+type Project = {
   title: string;
   description: string;
   icon: any;
@@ -37,24 +15,28 @@ const projects: Array<{
   preview: string;
   industry?: boolean;
   ai?: boolean;
-}> = [
+  featured?: boolean;
+};
+
+const projects: Project[] = [
   {
     title: "ChatGPT Clone",
     description: "Real-time conversational AI with streaming responses, memory, and custom system prompts.",
     icon: MessagesSquare,
-    tags: ["🤖 OpenAI", "⚛ React", "⚡ FastAPI", "🧩 LangChain"],
+    tags: ["OpenAI", "React", "FastAPI", "LangChain"],
     difficulty: "Intermediate",
     time: "2 Days",
     category: "LLM",
     preview: "chat",
     industry: true,
     ai: true,
+    featured: true,
   },
   {
     title: "AI Resume Builder",
     description: "Intelligent resume generator that tailors content to job descriptions using LLM analysis.",
     icon: FileText,
-    tags: ["🧩 LangChain", "⚛ React", "🎨 Tailwind", "🤖 OpenAI"],
+    tags: ["LangChain", "React", "Tailwind", "OpenAI"],
     difficulty: "Easy",
     time: "6 Hours",
     category: "Generative AI",
@@ -65,7 +47,7 @@ const projects: Array<{
     title: "Recommendation Engine",
     description: "Collaborative filtering system predicting user preferences from behavior and rating data.",
     icon: BarChart3,
-    tags: ["🐍 Python", "📊 Pandas", "🧠 Scikit", "☁ AWS"],
+    tags: ["Python", "Pandas", "Scikit", "AWS"],
     difficulty: "Intermediate",
     time: "1 Week",
     category: "Machine Learning",
@@ -76,18 +58,19 @@ const projects: Array<{
     title: "Object Detection",
     description: "Train a YOLO-based model to identify and localize objects in images and video streams.",
     icon: Scan,
-    tags: ["🔥 PyTorch", "🐍 Python", "📷 OpenCV", "⚡ CUDA"],
+    tags: ["PyTorch", "Python", "OpenCV", "CUDA"],
     difficulty: "Advanced",
     time: "1 Week",
     category: "Computer Vision",
     preview: "detect",
     industry: true,
+    featured: true,
   },
   {
     title: "Speech Recognition",
     description: "Speech-to-text assistant with wake-word detection, NLP understanding and voice synthesis.",
     icon: Mic,
-    tags: ["🐍 Python", "🔥 PyTorch", "⚡ FastAPI", "🎙 Whisper"],
+    tags: ["Python", "PyTorch", "FastAPI", "Whisper"],
     difficulty: "Intermediate",
     time: "2 Days",
     category: "Deep Learning",
@@ -97,7 +80,7 @@ const projects: Array<{
     title: "Image Generator",
     description: "Stable Diffusion pipeline with LoRA fine-tuning to generate images from text prompts.",
     icon: ImageIcon,
-    tags: ["🧠 Diffusers", "🔥 PyTorch", "🎨 Gradio", "🤖 SDXL"],
+    tags: ["Diffusers", "PyTorch", "Gradio", "SDXL"],
     difficulty: "Advanced",
     time: "1 Week",
     category: "Generative AI",
@@ -108,7 +91,7 @@ const projects: Array<{
     title: "Medical Diagnosis",
     description: "Disease prediction dashboard combining patient signals with explainable ML models.",
     icon: Stethoscope,
-    tags: ["🐍 Python", "🧠 Sklearn", "📊 Pandas", "⚡ FastAPI"],
+    tags: ["Python", "Sklearn", "Pandas", "FastAPI"],
     difficulty: "Advanced",
     time: "1 Week",
     category: "Data Science",
@@ -119,7 +102,7 @@ const projects: Array<{
     title: "Stock Price Predictor",
     description: "LSTM-driven time series model forecasting prices with backtesting and live chart updates.",
     icon: TrendingUp,
-    tags: ["🧠 TensorFlow", "📊 Pandas", "🐍 Python", "📈 Plotly"],
+    tags: ["TensorFlow", "Pandas", "Python", "Plotly"],
     difficulty: "Intermediate",
     time: "2 Days",
     category: "Deep Learning",
@@ -129,7 +112,7 @@ const projects: Array<{
     title: "Fraud Detection",
     description: "Real-time anomaly detection on financial transactions using ensemble ML and graph signals.",
     icon: ShieldAlert,
-    tags: ["🐍 Python", "🌲 XGBoost", "🔗 Kafka", "🗄 Postgres"],
+    tags: ["Python", "XGBoost", "Kafka", "Postgres"],
     difficulty: "Advanced",
     time: "1 Week",
     category: "Machine Learning",
@@ -140,7 +123,7 @@ const projects: Array<{
     title: "Face Recognition",
     description: "Build a face authentication pipeline with embeddings, liveness detection, and admin panel.",
     icon: UserSquare2,
-    tags: ["📷 OpenCV", "🔥 PyTorch", "⚛ React", "⚡ FastAPI"],
+    tags: ["OpenCV", "PyTorch", "React", "FastAPI"],
     difficulty: "Intermediate",
     time: "2 Days",
     category: "Computer Vision",
@@ -150,7 +133,7 @@ const projects: Array<{
     title: "Document OCR",
     description: "Scan and extract structured data from invoices, IDs and forms with layout-aware OCR.",
     icon: ScanLine,
-    tags: ["🐍 Python", "📷 OpenCV", "🔍 Tesseract", "⚡ FastAPI"],
+    tags: ["Python", "OpenCV", "Tesseract", "FastAPI"],
     difficulty: "Easy",
     time: "6 Hours",
     category: "NLP",
@@ -160,7 +143,7 @@ const projects: Array<{
     title: "AI Voice Assistant",
     description: "Deploy an end-to-end voice agent: STT → LLM → TTS with streaming and tool calling.",
     icon: Sparkles,
-    tags: ["🤖 OpenAI", "🧩 LangChain", "⚡ FastAPI", "☁ AWS"],
+    tags: ["OpenAI", "LangChain", "FastAPI", "AWS"],
     difficulty: "Advanced",
     time: "1 Week",
     category: "Deployment",
@@ -168,6 +151,11 @@ const projects: Array<{
     ai: true,
   },
 ];
+
+const categories = [
+  "All",
+  ...Array.from(new Set(projects.map((p) => p.category))),
+] as string[];
 
 const stats = [
   { value: 50, suffix: "+", label: "Hands-on Projects" },
@@ -180,6 +168,12 @@ const diffColor: Record<Difficulty, string> = {
   Easy: "bg-emerald-500/15 text-emerald-700 ring-emerald-500/30",
   Intermediate: "bg-amber-500/15 text-amber-700 ring-amber-500/30",
   Advanced: "bg-rose-500/15 text-rose-700 ring-rose-500/30",
+};
+
+const diffDot: Record<Difficulty, string> = {
+  Easy: "bg-emerald-500",
+  Intermediate: "bg-amber-500",
+  Advanced: "bg-rose-500",
 };
 
 export const Route = createFileRoute("/projects")({
@@ -203,6 +197,27 @@ export const Route = createFileRoute("/projects")({
 });
 
 function ProjectsPage() {
+  const [active, setActive] = useState("All");
+  const [query, setQuery] = useState("");
+
+  const featured = useMemo(() => projects.find((p) => p.featured)!, []);
+  const rest = useMemo(() => projects.filter((p) => !p.featured), []);
+
+  const filtered = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    return rest.filter((p) => {
+      const inCat = active === "All" || p.category === active;
+      const inQuery =
+        !q ||
+        p.title.toLowerCase().includes(q) ||
+        p.description.toLowerCase().includes(q) ||
+        p.tags.some((t) => t.toLowerCase().includes(q));
+      return inCat && inQuery;
+    });
+  }, [rest, active, query]);
+
+  const showFeatured = active === "All" && !query.trim();
+
   return (
     <section className="relative overflow-hidden bg-[oklch(0.985_0.003_265)] min-h-screen">
       {/* animated blobs */}
@@ -217,12 +232,27 @@ function ProjectsPage() {
       <div className="relative mx-auto max-w-7xl px-5 pt-28 pb-32 sm:px-8 lg:pt-36 lg:pb-40">
         <Header />
 
+        {showFeatured && <FeaturedSpotlight project={featured} />}
+
+        <Toolbar
+          categories={categories}
+          active={active}
+          setActive={setActive}
+          query={query}
+          setQuery={setQuery}
+          count={filtered.length + (showFeatured ? 1 : 0)}
+        />
+
         {/* grid */}
-        <div className="mt-20 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((p, i) => (
-            <ProjectCard key={p.title} project={p} index={i} />
-          ))}
-        </div>
+        {filtered.length > 0 ? (
+          <div className="mt-10 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filtered.map((p, i) => (
+              <ProjectCard key={p.title} project={p} index={i} />
+            ))}
+          </div>
+        ) : (
+          <EmptyState onReset={() => { setActive("All"); setQuery(""); }} />
+        )}
 
         <Stats />
 
@@ -252,11 +282,178 @@ function Header() {
   );
 }
 
+function FeaturedSpotlight({ project }: { project: Project }) {
+  const Icon = project.icon;
+  return (
+    <div className="mt-16 animate-card-rise">
+      <div className="mb-5 flex items-center gap-2">
+        <Star className="h-4 w-4 fill-amber-400 text-amber-400" />
+        <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[oklch(0.45_0.18_275)]">
+          Featured Project
+        </span>
+        <div className="h-px flex-1 bg-gradient-to-r from-[oklch(0.85_0.04_270)] to-transparent" />
+      </div>
+
+      <div className="spotlight-card group relative overflow-hidden rounded-[28px]">
+        <div className="grid gap-0 lg:grid-cols-[1.1fr_1fr]">
+          {/* Preview panel */}
+          <div className="relative h-64 overflow-hidden bg-gradient-to-br from-[oklch(0.42_0.22_260)] via-[oklch(0.4_0.25_285)] to-[oklch(0.45_0.24_315)] p-6 lg:h-auto">
+            <div className="pointer-events-none absolute -right-10 -top-10 h-40 w-40 rounded-full bg-[oklch(0.7_0.2_300)] opacity-40 blur-3xl" />
+            <div className="pp-preview relative h-full w-full transition-transform duration-700">
+              <Preview type={project.preview} />
+            </div>
+            <span className="absolute left-5 top-5 inline-flex items-center gap-1.5 rounded-full bg-white/15 px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-white backdrop-blur">
+              <Sparkles className="h-3 w-3" />
+              Capstone
+            </span>
+          </div>
+
+          {/* Content panel */}
+          <div className="flex flex-col justify-center p-8 lg:p-10">
+            <div className="flex items-center gap-3">
+              <span className="grid h-12 w-12 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.94_0.04_265)] to-[oklch(0.92_0.06_300)] text-[oklch(0.45_0.18_275)] shadow-soft">
+                <Icon className="h-5 w-5" strokeWidth={2} />
+              </span>
+              <div>
+                <span className="text-[11px] font-medium uppercase tracking-wider text-[oklch(0.55_0.18_275)]">
+                  {project.category}
+                </span>
+                <h2 className="text-2xl font-semibold tracking-tight text-foreground">
+                  {project.title}
+                </h2>
+              </div>
+            </div>
+
+            <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
+              {project.description}
+            </p>
+
+            <div className="mt-5 flex flex-wrap items-center gap-2">
+              <span className={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[11px] font-semibold ring-1 ${diffColor[project.difficulty]}`}>
+                <span className={`h-1.5 w-1.5 rounded-full ${diffDot[project.difficulty]}`} />
+                {project.difficulty}
+              </span>
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[oklch(0.96_0.01_260)] px-2.5 py-1 text-[11px] font-medium text-muted-foreground ring-1 ring-[oklch(0.92_0.01_260)]">
+                <Clock className="h-3 w-3" />
+                {project.time}
+              </span>
+              {project.industry && (
+                <span className="inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-500/15 to-orange-500/15 px-2.5 py-1 text-[11px] font-semibold text-amber-700 ring-1 ring-amber-500/30">
+                  Industry
+                </span>
+              )}
+            </div>
+
+            <div className="mt-5 flex flex-wrap gap-1.5">
+              {project.tags.map((t) => (
+                <span
+                  key={t}
+                  className="chip-gradient rounded-lg px-2 py-1 text-[11px] font-medium"
+                >
+                  {t}
+                </span>
+              ))}
+            </div>
+
+            <Link
+              to="/curriculum"
+              className="mt-7 inline-flex w-fit items-center gap-2 rounded-xl bg-gradient-to-r from-[oklch(0.5_0.22_260)] to-[oklch(0.52_0.25_295)] px-5 py-2.5 text-sm font-semibold text-white shadow-glass transition-all hover:-translate-y-0.5 hover:shadow-float"
+            >
+              Explore Build
+              <ArrowRight className="h-4 w-4" />
+            </Link>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Toolbar({
+  categories,
+  active,
+  setActive,
+  query,
+  setQuery,
+  count,
+}: {
+  categories: string[];
+  active: string;
+  setActive: (c: string) => void;
+  query: string;
+  setQuery: (q: string) => void;
+  count: number;
+}) {
+  return (
+    <div className="mt-16 flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
+      {/* Tabs */}
+      <div className="flex flex-wrap gap-2">
+        {categories.map((cat) => {
+          const isActive = active === cat;
+          return (
+            <button
+              key={cat}
+              onClick={() => setActive(cat)}
+              className={
+                "relative rounded-full px-4 py-2 text-sm font-medium transition-all duration-300 " +
+                (isActive
+                  ? "text-white shadow-glass"
+                  : "text-muted-foreground hover:text-foreground")
+              }
+            >
+              {isActive && (
+                <span className="absolute inset-0 rounded-full bg-gradient-to-r from-[oklch(0.5_0.22_260)] to-[oklch(0.52_0.25_295)] transition-all" />
+              )}
+              <span className="relative flex items-center gap-1.5">
+                {cat === "All" && <LayoutGrid className="h-3.5 w-3.5" />}
+                {cat}
+              </span>
+            </button>
+          );
+        })}
+      </div>
+
+      {/* Search */}
+      <div className="relative w-full lg:w-72">
+        <Search className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search projects, tags..."
+          className="w-full rounded-full border border-[oklch(0.9_0.01_260)] bg-white/70 py-2.5 pl-10 pr-4 text-sm text-foreground outline-none backdrop-blur transition-all placeholder:text-muted-foreground/70 focus:border-[oklch(0.7_0.14_265)] focus:ring-2 focus:ring-[oklch(0.7_0.14_265/0.2)]"
+        />
+      </div>
+    </div>
+  );
+}
+
+function EmptyState({ onReset }: { onReset: () => void }) {
+  return (
+    <div className="mt-10 flex flex-col items-center justify-center rounded-3xl border border-dashed border-[oklch(0.85_0.02_260)] bg-white/50 py-20 text-center backdrop-blur">
+      <div className="grid h-14 w-14 place-items-center rounded-2xl bg-gradient-to-br from-[oklch(0.95_0.03_265)] to-[oklch(0.93_0.05_300)] text-[oklch(0.45_0.18_275)]">
+        <Search className="h-6 w-6" />
+      </div>
+      <h3 className="mt-5 text-lg font-semibold tracking-tight text-foreground">
+        No projects found
+      </h3>
+      <p className="mt-1.5 text-sm text-muted-foreground">
+        Try a different category or search term.
+      </p>
+      <button
+        onClick={onReset}
+        className="mt-5 inline-flex items-center gap-1.5 rounded-full bg-gradient-to-r from-[oklch(0.5_0.22_260)] to-[oklch(0.52_0.25_295)] px-5 py-2.5 text-sm font-semibold text-white shadow-glass transition hover:-translate-y-0.5"
+      >
+        Reset filters
+      </button>
+    </div>
+  );
+}
+
 function ProjectCard({
   project,
   index,
 }: {
-  project: (typeof projects)[number];
+  project: Project;
   index: number;
 }) {
   const ref = useRef<HTMLDivElement | null>(null);
@@ -291,7 +488,8 @@ function ProjectCard({
         </div>
 
         {/* difficulty badge */}
-        <span className={`absolute right-3 top-3 z-10 rounded-full px-2.5 py-1 text-[10px] font-semibold ring-1 backdrop-blur ${diffColor[project.difficulty]}`}>
+        <span className={`absolute right-3 top-3 z-10 inline-flex items-center gap-1.5 rounded-full px-2.5 py-1 text-[10px] font-semibold ring-1 backdrop-blur ${diffColor[project.difficulty]}`}>
+          <span className={`h-1.5 w-1.5 rounded-full ${diffDot[project.difficulty]}`} />
           {project.difficulty}
         </span>
 
@@ -314,7 +512,7 @@ function ProjectCard({
               {project.ai && (
                 <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-gradient-to-r from-violet-500/15 to-blue-500/15 px-2 py-0.5 text-[9px] font-semibold text-violet-700 ring-1 ring-violet-500/30">
                   <Sparkles className="h-2.5 w-2.5" />
-                  Built with AI
+                  AI
                 </span>
               )}
             </div>
@@ -322,7 +520,7 @@ function ProjectCard({
               {project.category}
             </span>
           </div>
-          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[oklch(0.94_0.04_265)] to-[oklch(0.92_0.06_300)] text-[oklch(0.45_0.18_275)] shadow-soft">
+          <span className="grid h-9 w-9 shrink-0 place-items-center rounded-xl bg-gradient-to-br from-[oklch(0.94_0.04_265)] to-[oklch(0.92_0.06_300)] text-[oklch(0.45_0.18_275)] shadow-soft transition-transform duration-500 group-hover:scale-105 group-hover:rotate-[-3deg]">
             <Icon className="h-4 w-4" strokeWidth={2} />
           </span>
         </div>
@@ -330,11 +528,6 @@ function ProjectCard({
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
           {project.description}
         </p>
-
-        <div className="mt-3 flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground">
-          <Clock className="h-3.5 w-3.5" />
-          {project.time}
-        </div>
 
         <div className="mt-4 flex flex-wrap gap-1.5">
           {project.tags.map((t) => (
@@ -347,13 +540,17 @@ function ProjectCard({
           ))}
         </div>
 
-        <div className="mt-5 pt-2">
+        <div className="mt-auto flex items-center justify-between pt-5">
+          <span className="inline-flex items-center gap-1.5 text-[12px] font-medium text-muted-foreground">
+            <Clock className="h-3.5 w-3.5" />
+            {project.time}
+          </span>
           <Link
             to="/curriculum"
-            className="pp-cta inline-flex w-full items-center justify-center gap-1.5 rounded-xl bg-gradient-to-r from-[oklch(0.5_0.22_260)] to-[oklch(0.52_0.25_295)] px-4 py-2.5 text-sm font-semibold text-white opacity-0 translate-y-1 shadow-glass transition-all duration-300 hover:shadow-float"
+            className="pp-cta inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-[oklch(0.5_0.22_260)] to-[oklch(0.52_0.25_295)] px-3.5 py-1.5 text-xs font-semibold text-white shadow-glass transition-all duration-300 hover:shadow-float"
           >
-            View Curriculum
-            <ArrowRight className="h-3.5 w-3.5" />
+            View
+            <ArrowRight className="h-3 w-3" />
           </Link>
         </div>
       </div>
