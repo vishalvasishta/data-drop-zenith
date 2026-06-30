@@ -1,0 +1,78 @@
+Replace the generic purple placeholder graphics inside every project card with realistic, high-quality application UI mockups.
+
+Each card should visually represent the actual project instead of abstract gradients.
+
+Design the screenshots with modern SaaS aesthetics inspired by Apple, Linear, Vercel, Notion, and Stripe.
+
+Requirements:
+
+• The screenshots should look like real software interfaces.
+• Use clean layouts with glassmorphism, soft shadows, rounded corners, and blue-violet gradients.
+• Every screenshot should be unique and instantly communicate the project.
+• Add subtle charts, dashboards, buttons, sidebars, code snippets, AI outputs, and realistic UI elements.
+• Maintain the same aspect ratio for all screenshots.
+• Add a soft glow and slight zoom effect on hover.
+• Animate screenshots with a gentle floating motion.
+
+Create unique mockups for these projects:
+
+1. ChatGPT Clone
+- Modern AI chat interface
+- Conversation history sidebar
+- Streaming AI response
+- Prompt input box
+- AI typing indicator
+- Suggested prompts
+- Dark premium theme
+
+2. AI Resume Builder
+- Professional resume editor
+- Resume preview on the right
+- AI suggestions panel
+- Skills section
+- ATS score indicator
+- Generate Resume button
+
+3. Recommendation Engine
+- Netflix/Amazon-style recommendation dashboard
+- User profile panel
+- Product recommendation cards
+- Analytics charts
+- Recommendation score widgets
+- Machine learning insights
+
+4. AI Voice Assistant
+- Animated microphone
+- Voice waveform
+- Live transcription
+- AI response panel
+- Voice settings
+- Audio timeline
+
+5. Medical Diagnosis AI
+- Healthcare dashboard
+- Patient information panel
+- AI diagnosis summary
+- Medical charts
+- Risk prediction widgets
+- Confidence score
+
+6. AI Image Generator
+- Prompt input
+- Generated image gallery
+- Style selector
+- Generation progress
+- AI settings panel
+- Download and regenerate buttons
+
+Use consistent branding across all mockups with:
+
+• Premium white and glass backgrounds
+• Blue and purple gradients
+• Rounded 24px cards
+• Soft premium shadows
+• Beautiful typography
+• Modern iconography
+• High-end SaaS appearance
+
+The final result should look like six real AI applications that students will build during the course, making visitors immediately believe these are production-ready portfolio projects rather than simple tutorials.

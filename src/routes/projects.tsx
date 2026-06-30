@@ -563,195 +563,495 @@ function Preview({ type }: { type: string }) {
   switch (type) {
     case "chat":
       return (
-        <div className="flex h-full flex-col">
-          <div className="flex items-center gap-1.5 rounded-lg bg-white/10 px-2 py-1.5 backdrop-blur">
-            <div className="h-1.5 w-1.5 rounded-full bg-emerald-300" />
-            <span className="text-[8px] font-semibold text-white/90">AI Assistant</span>
+        <div className="flex h-full gap-1.5 overflow-hidden rounded-xl">
+          {/* Sidebar */}
+          <div className="flex w-[30%] flex-col gap-1 rounded-lg bg-black/30 p-1.5 backdrop-blur">
+            <div className="mb-1 flex items-center gap-1">
+              <div className="h-2 w-2 rounded-full bg-violet-400" />
+              <span className="text-[6px] font-bold text-white/80">ChatAI</span>
+            </div>
+            {["General chat", "Code helper", "Data analysis"].map((label, i) => (
+              <div key={i} className={`rounded px-1 py-0.5 text-[5.5px] font-medium ${i === 0 ? "bg-violet-500/40 text-white" : "text-white/50"}`}>{label}</div>
+            ))}
+            <div className="mt-auto space-y-0.5">
+              <div className="h-0.5 w-full rounded bg-white/10" />
+              <div className="h-4 w-4 rounded-full bg-white/20" />
+            </div>
           </div>
-          <div className="mt-auto space-y-1.5">
-            <div className="ml-auto w-fit max-w-[80%] rounded-lg bg-white/25 px-2 py-1 text-[7px] text-white shadow-sm">
-              Explain transformers
+          {/* Chat area */}
+          <div className="flex flex-1 flex-col gap-1 py-1">
+            <div className="flex items-start gap-1">
+              <div className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-gradient-to-br from-violet-400 to-blue-400" />
+              <div className="rounded-lg rounded-tl-none bg-white/15 px-1.5 py-1 text-[5.5px] text-white/90 backdrop-blur">
+                Hello! How can I help you today?
+              </div>
             </div>
-            <div className="w-fit max-w-[85%] rounded-lg bg-white/10 px-2 py-1 text-[7px] text-white/90">
-              Transformers use self-attention to model token relationships...
+            <div className="flex items-start justify-end gap-1">
+              <div className="rounded-lg rounded-tr-none bg-violet-500/50 px-1.5 py-1 text-[5.5px] text-white">
+                Explain transformer attention
+              </div>
+              <div className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-white/30" />
             </div>
-            <div className="flex w-fit items-center gap-0.5 rounded-lg bg-white/10 px-2 py-1.5">
-              {[0, 1, 2].map((i) => (
-                <span key={i} className="block h-1 w-1 rounded-full bg-white/80 animate-typing-dot" style={{ animationDelay: `${i * 0.15}s` }} />
+            <div className="flex items-start gap-1">
+              <div className="mt-0.5 h-3 w-3 shrink-0 rounded-full bg-gradient-to-br from-violet-400 to-blue-400" />
+              <div className="flex-1 space-y-0.5 rounded-lg rounded-tl-none bg-white/15 px-1.5 py-1 backdrop-blur">
+                <div className="h-0.5 w-full rounded bg-white/50" />
+                <div className="h-0.5 w-5/6 rounded bg-white/40" />
+                <div className="h-0.5 w-4/5 rounded bg-white/30" />
+              </div>
+            </div>
+            <div className="mt-auto flex items-center gap-1 rounded-full bg-white/10 px-2 py-1 backdrop-blur">
+              <div className="flex-1 text-[5.5px] text-white/30">Message AI...</div>
+              <div className="flex items-center gap-0.5">
+                {[0,1,2].map(i => (
+                  <span key={i} className="block h-1 w-1 rounded-full bg-violet-300 animate-typing-dot" style={{ animationDelay: `${i * 0.18}s` }} />
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+
+    case "resume":
+      return (
+        <div className="flex h-full gap-1.5 overflow-hidden rounded-xl">
+          {/* Editor panel */}
+          <div className="flex w-[45%] flex-col gap-1 rounded-lg bg-black/25 p-1.5">
+            <div className="text-[5.5px] font-bold uppercase tracking-wider text-white/60">Editor</div>
+            <div className="space-y-0.5">
+              <div className="h-1 w-2/3 rounded bg-white/40" />
+              <div className="h-0.5 w-full rounded bg-white/15" />
+              <div className="h-0.5 w-5/6 rounded bg-white/15" />
+            </div>
+            <div className="mt-1 rounded bg-emerald-400/20 px-1 py-0.5">
+              <div className="text-[5px] text-emerald-300">✦ AI Suggestion</div>
+              <div className="mt-0.5 h-0.5 w-full rounded bg-emerald-400/40" />
+              <div className="h-0.5 w-4/5 rounded bg-emerald-400/30" />
+            </div>
+            <div className="mt-1 space-y-0.5">
+              <div className="text-[5px] font-semibold text-white/60">ATS Score</div>
+              <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/10">
+                <div className="h-full w-[87%] rounded-full bg-gradient-to-r from-emerald-400 to-teal-300" />
+              </div>
+              <div className="text-right text-[5px] font-bold text-emerald-300">87%</div>
+            </div>
+            <div className="mt-auto rounded bg-gradient-to-r from-violet-500/60 to-blue-500/60 px-1 py-0.5 text-center text-[5.5px] font-semibold text-white">
+              Generate ✦
+            </div>
+          </div>
+          {/* Resume preview */}
+          <div className="flex-1 overflow-hidden rounded-lg bg-white/95 p-1.5 shadow-lg">
+            <div className="mb-1 text-center">
+              <div className="mx-auto h-3 w-3 rounded-full bg-gradient-to-br from-violet-400 to-blue-400" />
+              <div className="mt-0.5 h-1 w-2/3 mx-auto rounded bg-gray-300" />
+              <div className="h-0.5 w-1/2 mx-auto mt-0.5 rounded bg-gray-200" />
+            </div>
+            <div className="h-0.5 w-full rounded bg-violet-300/60" />
+            {[["Experience", "4/5"], ["Skills", "5/5"], ["Education", "4/5"]].map(([label, score], i) => (
+              <div key={i} className="mt-0.5">
+                <div className="text-[4.5px] font-bold uppercase text-gray-400">{label}</div>
+                <div className="mt-0.5 h-0.5 w-full rounded bg-gray-100" />
+                <div className="h-0.5 w-5/6 rounded bg-gray-100" />
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
+    case "recommend":
+      return (
+        <div className="flex h-full flex-col gap-1 overflow-hidden rounded-xl">
+          {/* Top bar */}
+          <div className="flex items-center justify-between rounded-lg bg-black/25 px-2 py-1">
+            <span className="text-[6px] font-bold text-white/90">For You · Priya</span>
+            <div className="flex gap-0.5">
+              {["ML","Data","AI"].map((t,i) => (
+                <span key={i} className={`rounded px-1 py-0.5 text-[4.5px] font-semibold ${i===0 ? "bg-violet-500/60 text-white":"text-white/40 bg-white/10"}`}>{t}</span>
               ))}
             </div>
           </div>
-        </div>
-      );
-    case "resume":
-      return (
-        <div className="flex h-full gap-2">
-          <div className="w-1/4 space-y-1.5 rounded-lg bg-white/15 p-2 backdrop-blur">
-            <div className="h-6 w-6 rounded-full bg-white/30" />
-            <div className="h-1 w-full rounded bg-white/20" />
-            <div className="h-1 w-2/3 rounded bg-white/15" />
-          </div>
-          <div className="relative flex-1 space-y-1.5 overflow-hidden rounded-lg bg-white/15 p-2">
-            <div className="h-2 w-3/4 rounded bg-white/30" />
-            <div className="h-1 w-full rounded bg-white/15" />
-            <div className="h-1 w-5/6 rounded bg-emerald-300/60" />
-            <div className="h-1 w-full rounded bg-white/15" />
-            <div className="h-1 w-4/5 rounded bg-emerald-300/60" />
-            <div className="absolute inset-x-0 top-0 h-6 bg-gradient-to-b from-emerald-300/30 to-transparent animate-scan" />
-          </div>
-        </div>
-      );
-    case "recommend":
-      return (
-        <div className="flex h-full flex-col">
-          <div className="text-[8px] font-semibold text-white/80">For You</div>
-          <div className="mt-2 space-y-1.5">
-            {[{ w: "65%", s: "4.8" }, { w: "80%", s: "4.5" }, { w: "55%", s: "4.9" }].map((r, i) => (
-              <div key={i} className="flex items-center gap-2 rounded-md bg-white/10 px-2 py-1.5">
-                <div className="h-4 w-4 rounded bg-white/25" />
-                <div className="flex-1">
-                  <div className="h-1 rounded bg-white/30" style={{ width: r.w }} />
+          {/* Cards */}
+          <div className="grid flex-1 grid-cols-3 gap-1">
+            {[
+              { color: "from-blue-500 to-violet-500", score: "98%", label: "Deep Learning" },
+              { color: "from-violet-500 to-pink-500", score: "94%", label: "NLP Mastery" },
+              { color: "from-emerald-400 to-teal-500", score: "91%", label: "MLOps" },
+            ].map((c, i) => (
+              <div key={i} className="flex flex-col overflow-hidden rounded-lg bg-white/10">
+                <div className={`h-[40%] bg-gradient-to-br ${c.color} opacity-80`} />
+                <div className="flex flex-col p-1">
+                  <div className="text-[5px] font-semibold text-white leading-tight">{c.label}</div>
+                  <div className="mt-auto flex items-center gap-0.5">
+                    <span className="text-[4.5px] text-amber-300">★★★★★</span>
+                  </div>
+                  <div className="mt-0.5 text-[5px] font-bold text-emerald-300">{c.score} match</div>
                 </div>
-                <span className="text-[7px] font-semibold text-amber-200">★ {r.s}</span>
               </div>
             ))}
           </div>
+          {/* Analytics bar */}
+          <div className="flex items-center gap-1 rounded-lg bg-black/20 px-1.5 py-1">
+            <span className="text-[5px] text-white/50">Accuracy</span>
+            <div className="flex-1 h-1 rounded-full bg-white/10 overflow-hidden">
+              <div className="h-full w-[92%] rounded-full bg-gradient-to-r from-violet-400 to-blue-400" />
+            </div>
+            <span className="text-[5px] font-bold text-violet-300">92%</span>
+          </div>
         </div>
       );
+
     case "detect":
       return (
-        <div className="relative flex h-full items-center justify-center">
-          <div className="absolute inset-x-4 inset-y-2 rounded-lg border border-white/15" />
-          <div className="relative">
-            <div className="h-12 w-16 rounded-md bg-white/20" />
-            <div className="absolute -inset-1 rounded-md border-2 border-emerald-300" />
-            <div className="absolute -right-2 -top-4 rounded bg-emerald-400 px-1 py-0.5 text-[7px] font-bold text-emerald-950">Car 98%</div>
+        <div className="relative flex h-full overflow-hidden rounded-xl bg-black/30">
+          {/* Simulated camera feed */}
+          <div className="absolute inset-0">
+            <div className="absolute inset-0 opacity-20" style={{ background: "linear-gradient(135deg, oklch(0.4 0.1 220), oklch(0.3 0.05 270))" }} />
+            {/* Grid overlay */}
+            <svg className="absolute inset-0 h-full w-full opacity-10" viewBox="0 0 100 100" preserveAspectRatio="none">
+              {[20,40,60,80].map(v=>(
+                <g key={v}>
+                  <line x1={v} y1="0" x2={v} y2="100" stroke="white" strokeWidth="0.3"/>
+                  <line x1="0" y1={v} x2="100" y2={v} stroke="white" strokeWidth="0.3"/>
+                </g>
+              ))}
+            </svg>
           </div>
-          <div className="absolute right-6 bottom-4">
-            <div className="h-6 w-6 rounded bg-white/20" />
-            <div className="absolute -inset-0.5 rounded border-2 border-sky-300" />
-            <div className="absolute -bottom-3 -right-1 rounded bg-sky-300 px-1 text-[6px] font-bold text-sky-950">Sign 92%</div>
+          {/* Bounding boxes */}
+          <div className="absolute" style={{ left: "10%", top: "18%", width: "38%", height: "52%" }}>
+            <div className="h-full w-full rounded border-2 border-emerald-400 shadow-[0_0_8px_rgba(52,211,153,0.6)]">
+              <div className="absolute -top-2.5 left-0 rounded bg-emerald-400 px-1 py-0.5 text-[5.5px] font-bold text-black whitespace-nowrap">Person · 97%</div>
+            </div>
+          </div>
+          <div className="absolute" style={{ left: "54%", top: "28%", width: "26%", height: "32%" }}>
+            <div className="h-full w-full rounded border-2 border-sky-400 shadow-[0_0_8px_rgba(56,189,248,0.6)]">
+              <div className="absolute -top-2.5 left-0 rounded bg-sky-400 px-1 py-0.5 text-[5.5px] font-bold text-black whitespace-nowrap">Car · 94%</div>
+            </div>
+          </div>
+          <div className="absolute" style={{ left: "62%", top: "65%", width: "16%", height: "20%" }}>
+            <div className="h-full w-full rounded border-2 border-amber-400 shadow-[0_0_8px_rgba(251,191,36,0.6)]">
+              <div className="absolute -top-2.5 left-0 rounded bg-amber-400 px-1 py-0.5 text-[5.5px] font-bold text-black whitespace-nowrap">Sign · 89%</div>
+            </div>
+          </div>
+          {/* Stats overlay */}
+          <div className="absolute bottom-1.5 left-1.5 right-1.5 flex items-center justify-between rounded-md bg-black/60 px-2 py-1 backdrop-blur">
+            <span className="text-[5.5px] font-semibold text-white/80">YOLO v8 · Live</span>
+            <div className="flex items-center gap-1">
+              <span className="text-[5px] text-white/50">Objects:</span>
+              <span className="text-[5.5px] font-bold text-emerald-300">3</span>
+              <div className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+            </div>
           </div>
         </div>
       );
+
     case "voice":
       return (
-        <div className="flex h-full flex-col items-center justify-center">
-          <div className="relative grid h-10 w-10 place-items-center rounded-full bg-white/20">
-            <Mic className="h-4 w-4 text-white" />
-            <span className="absolute inset-0 rounded-full border border-white/30 animate-ping" />
+        <div className="flex h-full flex-col overflow-hidden rounded-xl bg-black/25">
+          {/* Header */}
+          <div className="flex items-center justify-between px-2 py-1.5">
+            <span className="text-[6px] font-bold text-white/80">Voice Assistant</span>
+            <span className="flex items-center gap-0.5 rounded-full bg-emerald-400/20 px-1.5 py-0.5 text-[5px] font-semibold text-emerald-300">
+              <span className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+              LIVE
+            </span>
           </div>
-          <div className="mt-3 flex h-8 items-center gap-0.5">
-            {Array.from({ length: 18 }).map((_, i) => (
-              <span
-                key={i}
-                className="block w-0.5 origin-center rounded-full bg-white/70 animate-wave-bar"
-                style={{ height: `${20 + (i % 5) * 6}px`, animationDelay: `${i * 0.07}s` }}
-              />
-            ))}
+          {/* Mic + waveform */}
+          <div className="flex flex-1 flex-col items-center justify-center gap-2">
+            <div className="relative">
+              <div className="absolute inset-0 rounded-full bg-violet-400/20 animate-ping" />
+              <div className="absolute -inset-2 rounded-full bg-violet-400/10 animate-ping" style={{ animationDelay: "0.3s" }} />
+              <div className="relative grid h-10 w-10 place-items-center rounded-full bg-gradient-to-br from-violet-500 to-blue-500 shadow-[0_0_20px_rgba(139,92,246,0.5)]">
+                <Mic className="h-4 w-4 text-white" strokeWidth={2.5} />
+              </div>
+            </div>
+            <div className="flex h-6 items-end gap-[1.5px]">
+              {Array.from({ length: 22 }).map((_, i) => {
+                const heights = [3,6,10,14,10,7,12,16,10,6,14,10,7,13,9,6,11,15,9,5,8,4];
+                return (
+                  <span key={i} className="block w-[2px] rounded-full bg-gradient-to-t from-violet-400 to-blue-300 animate-wave-bar" style={{ height: `${heights[i]}px`, animationDelay: `${i * 0.06}s` }} />
+                );
+              })}
+            </div>
+          </div>
+          {/* Transcription */}
+          <div className="mx-1.5 mb-1.5 rounded-lg bg-white/10 px-2 py-1 backdrop-blur">
+            <div className="text-[5px] font-semibold uppercase text-white/40">Transcription</div>
+            <div className="mt-0.5 text-[5.5px] text-white/80">"Set a reminder for 9am tomorrow..."</div>
+            <div className="mt-0.5 h-0.5 w-2/3 rounded bg-violet-400/50" />
           </div>
         </div>
       );
+
     case "imagegen":
       return (
-        <div className="flex h-full flex-col">
-          <div className="flex items-center gap-1 rounded-lg bg-white/10 px-2 py-1.5">
-            <Sparkles className="h-2.5 w-2.5 text-white/70" />
-            <span className="text-[7px] text-white/70">cyberpunk city, neon rain...</span>
+        <div className="flex h-full gap-1.5 overflow-hidden rounded-xl">
+          {/* Left panel */}
+          <div className="flex w-[38%] flex-col gap-1 rounded-lg bg-black/30 p-1.5">
+            <div className="text-[5.5px] font-bold text-white/60">Prompt</div>
+            <div className="rounded bg-white/10 p-1 text-[5px] italic text-white/60 leading-tight">
+              "cyberpunk city at night, neon rain, 4K"
+            </div>
+            <div className="space-y-0.5">
+              <div className="text-[5px] text-white/50">Style</div>
+              <div className="grid grid-cols-3 gap-0.5">
+                {[
+                  { label: "Photo", active: false },
+                  { label: "Art", active: true },
+                  { label: "3D", active: false },
+                ].map((s) => (
+                  <div key={s.label} className={`rounded px-0.5 py-0.5 text-center text-[4.5px] font-medium ${s.active ? "bg-violet-500/70 text-white" : "bg-white/10 text-white/40"}`}>{s.label}</div>
+                ))}
+              </div>
+            </div>
+            <div className="mt-auto">
+              <div className="mb-0.5 text-[5px] text-white/50">Generating…</div>
+              <div className="h-1 w-full overflow-hidden rounded-full bg-white/10">
+                <div className="h-full w-[72%] rounded-full bg-gradient-to-r from-violet-400 to-blue-400 animate-pulse" />
+              </div>
+            </div>
+            <div className="rounded bg-gradient-to-r from-violet-500/70 to-blue-500/70 px-1 py-0.5 text-center text-[5.5px] font-bold text-white">
+              ✦ Generate
+            </div>
           </div>
-          <div className="mt-2 grid grid-cols-4 gap-1.5">
-            {[260, 220, 320, 290].map((h, i) => (
-              <div
-                key={i}
-                className="aspect-square rounded-md opacity-90"
-                style={{ background: `linear-gradient(135deg, oklch(0.7 0.18 ${h}), oklch(0.55 0.24 ${h + 30}))` }}
-              />
-            ))}
-          </div>
-        </div>
-      );
-    case "medical":
-      return (
-        <div className="flex h-full flex-col gap-2">
-          <div className="flex items-center justify-between rounded-md bg-white/10 px-2 py-1.5">
-            <span className="text-[8px] font-semibold text-white/90">Diagnosis</span>
-            <span className="rounded bg-emerald-400 px-1 text-[7px] font-bold text-emerald-950">Healthy</span>
-          </div>
-          <div className="grid flex-1 grid-cols-3 gap-1.5">
-            {[60, 80, 45].map((v, i) => (
-              <div key={i} className="flex flex-col justify-end rounded bg-white/10 p-1">
-                <div className="rounded bg-gradient-to-t from-sky-300 to-violet-300" style={{ height: `${v}%` }} />
+          {/* Image gallery */}
+          <div className="grid flex-1 grid-cols-2 gap-1">
+            {[
+              ["from-blue-600 to-violet-700", "opacity-100"],
+              ["from-violet-600 to-pink-600", "opacity-80"],
+              ["from-cyan-500 to-blue-600", "opacity-75"],
+              ["from-indigo-500 to-purple-600", "opacity-90"],
+            ].map(([gradient, opacity], i) => (
+              <div key={i} className={`relative overflow-hidden rounded-lg bg-gradient-to-br ${gradient} ${opacity}`}>
+                <div className="absolute inset-0 flex items-center justify-center opacity-20">
+                  <Sparkles className="h-4 w-4 text-white" />
+                </div>
+                {i === 0 && (
+                  <div className="absolute bottom-0.5 right-0.5 rounded bg-emerald-400 px-0.5 text-[4px] font-bold text-black">HD</div>
+                )}
               </div>
             ))}
           </div>
         </div>
       );
-    case "stock":
+
+    case "medical":
       return (
-        <div className="flex h-full flex-col">
-          <div className="flex items-center justify-between text-[8px] text-white/80">
-            <span className="font-semibold">AAPL</span>
-            <span className="text-emerald-300">▲ +2.4%</span>
+        <div className="flex h-full gap-1.5 overflow-hidden rounded-xl">
+          {/* Patient panel */}
+          <div className="flex w-[35%] flex-col gap-1 rounded-lg bg-black/25 p-1.5">
+            <div className="flex items-center gap-1">
+              <div className="h-4 w-4 rounded-full bg-white/20" />
+              <div>
+                <div className="text-[5.5px] font-semibold text-white">Ananya S.</div>
+                <div className="text-[4.5px] text-white/40">Age 34 · F</div>
+              </div>
+            </div>
+            <div className="space-y-0.5">
+              {[["BP", "120/80", "text-emerald-300"], ["HR", "72 bpm", "text-sky-300"], ["SpO₂", "98%", "text-emerald-300"]].map(([label, value, color]) => (
+                <div key={label} className="flex items-center justify-between rounded bg-white/10 px-1 py-0.5">
+                  <span className="text-[4.5px] text-white/50">{label}</span>
+                  <span className={`text-[5px] font-bold ${color}`}>{value}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-auto rounded bg-emerald-500/30 px-1 py-0.5 text-center text-[5px] font-bold text-emerald-300">Low Risk</div>
           </div>
-          <svg viewBox="0 0 200 80" className="mt-2 flex-1">
-            <defs>
-              <linearGradient id="sg" x1="0" x2="0" y1="0" y2="1">
-                <stop offset="0%" stopColor="oklch(0.85 0.18 145)" stopOpacity="0.4" />
-                <stop offset="100%" stopColor="oklch(0.85 0.18 145)" stopOpacity="0" />
-              </linearGradient>
-            </defs>
-            <path d="M0,60 L25,50 L50,55 L75,40 L100,45 L125,30 L150,35 L175,20 L200,15 L200,80 L0,80 Z" fill="url(#sg)" />
-            <path d="M0,60 L25,50 L50,55 L75,40 L100,45 L125,30 L150,35 L175,20 L200,15" stroke="oklch(0.85 0.18 145)" strokeWidth="1.5" fill="none" className="animate-stock-draw" />
-          </svg>
+          {/* Dashboard */}
+          <div className="flex flex-1 flex-col gap-1">
+            <div className="rounded-lg bg-black/20 px-1.5 py-1">
+              <div className="text-[5px] font-semibold text-white/70">AI Diagnosis</div>
+              <div className="mt-0.5 text-[5.5px] text-white/90">No critical findings detected</div>
+              <div className="mt-0.5 flex items-center gap-0.5">
+                <span className="text-[4.5px] text-white/40">Confidence:</span>
+                <div className="flex-1 h-0.5 rounded-full bg-white/10 overflow-hidden">
+                  <div className="h-full w-[94%] rounded-full bg-gradient-to-r from-emerald-400 to-teal-400" />
+                </div>
+                <span className="text-[5px] font-bold text-emerald-300">94%</span>
+              </div>
+            </div>
+            <div className="flex-1 rounded-lg bg-black/20 p-1">
+              <div className="text-[5px] text-white/50 mb-0.5">Risk Prediction</div>
+              <div className="flex h-full items-end gap-0.5 pb-1">
+                {[30, 55, 42, 70, 38, 62, 45].map((h, i) => (
+                  <div key={i} className="flex-1 rounded-t" style={{
+                    height: `${h}%`,
+                    background: `linear-gradient(to top, oklch(0.7 0.18 ${200 + i*15}), oklch(0.65 0.22 ${220 + i*15}))`
+                  }} />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
       );
+
+    case "stock":
+      return (
+        <div className="flex h-full flex-col gap-1 overflow-hidden rounded-xl bg-black/25 p-1.5">
+          {/* Header */}
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="text-[7px] font-bold text-white">AAPL</div>
+              <div className="text-[5px] text-white/40">Apple Inc.</div>
+            </div>
+            <div className="text-right">
+              <div className="text-[7px] font-bold text-white">$187.42</div>
+              <div className="text-[5.5px] font-semibold text-emerald-300">▲ +3.21%</div>
+            </div>
+          </div>
+          {/* Chart */}
+          <div className="relative flex-1">
+            <svg viewBox="0 0 200 70" className="h-full w-full" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="sg2" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stopColor="#6d28d9" stopOpacity="0.5" />
+                  <stop offset="100%" stopColor="#6d28d9" stopOpacity="0" />
+                </linearGradient>
+                <linearGradient id="lineGrad" x1="0" x2="1" y1="0" y2="0">
+                  <stop offset="0%" stopColor="#818cf8" />
+                  <stop offset="100%" stopColor="#34d399" />
+                </linearGradient>
+              </defs>
+              <path d="M0,55 C20,50 30,45 45,42 S65,35 80,32 S100,28 115,22 S140,18 160,14 S185,10 200,8 L200,70 L0,70 Z" fill="url(#sg2)" />
+              <path d="M0,55 C20,50 30,45 45,42 S65,35 80,32 S100,28 115,22 S140,18 160,14 S185,10 200,8" stroke="url(#lineGrad)" strokeWidth="1.8" fill="none" />
+              <circle cx="200" cy="8" r="2.5" fill="#34d399" />
+            </svg>
+          </div>
+          {/* Stats row */}
+          <div className="flex gap-1">
+            {[["LSTM", "92%"], ["MA-20", "↑"], ["Vol", "2.1M"]].map(([label, val]) => (
+              <div key={label} className="flex-1 rounded bg-white/10 px-1 py-0.5 text-center">
+                <div className="text-[4.5px] text-white/40">{label}</div>
+                <div className="text-[5.5px] font-bold text-white">{val}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      );
+
     case "fraud":
       return (
-        <div className="flex h-full flex-col">
+        <div className="flex h-full flex-col gap-1 overflow-hidden rounded-xl bg-black/25 p-1.5">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1">
               <ShieldCheck className="h-3 w-3 text-emerald-300" />
-              <span className="text-[8px] font-semibold text-white/90">SecureGuard</span>
+              <span className="text-[6px] font-bold text-white/90">SecureGuard AI</span>
             </div>
-            <span className="rounded bg-emerald-400 px-1 text-[7px] font-bold text-emerald-950">LIVE</span>
+            <div className="flex items-center gap-0.5 rounded-full bg-emerald-400/20 px-1 py-0.5">
+              <div className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-[5px] font-semibold text-emerald-300">LIVE</span>
+            </div>
           </div>
-          <svg viewBox="0 0 200 80" className="mt-1 flex-1">
-            {[[40,30],[100,20],[160,35],[60,60],[120,55],[170,65]].map(([cx,cy],i)=>(
-              <circle key={i} cx={cx} cy={cy} r="4" fill="white" opacity="0.7" />
+          {/* Transaction stream */}
+          <div className="space-y-0.5">
+            {[
+              { id: "TXN-4821", amt: "$1,240", status: "Safe", color: "text-emerald-300 bg-emerald-400/15" },
+              { id: "TXN-4822", amt: "$89,500", status: "⚠ Alert", color: "text-red-300 bg-red-400/20" },
+              { id: "TXN-4823", amt: "$320", status: "Safe", color: "text-emerald-300 bg-emerald-400/15" },
+            ].map((tx) => (
+              <div key={tx.id} className="flex items-center justify-between rounded-md bg-white/8 px-1.5 py-1 border border-white/5">
+                <div>
+                  <div className="text-[5.5px] font-medium text-white/80">{tx.id}</div>
+                  <div className="text-[5px] text-white/40">{tx.amt}</div>
+                </div>
+                <span className={`rounded-full px-1 py-0.5 text-[5px] font-semibold ${tx.color}`}>{tx.status}</span>
+              </div>
             ))}
-            <g stroke="white" strokeWidth="0.5" opacity="0.4">
-              <line x1="40" y1="30" x2="100" y2="20" />
-              <line x1="100" y1="20" x2="160" y2="35" />
-              <line x1="40" y1="30" x2="60" y2="60" />
-              <line x1="100" y1="20" x2="120" y2="55" />
-              <line x1="160" y1="35" x2="170" y2="65" />
-              <line x1="60" y1="60" x2="120" y2="55" />
-            </g>
-            <circle cx="120" cy="55" r="6" fill="oklch(0.7 0.22 25)" />
-          </svg>
+          </div>
+          {/* Graph scatter */}
+          <div className="flex-1 overflow-hidden rounded-lg bg-white/5">
+            <svg viewBox="0 0 200 60" className="h-full w-full">
+              {[[30,40],[60,25],[90,38],[130,15],[160,30],[50,48],[110,42],[170,20]].map(([cx,cy],i)=>(
+                <circle key={i} cx={cx} cy={cy} r={i===1?4:2.5} fill={i===1?"#f87171":"rgba(255,255,255,0.5)"} opacity={i===1?1:0.6} />
+              ))}
+              {i===1 && <circle cx={60} cy={25} r={8} fill="none" stroke="#f87171" strokeWidth="0.8" opacity="0.4" />}
+            </svg>
+          </div>
         </div>
       );
+
     case "face":
       return (
-        <div className="relative flex h-full items-center justify-center">
-          <div className="grid h-16 w-16 place-items-center rounded-full bg-white/15">
-            <UserSquare2 className="h-7 w-7 text-white/80" />
+        <div className="relative flex h-full overflow-hidden rounded-xl bg-black/30">
+          <div className="absolute inset-0 flex items-center justify-center">
+            {/* Face silhouette */}
+            <div className="relative">
+              <div className="h-16 w-14 rounded-t-[50%] rounded-b-lg bg-white/15" />
+              {/* Scan overlay */}
+              <div className="absolute inset-0 rounded-t-[50%] rounded-b-lg border-2 border-emerald-400 shadow-[0_0_12px_rgba(52,211,153,0.5)]">
+                {/* Corner markers */}
+                {[
+                  "top-0 left-0 border-t-2 border-l-2 rounded-tl",
+                  "top-0 right-0 border-t-2 border-r-2 rounded-tr",
+                  "bottom-0 left-0 border-b-2 border-l-2 rounded-bl",
+                  "bottom-0 right-0 border-b-2 border-r-2 rounded-br",
+                ].map((cls, i) => (
+                  <div key={i} className={`absolute h-2 w-2 border-emerald-400 ${cls}`} />
+                ))}
+                {/* Landmark dots */}
+                {[[28, 28], [52, 28], [40, 40], [30, 52], [50, 52]].map(([x, y], i) => (
+                  <div key={i} className="absolute h-1 w-1 rounded-full bg-violet-300/80" style={{ left: `${x}%`, top: `${y}%` }} />
+                ))}
+              </div>
+              {/* Scan line */}
+              <div className="absolute inset-x-0 h-0.5 bg-emerald-400/70 shadow-[0_0_8px_rgba(52,211,153,0.8)] animate-scan" />
+            </div>
           </div>
-          <div className="absolute inset-x-6 inset-y-3 rounded-xl border border-emerald-300/70" />
-          <span className="absolute bottom-2 right-3 rounded bg-emerald-400 px-1 text-[7px] font-bold text-emerald-950">Match 99%</span>
+          {/* Sidebar data */}
+          <div className="absolute right-1.5 top-1.5 space-y-0.5">
+            {[["ID", "USR-0042"], ["Age", "~28"], ["Conf.", "99.2%"]].map(([k, v]) => (
+              <div key={k} className="rounded bg-black/50 px-1 py-0.5 backdrop-blur">
+                <div className="text-[4.5px] text-white/40">{k}</div>
+                <div className="text-[5.5px] font-bold text-white">{v}</div>
+              </div>
+            ))}
+          </div>
+          <div className="absolute bottom-1.5 inset-x-1.5 flex items-center justify-between rounded-md bg-black/60 px-2 py-1 backdrop-blur">
+            <span className="text-[5.5px] font-bold text-emerald-300">✓ Match Found</span>
+            <div className="h-1 w-1 rounded-full bg-emerald-400 animate-pulse" />
+          </div>
         </div>
       );
+
     case "ocr":
       return (
-        <div className="relative flex h-full flex-col gap-1 overflow-hidden rounded-md bg-white/15 p-2">
-          <div className="h-1.5 w-1/2 rounded bg-white/40" />
-          <div className="h-1 w-full rounded bg-white/20" />
-          <div className="h-1 w-5/6 rounded bg-white/20" />
-          <div className="h-1 w-2/3 rounded bg-white/20" />
-          <div className="h-1 w-full rounded bg-white/20" />
-          <div className="absolute inset-x-0 top-0 h-0.5 bg-emerald-300 shadow-[0_0_10px_2px_oklch(0.85_0.18_145)] animate-scan" />
+        <div className="flex h-full gap-1.5 overflow-hidden rounded-xl">
+          {/* Document */}
+          <div className="relative w-[45%] overflow-hidden rounded-lg bg-white/90 p-1.5 shadow-lg">
+            <div className="mb-1 text-[5.5px] font-bold text-gray-500 uppercase">Invoice #4821</div>
+            <div className="space-y-0.5">
+              <div className="h-0.5 w-full rounded bg-gray-200" />
+              <div className="h-0.5 w-5/6 rounded bg-gray-200" />
+              <div className="h-0.5 w-4/5 rounded bg-gray-200" />
+              <div className="h-2 w-full rounded bg-gray-100 mt-1" />
+              <div className="h-0.5 w-full rounded bg-gray-200" />
+              <div className="h-0.5 w-5/6 rounded bg-gray-200" />
+              <div className="h-0.5 w-2/3 rounded bg-gray-200" />
+            </div>
+            {/* Scan highlight overlay */}
+            <div className="absolute left-0 right-0 h-0.5 bg-emerald-400 shadow-[0_0_10px_rgba(52,211,153,0.9)] animate-scan" />
+            <div className="absolute left-1 top-4 right-1 h-2 rounded bg-violet-400/15 border border-violet-400/40" />
+          </div>
+          {/* Extracted data */}
+          <div className="flex flex-1 flex-col gap-1 rounded-lg bg-black/25 p-1.5">
+            <div className="text-[5.5px] font-bold text-white/70">Extracted Fields</div>
+            {[
+              ["Date", "Jun 28, 2026"],
+              ["Total", "$4,200.00"],
+              ["Vendor", "Acme Corp"],
+              ["PO#", "PO-9921"],
+            ].map(([key, val]) => (
+              <div key={key} className="flex items-center justify-between rounded bg-white/10 px-1 py-0.5">
+                <span className="text-[4.5px] text-white/40">{key}</span>
+                <span className="text-[5px] font-semibold text-emerald-300">{val}</span>
+              </div>
+            ))}
+            <div className="mt-auto flex items-center gap-0.5 rounded bg-emerald-400/15 px-1 py-0.5">
+              <span className="text-[5px] font-bold text-emerald-300">✓ 100% Confidence</span>
+            </div>
+          </div>
         </div>
       );
+
     default:
       return null;
   }
