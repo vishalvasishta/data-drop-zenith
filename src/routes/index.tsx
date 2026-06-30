@@ -217,7 +217,7 @@ function Hero() {
           <div className="mt-10 grid grid-cols-2 gap-3 sm:grid-cols-4">
             <Stat value="18" suffix="Months" label="Program" />
             <Stat value="50+" label="Projects" />
-            <Stat value="100+" label="Learning Hours" />
+            <Stat value="300+" label="Learning Hours" />
             <Stat value="₹3,999" label="Program Fee" highlight />
           </div>
         </div>
