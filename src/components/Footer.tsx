@@ -48,6 +48,7 @@ export function Footer() {
               </h4>
               <ul className="mt-4 space-y-3">
                 {[
+                  { label: "Home", to: "/" },
                   { label: "Curriculum", to: "/curriculum" },
                   { label: "Projects", to: "/projects" },
                   { label: "Pricing", to: "/pricing" },
