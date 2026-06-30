@@ -1151,17 +1151,14 @@ function BottomCTA() {
           portfolio that stands out.
         </p>
         <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row">
-          <Link
-            to="/curriculum"
-            className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[oklch(0.4_0.22_280)] shadow-float transition hover:scale-[1.03]"
-          >
+          <a href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-[oklch(0.4_0.22_280)] shadow-float transition hover:scale-[1.03]">
             <Rocket className="h-4 w-4" />
             View Complete Curriculum
-          </Link>
-          <button className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20">
+          </a>
+          <a href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info" target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold text-white backdrop-blur transition hover:bg-white/20">
             <Download className="h-4 w-4" />
             Download Syllabus
-          </button>
+          </a>
         </div>
       </div>
     </div>

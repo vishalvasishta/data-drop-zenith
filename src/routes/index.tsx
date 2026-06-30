@@ -182,14 +182,14 @@ function Hero() {
 
           {/* Buttons */}
           <div className="mt-8 flex flex-wrap items-center gap-3">
-            <button className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-br from-[oklch(0.58_0.22_258)] to-[oklch(0.52_0.26_290)] px-6 py-3.5 text-sm font-semibold text-white shadow-float transition-all hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-18px_oklch(0.55_0.25_280/0.6)]">
+            <a href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 rounded-2xl bg-gradient-to-br from-[oklch(0.58_0.22_258)] to-[oklch(0.52_0.26_290)] px-6 py-3.5 text-sm font-semibold text-white shadow-float transition-all hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-18px_oklch(0.55_0.25_280/0.6)]">
               Enroll Now
               <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-            </button>
-            <button className="group inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground shadow-soft backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white">
+            </a>
+            <a href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info" target="_blank" rel="noopener noreferrer" className="group inline-flex items-center gap-2 rounded-2xl border border-border bg-white/70 px-6 py-3.5 text-sm font-semibold text-foreground shadow-soft backdrop-blur transition-all hover:-translate-y-0.5 hover:bg-white">
               <Download className="h-4 w-4 text-[oklch(0.5_0.2_270)]" />
               Download Curriculum
-            </button>
+            </a>
           </div>
 
           {/* Trust badges */}
@@ -1666,10 +1666,10 @@ function PricingSection() {
             </div>
 
             {/* CTA */}
-            <button className="group mt-8 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-[oklch(0.58_0.22_258)] to-[oklch(0.52_0.26_290)] px-6 py-4 text-base font-bold text-white shadow-float transition-all hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-18px_oklch(0.55_0.25_280/0.6)]">
+            <a href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info" target="_blank" rel="noopener noreferrer" className="group mt-8 w-full inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-br from-[oklch(0.58_0.22_258)] to-[oklch(0.52_0.26_290)] px-6 py-4 text-base font-bold text-white shadow-float transition-all hover:-translate-y-0.5 hover:shadow-[0_28px_60px_-18px_oklch(0.55_0.25_280/0.6)]">
               Enroll Now
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-0.5" />
-            </button>
+            </a>
 
             {/* Guarantee */}
             <div className="mt-5 flex items-center justify-center gap-2 text-sm text-muted-foreground">

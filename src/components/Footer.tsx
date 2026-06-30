@@ -77,7 +77,9 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Support Center
@@ -85,7 +87,9 @@ export function Footer() {
                 </li>
                 <li>
                   <a
-                    href="#"
+                    href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Community
