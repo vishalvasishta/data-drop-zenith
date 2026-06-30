@@ -85,16 +85,6 @@ export function Footer() {
                     Support Center
                   </a>
                 </li>
-                <li>
-                  <a
-                    href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                  >
-                    Community
-                  </a>
-                </li>
               </ul>
             </div>
             <div>
