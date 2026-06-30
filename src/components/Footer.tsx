@@ -1,5 +1,4 @@
 import { Link } from "@tanstack/react-router";
-import ddLogo from "@/assets/dd-logo.png.asset.json";
 import { Mail, Send } from "lucide-react";
 
 export function Footer() {
@@ -11,9 +10,9 @@ export function Footer() {
           <div className="lg:col-span-4">
             <Link to="/" className="flex items-center gap-2.5">
               <img
-                src={ddLogo.url}
-                alt="Data Drop logo"
-                className="h-9 w-9 rounded-2xl object-contain"
+                src="/assets/logo.png"
+                alt="Data Drop Logo"
+                className="h-10 w-auto object-contain"
               />
               <span className="text-[17px] font-semibold tracking-tight">
                 Data Drop
