@@ -179,13 +179,13 @@ const diffDot: Record<Difficulty, string> = {
 export const Route = createFileRoute("/projects")({
   head: () => ({
     meta: [
-      { title: "Projects — Data Drop" },
+      { title: "Projects — DATA DROP" },
       {
         name: "description",
         content:
-          "Build 50+ real-world AI portfolio projects with Data Drop — LLMs, Computer Vision, Generative AI and more.",
+          "Build 50+ real-world AI portfolio projects with DATA DROP — LLMs, Computer Vision, Generative AI and more.",
       },
-      { property: "og:title", content: "AI Portfolio Projects — Data Drop" },
+      { property: "og:title", content: "AI Portfolio Projects — DATA DROP" },
       {
         property: "og:description",
         content:

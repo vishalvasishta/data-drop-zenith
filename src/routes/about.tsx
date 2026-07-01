@@ -11,7 +11,7 @@ function AboutPage() {
         About Us
       </h1>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-        Welcome to <span className="font-semibold text-foreground">Data Drop</span>, a learning platform dedicated to helping students and aspiring professionals build practical skills in Artificial Intelligence, Machine Learning, Data Science, and related technologies.
+        Welcome to <span className="font-semibold text-foreground">DATA DROP</span>, a learning platform dedicated to helping students and aspiring professionals build practical skills in Artificial Intelligence, Machine Learning, Data Science, and related technologies.
       </p>
       <p className="mt-4 text-base leading-relaxed text-muted-foreground">
         Our mission is to bridge the gap between traditional education and industry requirements by providing structured, project-based learning that prepares students for real-world careers.

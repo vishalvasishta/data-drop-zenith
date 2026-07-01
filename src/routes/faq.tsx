@@ -43,17 +43,17 @@ const faqs = [
 export const Route = createFileRoute("/faq")({
   head: () => ({
     meta: [
-      { title: "FAQ — Data Drop" },
+      { title: "FAQ — DATA DROP" },
       {
         name: "description",
         content:
-          "Find answers to frequently asked questions about the Data Drop AI Career Program — duration, projects, certification, and career support.",
+          "Find answers to frequently asked questions about the DATA DROP AI Career Program — duration, projects, certification, and career support.",
       },
-      { property: "og:title", content: "FAQ — Data Drop" },
+      { property: "og:title", content: "FAQ — DATA DROP" },
       {
         property: "og:description",
         content:
-          "Find answers to frequently asked questions about the Data Drop AI Career Program.",
+          "Find answers to frequently asked questions about the DATA DROP AI Career Program.",
       },
     ],
   }),

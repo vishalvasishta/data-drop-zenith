@@ -68,7 +68,7 @@ function ContactPage() {
             </div>
             <h2 className="text-sm font-semibold text-foreground">Business Name</h2>
           </div>
-          <p className="mt-3 text-sm text-muted-foreground">Data Drop</p>
+          <p className="mt-3 text-sm text-muted-foreground">DATA DROP</p>
         </div>
       </div>
 

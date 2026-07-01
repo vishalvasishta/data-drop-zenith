@@ -11,11 +11,11 @@ export function Footer() {
             <Link to="/" className="flex items-center gap-2.5">
               <img
                 src="/assets/logo.png"
-                alt="Data Drop Logo"
+                alt="DATA DROP Logo"
                 className="h-10 w-auto object-contain"
               />
               <span className="text-[17px] font-semibold tracking-tight">
-                Data Drop
+                DATA DROP
               </span>
             </Link>
             <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted-foreground">
@@ -139,7 +139,7 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="mt-16 flex flex-col items-center justify-between gap-4 border-t border-border/60 pt-8 sm:flex-row">
           <p className="text-xs text-muted-foreground">
-            &copy; {new Date().getFullYear()} Data Drop. All rights reserved.
+            &copy; {new Date().getFullYear()} DATA DROP. All rights reserved.
           </p>
 
         </div>

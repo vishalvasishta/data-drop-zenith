@@ -18,11 +18,11 @@ export function Navbar() {
         <Link to="/" className="flex items-center gap-2.5">
           <img
             src="/assets/logo.png"
-            alt="Data Drop Logo"
+            alt="DATA DROP Logo"
             className="h-10 w-auto object-contain sm:h-12"
           />
           <span className="text-[17px] font-semibold tracking-tight">
-            Data Drop
+            DATA DROP
           </span>
         </Link>
 

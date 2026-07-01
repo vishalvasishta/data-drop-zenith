@@ -41,7 +41,7 @@ function PrivacyPage() {
         Effective Date: 31-05-2026
       </p>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-        Data Drop respects your privacy and is committed to protecting your personal information.
+        DATA DROP respects your privacy and is committed to protecting your personal information.
       </p>
 
       {sections.map((s) => (

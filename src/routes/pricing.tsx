@@ -23,17 +23,17 @@ const pricingFeatures = [
 export const Route = createFileRoute("/pricing")({
   head: () => ({
     meta: [
-      { title: "Pricing — Data Drop" },
+      { title: "Pricing — DATA DROP" },
       {
         name: "description",
         content:
-          "Invest in your AI career. Get the complete Data Drop AI Career Program for ₹4,599 — 18 months of live mentorship, projects, and career support.",
+          "Invest in your AI career. Get the complete DATA DROP AI Career Program for ₹4,599 — 18 months of live mentorship, projects, and career support.",
       },
-      { property: "og:title", content: "Pricing — Data Drop" },
+      { property: "og:title", content: "Pricing — DATA DROP" },
       {
         property: "og:description",
         content:
-          "Invest in your AI career. Get the complete Data Drop AI Career Program for ₹4,599.",
+          "Invest in your AI career. Get the complete DATA DROP AI Career Program for ₹4,599.",
       },
     ],
   }),

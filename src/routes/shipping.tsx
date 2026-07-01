@@ -14,7 +14,7 @@ function ShippingPage() {
         Effective Date: 31-05-2026
       </p>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">
-        <span className="font-semibold text-foreground">Data Drop</span> provides digital educational products only.
+        <span className="font-semibold text-foreground">DATA DROP</span> provides digital educational products only.
       </p>
 
       <div className="mt-10">

@@ -14,7 +14,7 @@ function TermsPage() {
     {
       title: "Intellectual Property",
       content:
-        "All course materials, videos, documents, graphics, logos, and website content are the intellectual property of Data Drop and may not be reproduced without written permission.",
+        "All course materials, videos, documents, graphics, logos, and website content are the intellectual property of DATA DROP and may not be reproduced without written permission.",
     },
     {
       title: "Pricing",
@@ -52,7 +52,7 @@ function TermsPage() {
       </p>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">
         By accessing or purchasing any course from{" "}
-        <span className="font-semibold text-foreground">Data Drop</span>,
+        <span className="font-semibold text-foreground">DATA DROP</span>,
         you agree to these Terms &amp; Conditions.
       </p>
 

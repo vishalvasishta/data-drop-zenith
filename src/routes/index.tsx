@@ -86,13 +86,13 @@ import type { SimpleIcon } from "simple-icons";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "Data Drop — Become the AI Engineer Companies Want to Hire" },
+      { title: "DATA DROP — Become the AI Engineer Companies Want to Hire" },
       {
         name: "description",
         content:
           "India's most practical AI career program. Master AI & ML through live mentorship, real-world projects, interview prep, and career guidance.",
       },
-      { property: "og:title", content: "Data Drop — India's Most Practical AI Career Program" },
+      { property: "og:title", content: "DATA DROP — India's Most Practical AI Career Program" },
       {
         property: "og:description",
         content:
@@ -621,7 +621,7 @@ function TrustSection() {
         <div className="mx-auto max-w-2xl text-center">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-[oklch(0.9_0.02_270)] bg-[oklch(0.98_0.005_260)] px-3 py-1 text-[11px] font-semibold tracking-widest text-[oklch(0.55_0.18_275)] uppercase">
             <Sparkles className="h-3 w-3" />
-            Why Data Drop
+            Why DATA DROP
           </span>
           <h2 className="mt-5 text-[2.2rem] font-semibold leading-[1.1] tracking-[-0.03em] text-foreground sm:text-5xl">
             Trusted by Future{" "}
@@ -718,7 +718,7 @@ function JourneySection() {
             steps={traditionalSteps}
           />
           <JourneyColumn
-            label="Data Drop"
+            label="DATA DROP"
             tone="brand"
             tagline="The practical path"
             steps={dataDropSteps}

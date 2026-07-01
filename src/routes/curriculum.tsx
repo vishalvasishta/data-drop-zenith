@@ -65,17 +65,17 @@ const roadmap = [
 export const Route = createFileRoute("/curriculum")({
   head: () => ({
     meta: [
-      { title: "Curriculum — Data Drop" },
+      { title: "Curriculum — DATA DROP" },
       {
         name: "description",
         content:
-          "Explore the 18-month Data Drop AI Career curriculum. From Python fundamentals to Agentic AI — a step-by-step roadmap to becoming a job-ready AI engineer.",
+          "Explore the 18-month DATA DROP AI Career curriculum. From Python fundamentals to Agentic AI — a step-by-step roadmap to becoming a job-ready AI engineer.",
       },
-      { property: "og:title", content: "Curriculum — Data Drop" },
+      { property: "og:title", content: "Curriculum — DATA DROP" },
       {
         property: "og:description",
         content:
-          "Explore the 18-month Data Drop AI Career curriculum. From Python fundamentals to Agentic AI.",
+          "Explore the 18-month DATA DROP AI Career curriculum. From Python fundamentals to Agentic AI.",
       },
     ],
   }),
