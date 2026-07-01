@@ -224,7 +224,7 @@ function Hero() {
             <Stat value="18" suffix="Months" label="Program" />
             <Stat value="50+" label="Projects" />
             <Stat value="300+" label="Learning Hours" />
-            <Stat value="₹3,999" label="Program Fee" highlight />
+            <Stat value="₹4,599" label="Program Fee" highlight />
           </div>
         </div>
 
@@ -1693,7 +1693,7 @@ function PricingSection() {
               </div>
               <div className="mt-2 flex items-baseline justify-center gap-1">
                 <span className="text-6xl font-bold tracking-tighter text-gradient-brand">
-                  ₹3,999
+                  ₹4,599
                 </span>
               </div>
               <p className="mt-1 text-sm text-muted-foreground">

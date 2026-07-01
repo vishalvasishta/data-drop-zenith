@@ -27,13 +27,13 @@ export const Route = createFileRoute("/pricing")({
       {
         name: "description",
         content:
-          "Invest in your AI career. Get the complete Data Drop AI Career Program for ₹3,999 — 18 months of live mentorship, projects, and career support.",
+          "Invest in your AI career. Get the complete Data Drop AI Career Program for ₹4,599 — 18 months of live mentorship, projects, and career support.",
       },
       { property: "og:title", content: "Pricing — Data Drop" },
       {
         property: "og:description",
         content:
-          "Invest in your AI career. Get the complete Data Drop AI Career Program for ₹3,999.",
+          "Invest in your AI career. Get the complete Data Drop AI Career Program for ₹4,599.",
       },
     ],
   }),
@@ -100,7 +100,7 @@ function PricingPage() {
               </div>
               <div className="mt-2 flex items-baseline justify-center gap-1">
                 <span className="text-6xl font-bold tracking-tighter text-gradient-brand">
-                  ₹3,999
+                  ₹4,599
                 </span>
               </div>
               <p className="mt-1 text-sm text-muted-foreground">
