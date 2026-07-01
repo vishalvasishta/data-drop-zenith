@@ -14,7 +14,7 @@ function TermsPage() {
     {
       title: "Intellectual Property",
       content:
-        "All course materials, videos, documents, graphics, logos, and website content are the intellectual property of Data Drop Zenith and may not be reproduced without written permission.",
+        "All course materials, videos, documents, graphics, logos, and website content are the intellectual property of Data Drop and may not be reproduced without written permission.",
     },
     {
       title: "Pricing",
