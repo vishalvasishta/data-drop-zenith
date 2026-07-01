@@ -52,7 +52,7 @@ function TermsPage() {
       </p>
       <p className="mt-6 text-base leading-relaxed text-muted-foreground">
         By accessing or purchasing any course from{" "}
-        <span className="font-semibold text-foreground">Data Drop Zenith</span>,
+        <span className="font-semibold text-foreground">Data Drop</span>,
         you agree to these Terms &amp; Conditions.
       </p>
 
