@@ -123,6 +123,14 @@ export function Footer() {
                     Terms
                   </Link>
                 </li>
+                <li>
+                  <Link
+                    to="/shipping"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Shipping &amp; Delivery
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
