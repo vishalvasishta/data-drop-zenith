@@ -108,12 +108,12 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
-                  <a
-                    href="#"
+                  <Link
+                    to="/refund"
                     className="text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     Refund Policy
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link
