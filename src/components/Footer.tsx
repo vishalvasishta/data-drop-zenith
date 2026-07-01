@@ -107,16 +107,22 @@ export function Footer() {
                     Privacy Policy
                   </Link>
                 </li>
-                {["Refund Policy", "Terms"].map((link) => (
-                  <li key={link}>
-                    <a
-                      href="#"
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
-                    >
-                      {link}
-                    </a>
-                  </li>
-                ))}
+                <li>
+                  <a
+                    href="#"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Refund Policy
+                  </a>
+                </li>
+                <li>
+                  <Link
+                    to="/terms"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Terms
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
