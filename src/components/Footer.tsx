@@ -99,7 +99,15 @@ export function Footer() {
             <div>
               <h4 className="text-sm font-semibold text-foreground">Legal</h4>
               <ul className="mt-4 space-y-3">
-                {["Privacy Policy", "Refund Policy", "Terms"].map((link) => (
+                <li>
+                  <Link
+                    to="/privacy"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Privacy Policy
+                  </Link>
+                </li>
+                {["Refund Policy", "Terms"].map((link) => (
                   <li key={link}>
                     <a
                       href="#"
