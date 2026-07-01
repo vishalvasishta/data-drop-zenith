@@ -77,6 +77,14 @@ export function Footer() {
                   </Link>
                 </li>
                 <li>
+                  <Link
+                    to="/contact"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    Contact Us
+                  </Link>
+                </li>
+                <li>
                   <a
                     href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info"
                     target="_blank"
