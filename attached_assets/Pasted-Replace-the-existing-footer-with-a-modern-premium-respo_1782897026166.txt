@@ -1,0 +1,175 @@
+Replace the existing footer with a modern, premium, responsive footer inspired by Stripe, Apple, Notion, Linear, and Vercel.
+
+The footer should have a clean white background with subtle blue gradients, rounded top corners, and a premium SaaS appearance.
+
+========================
+
+Top Section
+
+Display the logo on the left.
+
+Next to the logo show:
+
+AI/ML Career Accelerator
+
+Become an Industry-Ready AI & Machine Learning Engineer through real-world projects, mentorship, and career guidance.
+
+Below this add social icons:
+
+LinkedIn
+Instagram
+YouTube
+GitHub
+WhatsApp
+
+Each icon should have smooth hover animations.
+
+========================
+
+Create 5 columns
+
+Column 1
+
+Company
+
+About Us
+
+Success Stories
+
+Contact Us
+
+FAQs
+
+Column 2
+
+Course
+
+Curriculum
+
+50+ Projects
+
+Pricing
+
+Certification
+
+Placement Assistance
+
+Column 3
+
+Legal
+
+Privacy Policy
+
+Terms & Conditions
+
+Refund Policy
+
+Cancellation Policy
+
+Disclaimer
+
+Column 4
+
+Resources
+
+Blog
+
+Free AI Tools
+
+Career Roadmap
+
+Interview Questions
+
+Community
+
+Column 5
+
+Support
+
+support@yourdomain.com
+
++91 XXXXX XXXXX
+
+Mon–Sat
+
+9:00 AM – 7:00 PM IST
+
+Live Chat
+
+========================
+
+Newsletter Section
+
+Title
+
+Stay Updated
+
+Description
+
+Get AI career tips, project ideas, hiring updates, and exclusive offers directly in your inbox.
+
+Include:
+
+Email input
+
+Subscribe button
+
+========================
+
+Trust Badges
+
+Secure Payments
+
+SSL Secured
+
+Razorpay Accepted
+
+1000+ Students
+
+Lifetime Support
+
+Responsive Design
+
+========================
+
+Bottom Divider
+
+Show
+
+© 2026 AI/ML Career Accelerator. All Rights Reserved.
+
+Links:
+
+Privacy Policy
+
+Terms
+
+Refund
+
+Contact
+
+========================
+
+Design
+
+Premium white theme
+
+Soft blue gradient accents
+
+Rounded corners (24px)
+
+Glassmorphism cards for newsletter
+
+Smooth hover effects
+
+Blue gradient buttons
+
+Responsive on mobile
+
+Hover underline animations
+
+Subtle fade-in animation when footer enters viewport
+
+Use premium typography and spacing.
+
+The footer should feel like a premium SaaS company website and inspire trust for users considering purchasing the course.

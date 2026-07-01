@@ -69,6 +69,14 @@ export function Footer() {
               <h4 className="text-sm font-semibold text-foreground">Contact</h4>
               <ul className="mt-4 space-y-3">
                 <li>
+                  <Link
+                    to="/about"
+                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                  >
+                    About Us
+                  </Link>
+                </li>
+                <li>
                   <a
                     href="https://wa.me/918330961514?text=Hello%20can%20I%20get%20more%20info"
                     target="_blank"

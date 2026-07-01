@@ -13,6 +13,7 @@ import { Route as ProjectsRouteImport } from './routes/projects'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as CurriculumRouteImport } from './routes/curriculum'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 
 const ProjectsRoute = ProjectsRouteImport.update({
@@ -35,6 +36,11 @@ const CurriculumRoute = CurriculumRouteImport.update({
   path: '/curriculum',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
@@ -43,6 +49,7 @@ const IndexRoute = IndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/curriculum': typeof CurriculumRoute
   '/faq': typeof FaqRoute
   '/pricing': typeof PricingRoute
@@ -50,6 +57,7 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/curriculum': typeof CurriculumRoute
   '/faq': typeof FaqRoute
   '/pricing': typeof PricingRoute
@@ -58,6 +66,7 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/curriculum': typeof CurriculumRoute
   '/faq': typeof FaqRoute
   '/pricing': typeof PricingRoute
@@ -65,14 +74,22 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/curriculum' | '/faq' | '/pricing' | '/projects'
+  fullPaths: '/' | '/about' | '/curriculum' | '/faq' | '/pricing' | '/projects'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/curriculum' | '/faq' | '/pricing' | '/projects'
-  id: '__root__' | '/' | '/curriculum' | '/faq' | '/pricing' | '/projects'
+  to: '/' | '/about' | '/curriculum' | '/faq' | '/pricing' | '/projects'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/curriculum'
+    | '/faq'
+    | '/pricing'
+    | '/projects'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CurriculumRoute: typeof CurriculumRoute
   FaqRoute: typeof FaqRoute
   PricingRoute: typeof PricingRoute
@@ -109,6 +126,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof CurriculumRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -121,6 +145,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CurriculumRoute: CurriculumRoute,
   FaqRoute: FaqRoute,
   PricingRoute: PricingRoute,
