@@ -25,19 +25,16 @@ export async function saveEnrollment(
   const id = `enr_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const now = new Date().toISOString();
   const record: Enrollment = { ...data, id, createdAt: now, updatedAt: now };
-
+  // Each enrollment is stored at its own key; no shared index to corrupt.
   await client.uploadFromText(`enrollment:${id}`, JSON.stringify(record));
-
-  // Update index
-  const indexResult = await client.downloadAsText("enrollments:index");
-  const index: string[] =
-    indexResult.ok && indexResult.value
-      ? JSON.parse(indexResult.value)
-      : [];
-  index.push(id);
-  await client.uploadFromText("enrollments:index", JSON.stringify(index));
-
   return record;
+}
+
+export async function getEnrollment(id: string): Promise<Enrollment | null> {
+  const client = getClient();
+  const result = await client.downloadAsText(`enrollment:${id}`);
+  if (!result.ok || !result.value) return null;
+  return JSON.parse(result.value) as Enrollment;
 }
 
 export async function updateEnrollment(
@@ -60,13 +57,14 @@ export async function updateEnrollment(
 
 export async function getAllEnrollments(): Promise<Enrollment[]> {
   const client = getClient();
-  const indexResult = await client.downloadAsText("enrollments:index");
-  if (!indexResult.ok || !indexResult.value) return [];
+  // Prefix-scan: no shared mutable index, concurrent-safe.
+  const listResult = await client.list({ prefix: "enrollment:" });
+  if (!listResult.ok || !listResult.value || listResult.value.length === 0)
+    return [];
 
-  const index: string[] = JSON.parse(indexResult.value);
   const results = await Promise.all(
-    index.map(async (enrollId) => {
-      const r = await client.downloadAsText(`enrollment:${enrollId}`);
+    listResult.value.map(async (obj) => {
+      const r = await client.downloadAsText(obj.name);
       if (!r.ok || !r.value) return null;
       return JSON.parse(r.value) as Enrollment;
     }),

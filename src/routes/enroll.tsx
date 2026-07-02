@@ -1,7 +1,7 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
 import { ArrowRight, Lock, CheckCircle2, Loader2, AlertCircle } from "lucide-react";
-import { createOrder, verifyPayment } from "@/lib/enrollment-fns";
+import { createOrder, verifyPayment, COURSES } from "@/lib/enrollment-fns";
 
 declare global {
   interface Window {
@@ -32,11 +32,12 @@ interface RazorpayInstance {
   open: () => void;
 }
 
-const COURSES = [
-  { label: "Complete AI Career Program — ₹4,599", value: "Complete AI Career Program", amount: 4599 },
-  { label: "GenAI Bootcamp — ₹2,999", value: "GenAI Bootcamp", amount: 2999 },
-  { label: "AI Foundations (Self-paced) — ₹1,999", value: "AI Foundations (Self-paced)", amount: 1999 },
-];
+// COURSES imported from enrollment-fns so display labels stay in sync with server-authoritative prices
+const COURSE_OPTIONS = COURSES.map((c) => ({
+  label: `${c.label} — ₹${c.amount.toLocaleString("en-IN")}`,
+  value: c.label,
+  amount: c.amount,
+}));
 
 export const Route = createFileRoute("/enroll")({
   head: () => ({
@@ -68,7 +69,7 @@ function EnrollPage() {
   const navigate = useNavigate();
   const razorpayReady = useRazorpayScript();
 
-  const [form, setForm] = useState({ name: "", email: "", phone: "", course: COURSES[0].value });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", course: COURSE_OPTIONS[0].value });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [apiError, setApiError] = useState("");
@@ -98,20 +99,19 @@ function EnrollPage() {
 
     setLoading(true);
     try {
-      const selected = COURSES.find((c) => c.value === form.course)!;
-      const { orderId, enrollmentId, keyId } = await createOrder({
+      // amount is NOT sent to server — server derives it from course name
+      const { orderId, enrollmentId, keyId, amount } = await createOrder({
         data: {
           name: form.name.trim(),
           email: form.email.trim(),
           phone: form.phone.trim(),
           course: form.course,
-          amount: selected.amount,
         },
       });
 
       const rzp = new window.Razorpay({
         key: keyId,
-        amount: selected.amount * 100,
+        amount: amount * 100,
         currency: "INR",
         name: "Data Drop",
         description: form.course,
@@ -150,7 +150,7 @@ function EnrollPage() {
     }
   }
 
-  const selectedCourse = COURSES.find((c) => c.value === form.course)!;
+  const selectedCourse = COURSE_OPTIONS.find((c) => c.value === form.course)!;
 
   return (
     <section className="relative min-h-screen overflow-hidden">
@@ -234,10 +234,10 @@ function EnrollPage() {
               </label>
               <select
                 value={form.course}
-                onChange={(e) => setForm((f) => ({ ...f, course: e.target.value }))}
+                onChange={(e) => setForm((f) => ({ ...f, course: e.target.value as typeof f.course }))}
                 className={`w-full rounded-xl border px-4 py-3 text-sm text-white bg-[oklch(0.22_0.05_270)] outline-none transition focus:ring-2 focus:ring-[oklch(0.6_0.22_270)] ${errors.course ? "border-rose-500" : "border-white/15"}`}
               >
-                {COURSES.map((c) => (
+                {COURSE_OPTIONS.map((c) => (
                   <option key={c.value} value={c.value} className="bg-[oklch(0.22_0.05_270)]">
                     {c.label}
                   </option>
