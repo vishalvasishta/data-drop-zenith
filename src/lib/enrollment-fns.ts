@@ -13,8 +13,7 @@ import {
 // Amount is never trusted from the client — it is always looked up here.
 export const COURSES = [
   { label: "Complete AI Career Program", amount: 4599 },
-  { label: "GenAI Bootcamp", amount: 2999 },
-  { label: "AI Foundations (Self-paced)", amount: 1999 },
+  { label: "Test Course", amount: 9 },
 ] as const;
 
 export type CourseName = (typeof COURSES)[number]["label"];
