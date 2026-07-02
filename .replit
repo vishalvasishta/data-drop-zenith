@@ -38,3 +38,6 @@ externalPort = 80
 deploymentTarget = "autoscale"
 run = ["bun", "run", ".output/server/index.mjs"]
 build = ["bun", "run", "build"]
+
+[objectStorage]
+defaultBucketID = "replit-objstore-e515b9be-51fd-4ea9-87af-179fd3515872"
