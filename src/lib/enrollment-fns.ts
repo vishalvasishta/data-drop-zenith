@@ -25,10 +25,15 @@ function getCourse(name: string) {
 }
 
 function getRazorpay() {
-  return new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID!,
-    key_secret: process.env.RAZORPAY_KEY_SECRET!,
-  });
+  const key_id = process.env.RAZORPAY_KEY_ID;
+  const key_secret = process.env.RAZORPAY_KEY_SECRET;
+  if (!key_id || !key_secret) {
+    throw new Error(
+      `Razorpay credentials missing. key_id=${key_id ? "set" : "MISSING"}, key_secret=${key_secret ? "set" : "MISSING"}. ` +
+      `Ensure RAZORPAY_KEY_ID and RAZORPAY_KEY_SECRET are set in your Vercel environment variables.`
+    );
+  }
+  return new Razorpay({ key_id, key_secret });
 }
 
 // ── Create Razorpay order + save pending enrollment ───────────────────────────
