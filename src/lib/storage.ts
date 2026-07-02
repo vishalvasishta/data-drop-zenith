@@ -1,4 +1,4 @@
-import { Client } from "@replit/object-storage";
+import { put, list, get } from "@vercel/blob";
 
 export interface Enrollment {
   id: string;
@@ -14,59 +14,69 @@ export interface Enrollment {
   updatedAt: string;
 }
 
-function getClient() {
-  return new Client();
+const PREFIX = "enrollments/";
+
+// Read the full text body from a private-blob stream.
+async function streamToText(stream: ReadableStream<Uint8Array>): Promise<string> {
+  return new Response(stream).text();
 }
+
+// ── Write ─────────────────────────────────────────────────────────────────────
 
 export async function saveEnrollment(
   data: Omit<Enrollment, "id" | "createdAt" | "updatedAt">,
 ): Promise<Enrollment> {
-  const client = getClient();
   const id = `enr_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`;
   const now = new Date().toISOString();
   const record: Enrollment = { ...data, id, createdAt: now, updatedAt: now };
-  // Each enrollment is stored at its own key; no shared index to corrupt.
-  await client.uploadFromText(`enrollment:${id}`, JSON.stringify(record));
+  await put(`${PREFIX}${id}.json`, JSON.stringify(record), {
+    access: "private",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: "application/json",
+  });
   return record;
-}
-
-export async function getEnrollment(id: string): Promise<Enrollment | null> {
-  const client = getClient();
-  const result = await client.downloadAsText(`enrollment:${id}`);
-  if (!result.ok || !result.value) return null;
-  return JSON.parse(result.value) as Enrollment;
 }
 
 export async function updateEnrollment(
   id: string,
   updates: Partial<Enrollment>,
 ): Promise<Enrollment> {
-  const client = getClient();
-  const result = await client.downloadAsText(`enrollment:${id}`);
-  if (!result.ok || !result.value) throw new Error("Enrollment not found");
-
-  const record: Enrollment = JSON.parse(result.value);
+  const existing = await getEnrollment(id);
+  if (!existing) throw new Error("Enrollment not found");
   const updated: Enrollment = {
-    ...record,
+    ...existing,
     ...updates,
     updatedAt: new Date().toISOString(),
   };
-  await client.uploadFromText(`enrollment:${id}`, JSON.stringify(updated));
+  await put(`${PREFIX}${id}.json`, JSON.stringify(updated), {
+    access: "private",
+    addRandomSuffix: false,
+    allowOverwrite: true,
+    contentType: "application/json",
+  });
   return updated;
 }
 
+// ── Read ──────────────────────────────────────────────────────────────────────
+
+export async function getEnrollment(id: string): Promise<Enrollment | null> {
+  const result = await get(`${PREFIX}${id}.json`, { access: "private" });
+  if (!result || result.statusCode !== 200 || !result.stream) return null;
+  const text = await streamToText(result.stream);
+  return JSON.parse(text) as Enrollment;
+}
+
 export async function getAllEnrollments(): Promise<Enrollment[]> {
-  const client = getClient();
-  // Prefix-scan: no shared mutable index, concurrent-safe.
-  const listResult = await client.list({ prefix: "enrollment:" });
-  if (!listResult.ok || !listResult.value || listResult.value.length === 0)
-    return [];
+  const { blobs } = await list({ prefix: PREFIX });
+  if (!blobs.length) return [];
 
   const results = await Promise.all(
-    listResult.value.map(async (obj) => {
-      const r = await client.downloadAsText(obj.name);
-      if (!r.ok || !r.value) return null;
-      return JSON.parse(r.value) as Enrollment;
+    blobs.map(async (blob) => {
+      const result = await get(blob.pathname, { access: "private" });
+      if (!result || result.statusCode !== 200 || !result.stream) return null;
+      const text = await streamToText(result.stream);
+      return JSON.parse(text) as Enrollment;
     }),
   );
 
