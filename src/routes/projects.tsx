@@ -963,7 +963,7 @@ function Preview({ type }: { type: string }) {
               {[[30,40],[60,25],[90,38],[130,15],[160,30],[50,48],[110,42],[170,20]].map(([cx,cy],i)=>(
                 <circle key={i} cx={cx} cy={cy} r={i===1?4:2.5} fill={i===1?"#f87171":"rgba(255,255,255,0.5)"} opacity={i===1?1:0.6} />
               ))}
-              {i===1 && <circle cx={60} cy={25} r={8} fill="none" stroke="#f87171" strokeWidth="0.8" opacity="0.4" />}
+              <circle cx={60} cy={25} r={8} fill="none" stroke="#f87171" strokeWidth="0.8" opacity="0.4" />
             </svg>
           </div>
         </div>
