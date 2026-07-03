@@ -1,5 +1,5 @@
-import { motion } from 'framer-motion';
-import { X, Minus, RotateCcw } from 'lucide-react';
+import { motion } from "framer-motion";
+import { X, Minus, RotateCcw } from "lucide-react";
 
 interface ChatHeaderProps {
   onClose: () => void;

@@ -1,10 +1,10 @@
-import '../styles/chatbot.css';
-import { useCallback, useState } from 'react';
-import { useChatbot } from '../hooks/useChatbot';
-import { FloatingButton } from './FloatingButton';
-import { ChatWindow } from './ChatWindow';
-import type { EnrollmentData } from '../types';
-import { getStateResponse } from '../engine/stateMachine';
+import "../styles/chatbot.css";
+import { useCallback, useState } from "react";
+import { useChatbot } from "../hooks/useChatbot";
+import { FloatingButton } from "./FloatingButton";
+import { ChatWindow } from "./ChatWindow";
+import type { EnrollmentData } from "../types";
+import { getStateResponse } from "../engine/stateMachine";
 
 export function ChatWidget() {
   const { state, open, close, sendMessage, setEnrollmentData, confirmEnrollment } = useChatbot();
@@ -27,7 +27,7 @@ export function ChatWidget() {
 
   const handleReset = useCallback(async () => {
     // Reset by re-opening fresh (messages persist; user can scroll up)
-    await sendMessage('menu');
+    await sendMessage("menu");
   }, [sendMessage]);
 
   const handleEnrollSubmit = useCallback(

@@ -14,8 +14,12 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.cb-scrollbar::-webkit-scrollbar { width: 4px; }
-.cb-scrollbar::-webkit-scrollbar-track { background: transparent; }
+.cb-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.cb-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
 .cb-scrollbar::-webkit-scrollbar-thumb {
   background: rgba(139, 92, 246, 0.35);
   border-radius: 99px;
@@ -24,7 +28,16 @@
   background: rgba(139, 92, 246, 0.6);
 }
 
-.cb-markdown strong { font-weight: 700; }
-.cb-markdown em { font-style: italic; }
-.cb-markdown ul { list-style: disc; padding-left: 1.25rem; }
-.cb-markdown li { margin-bottom: 0.2rem; }
+.cb-markdown strong {
+  font-weight: 700;
+}
+.cb-markdown em {
+  font-style: italic;
+}
+.cb-markdown ul {
+  list-style: disc;
+  padding-left: 1.25rem;
+}
+.cb-markdown li {
+  margin-bottom: 0.2rem;
+}

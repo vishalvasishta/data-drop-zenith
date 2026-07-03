@@ -1,25 +1,25 @@
 // ── Chat States ───────────────────────────────────────────────────────────────
 export type ChatState =
-  | 'WELCOME'
-  | 'MAIN_MENU'
-  | 'ABOUT'
-  | 'ROADMAP'
-  | 'CURRICULUM'
-  | 'CAREERS'
-  | 'PLACEMENT'
-  | 'PROJECTS'
-  | 'PRICING'
-  | 'BONUSES'
-  | 'ENROLLMENT'
-  | 'PAYMENT'
-  | 'FAQ'
-  | 'STUDENT_SUPPORT'
-  | 'CONTACT'
-  | 'THANK_YOU';
+  | "WELCOME"
+  | "MAIN_MENU"
+  | "ABOUT"
+  | "ROADMAP"
+  | "CURRICULUM"
+  | "CAREERS"
+  | "PLACEMENT"
+  | "PROJECTS"
+  | "PRICING"
+  | "BONUSES"
+  | "ENROLLMENT"
+  | "PAYMENT"
+  | "FAQ"
+  | "STUDENT_SUPPORT"
+  | "CONTACT"
+  | "THANK_YOU";
 
 // ── Primitives ────────────────────────────────────────────────────────────────
-export type MessageSender = 'bot' | 'user';
-export type SpecialComponent = 'faq' | 'enroll' | 'lead-capture' | null;
+export type MessageSender = "bot" | "user";
+export type SpecialComponent = "faq" | "enroll" | "lead-capture" | null;
 
 // ── Domain Models ─────────────────────────────────────────────────────────────
 export interface FAQ {
@@ -92,9 +92,9 @@ export interface ChatbotState {
 }
 
 export type ChatbotAction =
-  | { type: 'OPEN' }
-  | { type: 'CLOSE' }
-  | { type: 'ADD_MESSAGE'; payload: Message }
-  | { type: 'SET_TYPING'; payload: boolean }
-  | { type: 'SET_STATE'; payload: ChatState }
-  | { type: 'SET_ENROLLMENT_DATA'; payload: Partial<EnrollmentData> };
+  | { type: "OPEN" }
+  | { type: "CLOSE" }
+  | { type: "ADD_MESSAGE"; payload: Message }
+  | { type: "SET_TYPING"; payload: boolean }
+  | { type: "SET_STATE"; payload: ChatState }
+  | { type: "SET_ENROLLMENT_DATA"; payload: Partial<EnrollmentData> };

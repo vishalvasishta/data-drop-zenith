@@ -1,7 +1,7 @@
-import { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronDown } from 'lucide-react';
-import type { FAQ } from '../types';
+import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ChevronDown } from "lucide-react";
+import type { FAQ } from "../types";
 
 interface FAQCardProps {
   faqs: FAQ[];
@@ -15,7 +15,7 @@ export function FAQCard({ faqs }: FAQCardProps) {
   return (
     <div className="mx-4 mb-2 overflow-hidden rounded-2xl border border-white/10 bg-white/5 backdrop-blur-sm">
       {faqs.map((faq, i) => (
-        <div key={faq.id} className={i > 0 ? 'border-t border-white/10' : ''}>
+        <div key={faq.id} className={i > 0 ? "border-t border-white/10" : ""}>
           <button
             onClick={() => toggle(faq.id)}
             className="flex w-full items-center justify-between gap-2 px-4 py-3 text-left text-sm font-medium text-gray-200 transition-colors hover:bg-white/5"
@@ -33,14 +33,12 @@ export function FAQCard({ faqs }: FAQCardProps) {
             {openId === faq.id && (
               <motion.div
                 initial={{ height: 0, opacity: 0 }}
-                animate={{ height: 'auto', opacity: 1 }}
+                animate={{ height: "auto", opacity: 1 }}
                 exit={{ height: 0, opacity: 0 }}
                 transition={{ duration: 0.22 }}
                 className="overflow-hidden"
               >
-                <p className="px-4 pb-4 text-xs leading-relaxed text-gray-400">
-                  {faq.answer}
-                </p>
+                <p className="px-4 pb-4 text-xs leading-relaxed text-gray-400">{faq.answer}</p>
               </motion.div>
             )}
           </AnimatePresence>

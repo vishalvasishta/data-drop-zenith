@@ -1,4 +1,4 @@
-import { motion } from 'framer-motion';
+import { motion } from "framer-motion";
 
 export function TypingIndicator() {
   return (
@@ -16,7 +16,7 @@ export function TypingIndicator() {
             key={i}
             className="block h-2 w-2 rounded-full bg-violet-400"
             animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 0.7, repeat: Infinity, delay, ease: 'easeInOut' }}
+            transition={{ duration: 0.7, repeat: Infinity, delay, ease: "easeInOut" }}
           />
         ))}
       </motion.div>

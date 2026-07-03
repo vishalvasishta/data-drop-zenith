@@ -1,6 +1,6 @@
-import { useState, useRef, type KeyboardEvent } from 'react';
-import { motion } from 'framer-motion';
-import { Send, Mic } from 'lucide-react';
+import { useState, useRef, type KeyboardEvent } from "react";
+import { motion } from "framer-motion";
+import { Send, Mic } from "lucide-react";
 
 interface ChatInputProps {
   onSend: (text: string) => void;
@@ -8,25 +8,28 @@ interface ChatInputProps {
 }
 
 export function ChatInput({ onSend, disabled = false }: ChatInputProps) {
-  const [value, setValue] = useState('');
+  const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const submit = () => {
     const trimmed = value.trim();
     if (!trimmed || disabled) return;
     onSend(trimmed);
-    setValue('');
-    if (textareaRef.current) textareaRef.current.style.height = 'auto';
+    setValue("");
+    if (textareaRef.current) textareaRef.current.style.height = "auto";
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
-    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); submit(); }
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      submit();
+    }
   };
 
   const handleInput = () => {
     const el = textareaRef.current;
     if (!el) return;
-    el.style.height = 'auto';
+    el.style.height = "auto";
     el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
   };
 

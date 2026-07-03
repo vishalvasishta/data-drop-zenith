@@ -1,29 +1,29 @@
-import { useReducer, useCallback, useRef } from 'react';
-import type { ChatbotState, ChatbotAction, Message, ChatState, EnrollmentData } from '../types';
-import { generateId } from '../utils/formatters';
-import { processInput, getWelcomeResponse } from '../engine/chatbotEngine';
+import { useReducer, useCallback, useRef } from "react";
+import type { ChatbotState, ChatbotAction, Message, ChatState, EnrollmentData } from "../types";
+import { generateId } from "../utils/formatters";
+import { processInput, getWelcomeResponse } from "../engine/chatbotEngine";
 
 // ── Reducer — exhaustive switch, no type assertions ───────────────────────────
 function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotState {
   switch (action.type) {
-    case 'OPEN':
+    case "OPEN":
       return { ...state, isOpen: true };
-    case 'CLOSE':
+    case "CLOSE":
       return { ...state, isOpen: false };
-    case 'ADD_MESSAGE':
+    case "ADD_MESSAGE":
       return { ...state, messages: [...state.messages, action.payload] };
-    case 'SET_TYPING':
+    case "SET_TYPING":
       return { ...state, isTyping: action.payload };
-    case 'SET_STATE':
+    case "SET_STATE":
       return { ...state, currentState: action.payload };
-    case 'SET_ENROLLMENT_DATA':
+    case "SET_ENROLLMENT_DATA":
       return { ...state, enrollmentData: { ...state.enrollmentData, ...action.payload } };
   }
 }
 
 // ── Initial state ─────────────────────────────────────────────────────────────
 const INITIAL_STATE: ChatbotState = {
-  currentState: 'WELCOME',
+  currentState: "WELCOME",
   messages: [],
   isTyping: false,
   enrollmentData: {},
@@ -62,14 +62,14 @@ export function useChatbot() {
 
   // Keep ref in sync whenever reducer state changes
   const addMessage = useCallback((msg: Message) => {
-    dispatch({ type: 'ADD_MESSAGE', payload: msg });
+    dispatch({ type: "ADD_MESSAGE", payload: msg });
   }, []);
 
   const buildBotMessage = useCallback(
     (content: string, extras: Partial<Message> = {}): Message => ({
       id: generateId(),
       content,
-      sender: 'bot',
+      sender: "bot",
       timestamp: new Date(),
       ...extras,
     }),
@@ -78,16 +78,16 @@ export function useChatbot() {
 
   const showBotResponse = useCallback(
     async (content: string, extras: Partial<Message> = {}, delay = 600) => {
-      dispatch({ type: 'SET_TYPING', payload: true });
+      dispatch({ type: "SET_TYPING", payload: true });
       await new Promise<void>((r) => setTimeout(r, delay));
-      dispatch({ type: 'SET_TYPING', payload: false });
+      dispatch({ type: "SET_TYPING", payload: false });
       addMessage(buildBotMessage(content, extras));
     },
     [addMessage, buildBotMessage],
   );
 
   const open = useCallback(() => {
-    dispatch({ type: 'OPEN' });
+    dispatch({ type: "OPEN" });
     if (!hasWelcomed.current) {
       hasWelcomed.current = true;
       enqueue(async () => {
@@ -98,13 +98,13 @@ export function useChatbot() {
           faqData: response.faqData,
         });
         currentStateRef.current = nextState;
-        dispatch({ type: 'SET_STATE', payload: nextState });
+        dispatch({ type: "SET_STATE", payload: nextState });
       });
     }
   }, [enqueue, showBotResponse]);
 
   const close = useCallback(() => {
-    dispatch({ type: 'CLOSE' });
+    dispatch({ type: "CLOSE" });
   }, []);
 
   const sendMessage = useCallback(
@@ -115,7 +115,7 @@ export function useChatbot() {
         addMessage({
           id: generateId(),
           content: userInput,
-          sender: 'user',
+          sender: "user",
           timestamp: new Date(),
         });
 
@@ -129,24 +129,24 @@ export function useChatbot() {
         });
 
         currentStateRef.current = nextState;
-        dispatch({ type: 'SET_STATE', payload: nextState });
+        dispatch({ type: "SET_STATE", payload: nextState });
       });
     },
     [enqueue, addMessage, showBotResponse],
   );
 
   const setEnrollmentData = useCallback((data: Partial<EnrollmentData>) => {
-    dispatch({ type: 'SET_ENROLLMENT_DATA', payload: data });
+    dispatch({ type: "SET_ENROLLMENT_DATA", payload: data });
   }, []);
 
   const confirmEnrollment = useCallback(() => {
     enqueue(async () => {
       await showBotResponse(
-        '🎉 **Enrollment Successful!**\n\nWelcome to DATADROP! Check your email for your welcome pack, Discord invite, and batch details. Your AI career journey starts now! 🚀',
-        { quickReplies: ['📞 Talk to Counselor', '❓ FAQs'] },
+        "🎉 **Enrollment Successful!**\n\nWelcome to DATADROP! Check your email for your welcome pack, Discord invite, and batch details. Your AI career journey starts now! 🚀",
+        { quickReplies: ["📞 Talk to Counselor", "❓ FAQs"] },
       );
-      currentStateRef.current = 'THANK_YOU';
-      dispatch({ type: 'SET_STATE', payload: 'THANK_YOU' });
+      currentStateRef.current = "THANK_YOU";
+      dispatch({ type: "SET_STATE", payload: "THANK_YOU" });
     });
   }, [enqueue, showBotResponse]);
 

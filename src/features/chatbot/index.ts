@@ -1,1 +1,1 @@
-export { ChatWidget } from './components/ChatWidget';
+export { ChatWidget } from "./components/ChatWidget";
