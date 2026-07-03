@@ -7,13 +7,18 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, lazy, Suspense, type ReactNode } from "react";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { Toaster } from "@/components/ui/sonner";
+
+// Lazy-loaded so it never runs during SSR — framer-motion requires browser APIs.
+const ChatWidget = lazy(() =>
+  import("@/features/chatbot").then((m) => ({ default: m.ChatWidget }))
+);
 
 function NotFoundComponent() {
   return (
@@ -120,6 +125,17 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function ClientChatWidget() {
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+  if (!mounted) return null;
+  return (
+    <Suspense fallback={null}>
+      <ChatWidget />
+    </Suspense>
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -130,6 +146,7 @@ function RootComponent() {
       <Outlet />
       <Footer />
       <Toaster />
+      <ClientChatWidget />
     </QueryClientProvider>
   );
 }

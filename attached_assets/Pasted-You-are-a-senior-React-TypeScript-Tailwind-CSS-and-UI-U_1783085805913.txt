@@ -1,0 +1,294 @@
+You are a senior React, TypeScript, Tailwind CSS and UI/UX engineer.
+
+I already have an existing React website.
+
+DO NOT rebuild my website.
+
+DO NOT modify existing pages unless absolutely necessary.
+
+Instead create a completely isolated feature folder.
+
+Create
+
+src/features/chatbot
+
+Inside it build a production-quality chatbot.
+
+The chatbot must look like ChatGPT.
+
+Requirements
+
+• Floating button bottom right
+• Beautiful opening animation
+• Mobile responsive
+• Desktop responsive
+• Dark mode
+• Light mode
+• Glassmorphism UI
+• Rounded modern interface
+• Smooth animations
+• Framer Motion
+• Auto scrolling
+• Typing animation
+• Suggested replies
+• Timestamp
+• Welcome screen
+• Persistent conversation during session
+• Component architecture
+• Clean TypeScript
+• No any types
+• No code duplication
+• Reusable hooks
+• Professional folder structure
+
+Create these components
+
+FloatingButton
+
+ChatWidget
+
+ChatWindow
+
+ChatHeader
+
+ChatBody
+
+MessageBubble
+
+TypingIndicator
+
+QuickReplies
+
+ChatInput
+
+LeadCapture
+
+EnrollForm
+
+FAQCard
+
+Create these folders
+
+components
+
+engine
+
+hooks
+
+styles
+
+utils
+
+data
+
+Create a complete conversation engine using a state machine.
+
+Do NOT use nested if else.
+
+Create
+
+chatbotEngine.ts
+
+stateMachine.ts
+
+actions.ts
+
+parser.ts
+
+types.ts
+
+The engine should support these states
+
+WELCOME
+
+MAIN_MENU
+
+ABOUT
+
+ROADMAP
+
+CURRICULUM
+
+CAREERS
+
+PLACEMENT
+
+PROJECTS
+
+PRICING
+
+BONUSES
+
+ENROLLMENT
+
+PAYMENT
+
+FAQ
+
+STUDENT_SUPPORT
+
+CONTACT
+
+THANK_YOU
+
+Create a knowledge base.
+
+Course
+
+DATADROP Complete AI Career Program
+
+Duration
+
+18 Months
+
+Fee
+
+₹4599
+
+Mode
+
+Live + Recorded
+
+Language
+
+Telugu + English
+
+Include
+
+Python
+
+Logic Building
+
+Data Structures
+
+SQL
+
+Pandas
+
+NumPy
+
+Excel
+
+Matplotlib
+
+Seaborn
+
+Regression
+
+Classification
+
+Clustering
+
+Scikit Learn
+
+Neural Networks
+
+Backpropagation
+
+Transfer Learning
+
+Computer Vision
+
+Sequence Modeling
+
+LLM Fine Tuning
+
+Prompt Engineering
+
+RAG
+
+AI Agents
+
+Vector Databases
+
+API Development
+
+Cloud Deployment
+
+System Design
+
+Agentic AI
+
+Enterprise Deployment
+
+AI Product Design
+
+Every topic should include
+
+title
+
+description
+
+career outcome
+
+project
+
+estimated duration
+
+Create FAQ data.
+
+Create at least 80 FAQs.
+
+Create a beautiful main menu.
+
+About Course
+
+Learning Roadmap
+
+Complete Curriculum
+
+Career Opportunities
+
+Projects
+
+Placement
+
+Course Fee
+
+Bonuses
+
+Enroll
+
+FAQs
+
+Existing Student
+
+Talk to Counselor
+
+Create enrollment form.
+
+Collect
+
+Name
+
+Phone
+
+Email
+
+City
+
+Education
+
+Profession
+
+Career Goal
+
+Validate all fields.
+
+Show confirmation.
+
+Create initiatePayment() placeholder.
+
+Do NOT integrate Razorpay yet.
+
+Make the chatbot easily extendable.
+
+Do not break the existing website.
+
+Finally integrate the chatbot by rendering a single
+
+<ChatWidget />
+
+component inside App.tsx.
+
+Follow modern React best practices.
