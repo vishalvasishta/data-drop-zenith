@@ -1,6 +1,6 @@
 import { useState, useRef, type KeyboardEvent } from "react";
-import { motion } from "framer-motion";
-import { Send, Mic } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowUp } from "lucide-react";
 
 interface ChatInputProps {
   onSend: (text: string) => void;
@@ -10,13 +10,16 @@ interface ChatInputProps {
 export function ChatInput({ onSend, disabled = false }: ChatInputProps) {
   const [value, setValue] = useState("");
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const hasContent = value.trim().length > 0;
 
   const submit = () => {
     const trimmed = value.trim();
     if (!trimmed || disabled) return;
     onSend(trimmed);
     setValue("");
-    if (textareaRef.current) textareaRef.current.style.height = "auto";
+    if (textareaRef.current) {
+      textareaRef.current.style.height = "auto";
+    }
   };
 
   const handleKeyDown = (e: KeyboardEvent<HTMLTextAreaElement>) => {
@@ -30,12 +33,22 @@ export function ChatInput({ onSend, disabled = false }: ChatInputProps) {
     const el = textareaRef.current;
     if (!el) return;
     el.style.height = "auto";
-    el.style.height = `${Math.min(el.scrollHeight, 120)}px`;
+    el.style.height = `${Math.min(el.scrollHeight, 112)}px`;
   };
 
   return (
-    <div className="border-t border-white/10 bg-black/20 px-3 py-3 backdrop-blur-sm">
-      <div className="flex items-end gap-2 rounded-2xl border border-white/10 bg-white/5 px-3 py-2 focus-within:border-violet-500/50 focus-within:ring-1 focus-within:ring-violet-500/30 transition-all">
+    <footer
+      className="shrink-0 px-3 pb-3 pt-2"
+      style={{ borderTop: "1px solid rgba(255,255,255,0.05)" }}
+    >
+      {/* Input wrapper */}
+      <div
+        className="cb-input-wrap flex items-end gap-2 rounded-xl px-3.5 py-2.5 transition-all duration-200"
+        style={{
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(255,255,255,0.09)",
+        }}
+      >
         <textarea
           ref={textareaRef}
           value={value}
@@ -43,32 +56,41 @@ export function ChatInput({ onSend, disabled = false }: ChatInputProps) {
           onKeyDown={handleKeyDown}
           onInput={handleInput}
           disabled={disabled}
-          placeholder="Type a message…"
+          placeholder="Message DATADROP AI…"
           rows={1}
-          className="flex-1 resize-none bg-transparent text-sm text-gray-100 placeholder-gray-500 outline-none disabled:opacity-50"
-          style={{ maxHeight: 120 }}
+          aria-label="Type a message"
+          aria-multiline="true"
+          className="flex-1 resize-none bg-transparent text-[13.5px] leading-relaxed text-zinc-200 placeholder-zinc-600 outline-none disabled:opacity-40"
+          style={{ maxHeight: 112 }}
         />
-        <div className="flex shrink-0 items-center gap-1">
-          <button
-            disabled
-            title="Voice input (coming soon)"
-            className="rounded-xl p-1.5 text-gray-600 transition-colors hover:text-gray-400"
-          >
-            <Mic className="h-4 w-4" />
-          </button>
+
+        {/* Send button */}
+        <AnimatePresence initial={false}>
           <motion.button
-            whileTap={{ scale: 0.9 }}
+            key={hasContent ? "active" : "idle"}
+            initial={{ scale: 0.75, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0.75, opacity: 0 }}
+            transition={{ duration: 0.15, ease: "easeOut" }}
+            whileTap={{ scale: 0.88 }}
             onClick={submit}
-            disabled={!value.trim() || disabled}
-            className="flex h-8 w-8 items-center justify-center rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 text-white shadow-md transition-opacity disabled:opacity-40"
+            disabled={!hasContent || disabled}
+            aria-label="Send message"
+            className={`mb-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-lg transition-colors duration-200 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/60 ${
+              hasContent && !disabled
+                ? "bg-violet-600 text-white hover:bg-violet-500"
+                : "bg-white/8 text-zinc-600"
+            }`}
           >
-            <Send className="h-4 w-4" />
+            <ArrowUp className="h-4 w-4" strokeWidth={2.5} />
           </motion.button>
-        </div>
+        </AnimatePresence>
       </div>
-      <p className="mt-1.5 text-center text-[10px] text-gray-600">
-        DATADROP AI • Powered by DataDrop
+
+      {/* Footer label */}
+      <p className="mt-1.5 text-center text-[10px] text-zinc-700">
+        DATADROP AI · Press <kbd className="rounded px-0.5 font-mono text-zinc-600">⏎</kbd> to send
       </p>
-    </div>
+    </footer>
   );
 }

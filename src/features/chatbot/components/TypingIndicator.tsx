@@ -2,24 +2,39 @@ import { motion } from "framer-motion";
 
 export function TypingIndicator() {
   return (
-    <div className="flex items-end gap-2 px-4 py-1">
-      <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-violet-600 to-indigo-600 text-sm shadow-lg">
+    <motion.div
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, y: 4 }}
+      transition={{ duration: 0.18 }}
+      className="flex items-end gap-2.5 px-4 pb-1 pt-0.5"
+      aria-label="Bot is typing"
+      aria-live="polite"
+    >
+      {/* Avatar */}
+      <div
+        className="mb-0.5 flex h-7 w-7 shrink-0 items-center justify-center rounded-full text-xs"
+        style={{
+          background: "linear-gradient(145deg, #8b5cf6, #6d28d9)",
+          boxShadow: "0 2px 8px rgba(139,92,246,0.3)",
+        }}
+        aria-hidden="true"
+      >
         🤖
       </div>
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85, y: 8 }}
-        animate={{ opacity: 1, scale: 1, y: 0 }}
-        className="flex items-center gap-1 rounded-2xl rounded-bl-none bg-white/10 px-4 py-3 shadow backdrop-blur-sm dark:bg-white/5"
+
+      {/* Bubble */}
+      <div
+        className="flex items-center gap-1 rounded-2xl rounded-bl-sm px-3.5 py-2.5"
+        style={{
+          background: "rgba(255,255,255,0.05)",
+          border: "1px solid rgba(255,255,255,0.07)",
+        }}
       >
-        {[0, 0.2, 0.4].map((delay, i) => (
-          <motion.span
-            key={i}
-            className="block h-2 w-2 rounded-full bg-violet-400"
-            animate={{ y: [0, -5, 0] }}
-            transition={{ duration: 0.7, repeat: Infinity, delay, ease: "easeInOut" }}
-          />
-        ))}
-      </motion.div>
-    </div>
+        <span className="cb-dot h-1.5 w-1.5 rounded-full bg-zinc-400" />
+        <span className="cb-dot h-1.5 w-1.5 rounded-full bg-zinc-400" />
+        <span className="cb-dot h-1.5 w-1.5 rounded-full bg-zinc-400" />
+      </div>
+    </motion.div>
   );
 }

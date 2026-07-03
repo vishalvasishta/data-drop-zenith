@@ -11,35 +11,59 @@ export function FloatingButton({ isOpen, onClick, unreadCount = 0 }: FloatingBut
   return (
     <motion.button
       onClick={onClick}
-      whileHover={{ scale: 1.08 }}
-      whileTap={{ scale: 0.93 }}
-      aria-label={isOpen ? "Close chat" : "Open chat"}
-      className="fixed bottom-5 right-5 z-[10000] flex h-14 w-14 items-center justify-center rounded-full shadow-2xl sm:bottom-6 sm:right-6"
+      initial={false}
+      animate={{ scale: 1 }}
+      whileHover={{ scale: 1.06 }}
+      whileTap={{ scale: 0.92 }}
+      aria-label={isOpen ? "Close chat" : "Open DATADROP AI chat"}
+      aria-expanded={isOpen}
+      aria-haspopup="dialog"
+      className="cb-fab fixed bottom-5 right-5 z-[10000] flex h-14 w-14 items-center justify-center rounded-full transition-shadow duration-300 sm:bottom-6 sm:right-6"
       style={{
-        background: "linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%)",
-        boxShadow: "0 8px 32px rgba(124,58,237,0.55), 0 2px 8px rgba(0,0,0,0.3)",
+        background: "linear-gradient(145deg, #8b5cf6 0%, #6d28d9 55%, #4f46e5 100%)",
+        boxShadow: "0 8px 32px rgba(109,40,217,0.5), 0 2px 8px rgba(0,0,0,0.35)",
       }}
     >
+      {/* Pulse ring — visible only when closed */}
+      <AnimatePresence>
+        {!isOpen && (
+          <motion.span
+            key="ring"
+            className="pointer-events-none absolute inset-0 rounded-full"
+            initial={{ scale: 1, opacity: 0.5 }}
+            animate={{ scale: 1.65, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.8, repeat: Infinity, ease: "easeOut" }}
+            style={{
+              background: "radial-gradient(circle, rgba(139,92,246,0.45) 0%, transparent 70%)",
+            }}
+          />
+        )}
+      </AnimatePresence>
+
+      {/* Icon swap */}
       <AnimatePresence mode="wait" initial={false}>
         {isOpen ? (
           <motion.span
             key="close"
-            initial={{ rotate: -90, opacity: 0, scale: 0.7 }}
+            initial={{ rotate: -80, opacity: 0, scale: 0.6 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            exit={{ rotate: 90, opacity: 0, scale: 0.7 }}
-            transition={{ duration: 0.2 }}
+            exit={{ rotate: 80, opacity: 0, scale: 0.6 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="flex items-center justify-center"
           >
-            <X className="h-6 w-6 text-white" />
+            <X className="h-5 w-5 text-white" strokeWidth={2.5} />
           </motion.span>
         ) : (
           <motion.span
             key="open"
-            initial={{ rotate: 90, opacity: 0, scale: 0.7 }}
+            initial={{ rotate: 80, opacity: 0, scale: 0.6 }}
             animate={{ rotate: 0, opacity: 1, scale: 1 }}
-            exit={{ rotate: -90, opacity: 0, scale: 0.7 }}
-            transition={{ duration: 0.2 }}
+            exit={{ rotate: -80, opacity: 0, scale: 0.6 }}
+            transition={{ duration: 0.18, ease: "easeOut" }}
+            className="flex items-center justify-center"
           >
-            <MessageCircle className="h-6 w-6 text-white" />
+            <MessageCircle className="h-5 w-5 text-white" fill="white" strokeWidth={0} />
           </motion.span>
         )}
       </AnimatePresence>
@@ -48,27 +72,18 @@ export function FloatingButton({ isOpen, onClick, unreadCount = 0 }: FloatingBut
       <AnimatePresence>
         {!isOpen && unreadCount > 0 && (
           <motion.span
-            initial={{ scale: 0 }}
-            animate={{ scale: 1 }}
-            exit={{ scale: 0 }}
-            className="absolute -right-1 -top-1 flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow"
+            key="badge"
+            initial={{ scale: 0, opacity: 0 }}
+            animate={{ scale: 1, opacity: 1 }}
+            exit={{ scale: 0, opacity: 0 }}
+            transition={{ type: "spring", stiffness: 400, damping: 22 }}
+            className="absolute -right-0.5 -top-0.5 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-red-500 px-1 text-[10px] font-bold text-white shadow-md"
+            aria-label={`${unreadCount} unread messages`}
           >
             {unreadCount > 9 ? "9+" : unreadCount}
           </motion.span>
         )}
       </AnimatePresence>
-
-      {/* Pulse ring — only when closed */}
-      {!isOpen && (
-        <motion.span
-          className="absolute inset-0 rounded-full"
-          animate={{ scale: [1, 1.35, 1], opacity: [0.5, 0, 0] }}
-          transition={{ duration: 2.4, repeat: Infinity, ease: "easeOut" }}
-          style={{
-            background: "radial-gradient(circle, rgba(124,58,237,0.6) 0%, transparent 70%)",
-          }}
-        />
-      )}
     </motion.button>
   );
 }

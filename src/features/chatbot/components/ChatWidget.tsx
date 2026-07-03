@@ -4,7 +4,6 @@ import { useChatbot } from "../hooks/useChatbot";
 import { FloatingButton } from "./FloatingButton";
 import { ChatWindow } from "./ChatWindow";
 import type { EnrollmentData } from "../types";
-import { getStateResponse } from "../engine/stateMachine";
 
 export function ChatWidget() {
   const { state, open, close, sendMessage, setEnrollmentData, confirmEnrollment } = useChatbot();
@@ -25,28 +24,26 @@ export function ChatWidget() {
     close();
   }, [close]);
 
-  const handleReset = useCallback(async () => {
-    // Reset by re-opening fresh (messages persist; user can scroll up)
-    await sendMessage("menu");
+  const handleReset = useCallback(() => {
+    sendMessage("menu");
   }, [sendMessage]);
 
   const handleEnrollSubmit = useCallback(
-    async (data: EnrollmentData) => {
+    (data: EnrollmentData) => {
       setEnrollmentData(data);
-      await confirmEnrollment();
+      confirmEnrollment();
     },
     [setEnrollmentData, confirmEnrollment],
   );
 
   const handleLeadSubmit = useCallback(
-    async (data: { name: string; phone: string }) => {
+    (data: { name: string; phone: string }) => {
       setEnrollmentData(data);
-      await sendMessage(`📞 Callback requested by ${data.name} (${data.phone})`);
+      sendMessage(`📞 Callback requested by ${data.name} (${data.phone})`);
     },
     [setEnrollmentData, sendMessage],
   );
 
-  // Count unread = bot messages received while minimized (simple: always show 1 when minimized)
   const unreadCount = minimized ? 1 : 0;
 
   return (

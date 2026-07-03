@@ -5,24 +5,52 @@ interface QuickRepliesProps {
   onSelect: (reply: string) => void;
 }
 
+const container = {
+  hidden: {},
+  show: {
+    transition: { staggerChildren: 0.04, delayChildren: 0.08 },
+  },
+};
+
+const chip = {
+  hidden: { opacity: 0, y: 6, scale: 0.95 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      duration: 0.18,
+      ease: [0.25, 0.46, 0.45, 0.94] as [number, number, number, number],
+    },
+  },
+};
+
 export function QuickReplies({ replies, onSelect }: QuickRepliesProps) {
   if (!replies.length) return null;
 
   return (
     <motion.div
-      initial={{ opacity: 0, y: 8 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 0.15 }}
-      className="flex flex-wrap gap-2 px-4 pb-2 pt-1"
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="flex flex-wrap gap-1.5 px-4 pb-3 pt-2"
+      role="list"
+      aria-label="Quick reply options"
     >
       {replies.map((reply) => (
-        <button
+        <motion.button
           key={reply}
+          variants={chip}
           onClick={() => onSelect(reply)}
-          className="rounded-full border border-violet-400/30 bg-violet-500/10 px-3 py-1.5 text-xs font-medium text-violet-300 transition-all duration-150 hover:border-violet-400/70 hover:bg-violet-500/25 hover:text-violet-100 active:scale-95"
+          role="listitem"
+          className="cb-chip rounded-full px-3 py-1.5 text-[12px] font-medium text-violet-300 transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-500/60 active:scale-95"
+          style={{
+            background: "rgba(139,92,246,0.08)",
+            border: "1px solid rgba(139,92,246,0.22)",
+          }}
         >
           {reply}
-        </button>
+        </motion.button>
       ))}
     </motion.div>
   );

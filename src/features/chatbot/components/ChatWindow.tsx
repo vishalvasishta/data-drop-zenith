@@ -1,4 +1,4 @@
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, type Transition } from "framer-motion";
 import { ChatHeader } from "./ChatHeader";
 import { ChatBody } from "./ChatBody";
 import { ChatInput } from "./ChatInput";
@@ -17,6 +17,8 @@ interface ChatWindowProps {
   onLeadSubmit: (data: { name: string; phone: string }) => void;
 }
 
+const spring: Transition = { type: "spring", stiffness: 420, damping: 36, mass: 0.9 };
+
 export function ChatWindow({
   isOpen,
   messages,
@@ -33,17 +35,22 @@ export function ChatWindow({
     <AnimatePresence>
       {isOpen && (
         <motion.div
-          key="chat-window"
-          initial={{ opacity: 0, scale: 0.88, y: 24, originX: 1, originY: 1 }}
+          key="chatwindow"
+          role="dialog"
+          aria-label="DATADROP AI chat"
+          aria-modal="true"
+          initial={{ opacity: 0, scale: 0.9, y: 16 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
-          exit={{ opacity: 0, scale: 0.88, y: 24 }}
-          transition={{ type: "spring", stiffness: 380, damping: 30 }}
-          className="fixed bottom-24 right-4 z-[9999] flex w-[92vw] max-w-md flex-col overflow-hidden rounded-3xl shadow-2xl sm:right-6 sm:w-[400px]"
+          exit={{ opacity: 0, scale: 0.92, y: 12 }}
+          transition={spring}
+          className="cb-window cb-window-mobile fixed bottom-24 right-5 z-[9999] flex flex-col overflow-hidden rounded-2xl sm:bottom-24 sm:right-6 sm:w-[400px]"
           style={{
-            height: "clamp(480px, 80vh, 680px)",
-            background: "linear-gradient(160deg, rgba(18,10,40,0.97) 0%, rgba(15,12,35,0.99) 100%)",
-            border: "1px solid rgba(139,92,246,0.25)",
-            boxShadow: "0 32px 80px -16px rgba(79,46,220,0.45), 0 0 0 1px rgba(139,92,246,0.15)",
+            width: "min(400px, calc(100vw - 24px))",
+            height: "clamp(520px, 78vh, 680px)",
+            background: "linear-gradient(180deg, #111118 0%, #0d0d12 100%)",
+            border: "1px solid rgba(255,255,255,0.07)",
+            boxShadow:
+              "0 0 0 1px rgba(139,92,246,0.08), 0 40px 80px -20px rgba(0,0,0,0.7), 0 24px 48px -12px rgba(109,40,217,0.2)",
           }}
         >
           <ChatHeader onClose={onClose} onMinimize={onMinimize} onReset={onReset} />
