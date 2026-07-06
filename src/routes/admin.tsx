@@ -65,7 +65,7 @@ function AdminPage() {
       setEnrollments(enrollmentData);
       setLeads(leadData);
     } catch (err) {
-      setError(err instanceof Error && err.message === "Unauthorized" ? "Incorrect password." : "An error occurred. Please try again.");
+      setError(err instanceof Error && err.message === "Unauthorized" ? "Incorrect password." : err instanceof Error ? err.message : String(err));
     } finally {
       setLoading(false);
     }
