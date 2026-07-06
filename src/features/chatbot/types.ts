@@ -91,6 +91,9 @@ export interface StudentProfile {
   role: string | null;
   education: string | null;
   careerGoal: string | null;
+  interests: string[];
+  objections: string[];
+  leadScore: number;
 }
 
 // ── Chatbot Global State ──────────────────────────────────────────────────────
@@ -112,4 +115,7 @@ export type ChatbotAction =
   | { type: "SET_ENROLLMENT_DATA"; payload: Partial<EnrollmentData> }
   | { type: "SET_PROFILE_ROLE"; payload: string }
   | { type: "SET_PROFILE_EDUCATION"; payload: string }
-  | { type: "SET_PROFILE_CAREER_GOAL"; payload: string };
+  | { type: "SET_PROFILE_CAREER_GOAL"; payload: string }
+  | { type: "SET_PROFILE_INTERESTS"; payload: string[] }
+  | { type: "SET_PROFILE_OBJECTIONS"; payload: string[] }
+  | { type: "SET_PROFILE_LEAD_SCORE"; payload: number };

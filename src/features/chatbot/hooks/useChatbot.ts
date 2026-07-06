@@ -4,6 +4,7 @@ import { generateId } from "../utils/formatters";
 import { processInput, getWelcomeResponse } from "../engine/chatbotEngine";
 import { mainMenuAction } from "../engine/actions";
 import { detectObjection } from "../engine/objectionHandler";
+import { detectObjectionLabel, computeLeadScore, INTEREST_STATES } from "../engine/leadIntelligence";
 import {
   ROLE_QUICK_REPLIES,
   EDUCATION_QUESTION,
@@ -41,6 +42,12 @@ function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotStat
       return { ...state, profile: { ...state.profile, education: action.payload } };
     case "SET_PROFILE_CAREER_GOAL":
       return { ...state, profile: { ...state.profile, careerGoal: action.payload } };
+    case "SET_PROFILE_INTERESTS":
+      return { ...state, profile: { ...state.profile, interests: action.payload } };
+    case "SET_PROFILE_OBJECTIONS":
+      return { ...state, profile: { ...state.profile, objections: action.payload } };
+    case "SET_PROFILE_LEAD_SCORE":
+      return { ...state, profile: { ...state.profile, leadScore: action.payload } };
   }
 }
 
@@ -79,7 +86,7 @@ const INITIAL_STATE: ChatbotState = {
   isTyping: false,
   enrollmentData: {},
   isOpen: false,
-  profile: { role: null, education: null, careerGoal: null },
+  profile: { role: null, education: null, careerGoal: null, interests: [], objections: [], leadScore: 0 },
 };
 
 // ── Hook ──────────────────────────────────────────────────────────────────────
@@ -179,6 +186,7 @@ export function useChatbot() {
         if (ROLE_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, role: userInput };
           dispatch({ type: "SET_PROFILE_ROLE", payload: userInput });
+          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
           await showBotResponse(EDUCATION_QUESTION, {
             quickReplies: EDUCATION_QUICK_REPLIES,
           });
@@ -189,6 +197,7 @@ export function useChatbot() {
         if (EDUCATION_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, education: userInput };
           dispatch({ type: "SET_PROFILE_EDUCATION", payload: userInput });
+          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
           await showBotResponse(CAREER_GOAL_QUESTION, {
             quickReplies: CAREER_GOAL_QUICK_REPLIES,
           });
@@ -200,6 +209,7 @@ export function useChatbot() {
         if (CAREER_GOAL_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, careerGoal: userInput };
           dispatch({ type: "SET_PROFILE_CAREER_GOAL", payload: userInput });
+          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
           await showBotResponse(buildPersonalizedRecommendation(profileRef.current));
 
           const menuResponse = mainMenuAction();
@@ -215,6 +225,14 @@ export function useChatbot() {
         // if no objection is detected, we fall through to the normal parser below.
         const objectionResponse = detectObjection(userInput);
         if (objectionResponse) {
+          // Track the objection label and recompute lead score (objections are high-intent signals)
+          const objLabel = detectObjectionLabel(userInput);
+          if (objLabel && !profileRef.current.objections.includes(objLabel)) {
+            const newObjections = [...profileRef.current.objections, objLabel];
+            profileRef.current = { ...profileRef.current, objections: newObjections };
+            dispatch({ type: "SET_PROFILE_OBJECTIONS", payload: newObjections });
+            dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+          }
           await showBotResponse(objectionResponse);
 
           const menuResponse = mainMenuAction();
@@ -229,6 +247,15 @@ export function useChatbot() {
 
         // Read latest state from ref (not closure) to avoid stale-state races
         const { response, nextState } = processInput(currentStateRef.current, userInput);
+
+        // Track interest from the state being entered and recompute lead score
+        const interestLabel = INTEREST_STATES[nextState];
+        if (interestLabel && !profileRef.current.interests.includes(interestLabel)) {
+          const newInterests = [...profileRef.current.interests, interestLabel];
+          profileRef.current = { ...profileRef.current, interests: newInterests };
+          dispatch({ type: "SET_PROFILE_INTERESTS", payload: newInterests });
+          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+        }
 
         await showBotResponse(response.content, {
           quickReplies: response.quickReplies,
