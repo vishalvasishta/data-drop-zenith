@@ -55,7 +55,7 @@ async function ensureLeadsTable(): Promise<void> {
     CREATE TABLE IF NOT EXISTS leads (
       id           TEXT        PRIMARY KEY,
       name         TEXT        NOT NULL,
-      phone        TEXT        NOT NULL,
+      phone        TEXT        NOT NULL UNIQUE,
       role         TEXT,
       education    TEXT,
       career_goal  TEXT,
@@ -64,6 +64,18 @@ async function ensureLeadsTable(): Promise<void> {
       objections   TEXT[]      NOT NULL DEFAULT '{}',
       created_at   TIMESTAMPTZ NOT NULL DEFAULT NOW()
     )
+  `);
+  // Add UNIQUE constraint to existing tables that were created without it.
+  await pool.query(`
+    DO $
+    BEGIN
+      IF NOT EXISTS (
+        SELECT 1 FROM pg_constraint
+        WHERE conname = 'leads_phone_key' AND conrelid = 'leads'::regclass
+      ) THEN
+        ALTER TABLE leads ADD CONSTRAINT leads_phone_key UNIQUE (phone);
+      END IF;
+    END $;
   `);
 }
 
@@ -79,6 +91,14 @@ export async function saveLead(
     `INSERT INTO leads
        (id, name, phone, role, education, career_goal, lead_score, interests, objections)
      VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
+     ON CONFLICT (phone) DO UPDATE SET
+       name        = EXCLUDED.name,
+       role        = EXCLUDED.role,
+       education   = EXCLUDED.education,
+       career_goal = EXCLUDED.career_goal,
+       lead_score  = EXCLUDED.lead_score,
+       interests   = EXCLUDED.interests,
+       objections  = EXCLUDED.objections
      RETURNING *`,
     [
       id,
