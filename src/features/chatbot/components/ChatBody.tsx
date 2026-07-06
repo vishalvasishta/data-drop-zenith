@@ -6,6 +6,12 @@ import { QuickReplies } from "./QuickReplies";
 import { FAQCard } from "./FAQCard";
 import { EnrollForm } from "./EnrollForm";
 import { LeadCapture } from "./LeadCapture";
+import { CourseOverview } from "./CourseOverview";
+import { CurriculumCards } from "./CurriculumCards";
+import { RoadmapCard } from "./RoadmapCard";
+import { PlacementStats } from "./PlacementStats";
+import { ProjectCards } from "./ProjectCards";
+import { CareerPaths } from "./CareerPaths";
 import { useAutoScroll } from "../hooks/useAutoScroll";
 
 interface ChatBodyProps {
@@ -32,20 +38,27 @@ export function ChatBody({
       aria-live="polite"
       aria-atomic="false"
     >
-      {/* Welcome placeholder when empty */}
+      {/* Welcome placeholder */}
       {messages.length === 0 && (
-        <div className="flex flex-1 flex-col items-center justify-center gap-2 px-6 text-center">
+        <div className="flex flex-1 flex-col items-center justify-center gap-2.5 px-6 text-center">
           <div
-            className="flex h-12 w-12 items-center justify-center rounded-2xl text-2xl"
+            className="flex h-14 w-14 items-center justify-center rounded-2xl text-2xl"
             style={{
               background: "linear-gradient(145deg, #8b5cf6, #6d28d9)",
-              boxShadow: "0 4px 20px rgba(139,92,246,0.35)",
+              boxShadow: "0 4px 24px rgba(139,92,246,0.35)",
             }}
+            aria-hidden="true"
           >
             🤖
           </div>
-          <p className="text-sm font-semibold text-zinc-300">DATADROP AI Advisor</p>
-          <p className="text-xs text-zinc-600">Ask me anything about the program</p>
+          <div>
+            <p className="text-[14px] font-semibold text-zinc-200">DATADROP AI Advisor</p>
+            <p className="mt-1 text-[12px] leading-relaxed text-zinc-600">
+              Ask me anything — curriculum, placement,
+              <br />
+              fees, career paths, or how to enroll.
+            </p>
+          </div>
         </div>
       )}
 
@@ -53,7 +66,6 @@ export function ChatBody({
         {messages.map((msg, i) => {
           const isLast = i === messages.length - 1;
           const nextMsg = messages[i + 1];
-          // Show avatar only when it's the last bot msg in a consecutive bot run
           const showAvatar = msg.sender === "bot" && (!nextMsg || nextMsg.sender !== "bot");
 
           return (
@@ -64,29 +76,28 @@ export function ChatBody({
                 showAvatar={showAvatar}
               />
 
-              {/* Attached special components — only on last message */}
-              {isLast && msg.sender === "bot" && (
-                <>
-                  {msg.component === "faq" && msg.faqData && (
-                    <div className="mt-2">
-                      <FAQCard faqs={msg.faqData} />
-                    </div>
-                  )}
-                  {msg.component === "enroll" && (
-                    <div className="mt-2">
-                      <EnrollForm onSubmit={onEnrollSubmit} />
-                    </div>
-                  )}
-                  {msg.component === "lead-capture" && (
-                    <div className="mt-2">
-                      <LeadCapture onSubmit={onLeadSubmit} />
-                    </div>
-                  )}
-                  {msg.quickReplies && msg.quickReplies.length > 0 && (
-                    <QuickReplies replies={msg.quickReplies} onSelect={onQuickReply} />
-                  )}
-                </>
+              {/* Rich cards — rendered only on the last bot message */}
+              {isLast && msg.sender === "bot" && msg.component && (
+                <div className="mt-2">
+                  {msg.component === "course-overview" && <CourseOverview />}
+                  {msg.component === "curriculum-cards" && <CurriculumCards />}
+                  {msg.component === "roadmap" && <RoadmapCard />}
+                  {msg.component === "placement-stats" && <PlacementStats />}
+                  {msg.component === "project-cards" && <ProjectCards />}
+                  {msg.component === "career-paths" && <CareerPaths />}
+                  {msg.component === "faq" && msg.faqData && <FAQCard faqs={msg.faqData} />}
+                  {msg.component === "enroll" && <EnrollForm onSubmit={onEnrollSubmit} />}
+                  {msg.component === "lead-capture" && <LeadCapture onSubmit={onLeadSubmit} />}
+                </div>
               )}
+
+              {/* Quick replies — only on the last message */}
+              {isLast &&
+                msg.sender === "bot" &&
+                msg.quickReplies &&
+                msg.quickReplies.length > 0 && (
+                  <QuickReplies replies={msg.quickReplies} onSelect={onQuickReply} />
+                )}
             </div>
           );
         })}

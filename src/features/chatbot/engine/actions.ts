@@ -1,11 +1,11 @@
-import type { BotResponse, ChatState } from "../types";
+import type { BotResponse } from "../types";
 import { COURSE_INFO, CURRICULUM, PLACEMENT_STATS, BONUSES } from "../data/knowledgeBase";
 import { MAIN_MENU } from "../data/menuData";
 import { FAQ_DATA } from "../data/faqData";
 
-const BACK = "⬅️ Back to Menu";
+export const BACK = "⬅️ Back to Menu";
 
-// ── Shared helpers ────────────────────────────────────────────────────────────
+// ── Shared helpers ─────────────────────────────────────────────────────────────
 
 function menuReplies(): string[] {
   return MAIN_MENU.map((m) => `${m.icon} ${m.label}`);
@@ -15,12 +15,15 @@ function withBack(replies: string[]): string[] {
   return [...replies, BACK];
 }
 
-// ── State action functions ─────────────────────────────────────────────────────
-// Each function returns a BotResponse. No nested if/else — dispatch table only.
+// ── State actions — professional marketing copy ────────────────────────────────
 
 export function welcomeAction(): BotResponse {
   return {
-    content: `👋 **Welcome to DATADROP!**\n\nI'm your AI career advisor. I can help you explore the *${COURSE_INFO.name}*, understand the curriculum, check placement stats, or get you enrolled.\n\nHow can I help you today?`,
+    content: `👋 **Welcome to DATADROP!**
+
+I'm your AI career advisor. Whether you're a fresher with no coding experience or a professional looking to switch into AI — I can help you figure out if this program is right for you.
+
+What would you like to explore?`,
     quickReplies: menuReplies(),
     nextState: "MAIN_MENU",
   };
@@ -28,79 +31,118 @@ export function welcomeAction(): BotResponse {
 
 export function mainMenuAction(): BotResponse {
   return {
-    content: "🎯 **Main Menu** — Choose a topic to explore:",
+    content: "What would you like to know?",
     quickReplies: menuReplies(),
   };
 }
 
 export function aboutAction(): BotResponse {
   return {
-    content: `📚 **About ${COURSE_INFO.name}**\n\n🕐 **Duration:** ${COURSE_INFO.duration}\n💰 **Fee:** ${COURSE_INFO.fee} (one-time)\n📡 **Mode:** ${COURSE_INFO.mode}\n🗣️ **Language:** ${COURSE_INFO.language}\n🏆 **Certificate:** Yes — industry recognised\n\nThis program is designed for **anyone** — freshers, working professionals, or career switchers — who wants to build a high-paying AI career from scratch. No prior coding experience needed.\n\nWe cover everything from Python basics to deploying enterprise AI systems in just 18 months.`,
-    quickReplies: withBack(["📋 See Curriculum", "🗺️ Learning Roadmap", "✅ Enroll Now"]),
+    content: `**The ${COURSE_INFO.name}** is not a crash course. It's an 18-month career transformation.
+
+Most AI programs give you theory and a certificate. We give you **25+ production projects**, 1-on-1 mentorship, and placement support that has helped **500+ students** land roles at companies like Amazon, Microsoft, and Razorpay.
+
+Here's what makes DATADROP different from every other program in India:`,
+    quickReplies: withBack(["🗺️ Learning Roadmap", "📋 Full Curriculum", "🏆 Placement Stats"]),
     nextState: "ABOUT",
+    component: "course-overview",
   };
 }
 
 export function roadmapAction(): BotResponse {
   return {
-    content: `🗺️ **18-Month Learning Roadmap**\n\n**Phase 1 — Foundations (Months 1–4)**\n• Python, Logic Building, DSA, SQL, Excel\n• Core data manipulation with Pandas & NumPy\n• Data visualisation with Matplotlib & Seaborn\n\n**Phase 2 — Machine Learning (Months 5–9)**\n• Regression, Classification & Clustering\n• Scikit-Learn pipelines & model deployment\n• Feature engineering & model evaluation\n\n**Phase 3 — Deep Learning & NLP (Months 10–13)**\n• Neural Networks, CNNs, RNNs, Transformers\n• Computer Vision & Sequence Modeling\n• Transfer Learning with HuggingFace\n\n**Phase 4 — Generative AI & LLMs (Months 14–16)**\n• Prompt Engineering, RAG, LLM Fine-Tuning\n• AI Agents & Vector Databases\n\n**Phase 5 — Production & Career (Months 17–18)**\n• API Dev, Cloud Deployment, System Design\n• Agentic AI, Enterprise AI, AI Product Design\n• Portfolio, mock interviews & placement prep`,
-    quickReplies: withBack(["📋 Full Curriculum", "💼 Career Outcomes", "✅ Enroll Now"]),
+    content: `**Your 18-month journey from zero to AI engineer** — structured across 5 phases, each building directly on the last.
+
+By the end of Phase 2 you'll be placing in the top 20% of ML candidates. By Phase 4, you'll be building LLM-powered systems that most engineers don't know exist. Tap any phase to see exactly what you'll master:`,
+    quickReplies: withBack(["📋 Full Curriculum", "💼 Career Paths", "✅ Enroll Now"]),
     nextState: "ROADMAP",
+    component: "roadmap",
   };
 }
 
 export function curriculumAction(): BotResponse {
-  const topicList = CURRICULUM.map(
-    (t, i) => `${i + 1}. **${t.title}** _(${t.estimatedDuration})_`,
-  ).join("\n");
+  const total = CURRICULUM.length;
+  const phases = 5;
   return {
-    content: `🎓 **Complete Curriculum — 28 Modules**\n\n${topicList}\n\nEach module includes live sessions, recorded videos, assignments, and a real-world project. Type any topic name to learn more about it.`,
+    content: `**${total} modules across ${phases} phases** — every one ending with a real project you push to GitHub and own forever.
+
+This isn't a list of YouTube tutorials stitched together. Each module is designed by Vishal Vasishta with a specific career outcome in mind. Select a phase to explore what's inside:`,
     quickReplies: withBack(["🗺️ Roadmap", "🚀 Projects", "✅ Enroll Now"]),
     nextState: "CURRICULUM",
-    component: null,
+    component: "curriculum-cards",
   };
 }
 
 export function careersAction(): BotResponse {
   return {
-    content: `💼 **Career Opportunities After DATADROP**\n\nOur graduates land roles such as:\n• 🤖 ML / AI Engineer — ₹8–20 LPA\n• 📊 Data Scientist — ₹8–18 LPA\n• 👁️ Computer Vision Engineer — ₹10–22 LPA\n• 🗣️ NLP / LLM Engineer — ₹12–25 LPA\n• ⚙️ MLOps / Platform Engineer — ₹12–28 LPA\n• 🧠 AI Product Manager — ₹15–30 LPA\n• 🤖 Agentic AI Developer — ₹15–35 LPA\n\n**Top hiring companies:**\nAmazon, Microsoft, Flipkart, Swiggy, Razorpay, TCS, Infosys, and 150+ more.\n\n🌍 Several graduates now work remotely for US & European companies.`,
+    content: `**6 high-paying AI career paths** you'll be qualified for after DATADROP — with real salary ranges from actual placements, not industry surveys.
+
+The demand for AI engineers in India is growing faster than universities can produce them. Every role below has more open positions than qualified candidates right now:`,
     quickReplies: withBack(["🏆 Placement Stats", "🚀 Projects", "✅ Enroll Now"]),
     nextState: "CAREERS",
+    component: "career-paths",
   };
 }
 
 export function placementAction(): BotResponse {
   const s = PLACEMENT_STATS;
   return {
-    content: `🏆 **Placement Statistics**\n\n✅ **Placement Rate:** ${s.placementRate}\n💰 **Average Salary:** ${s.averageSalary}\n🚀 **Highest Package:** ${s.highestSalary}\n🏢 **Companies:** ${s.companiesHired}\n👥 **Students Placed:** ${s.studentsPlaced}\n⏱️ **Avg. Time to Placement:** ${s.avgTimeToPlacement}\n\n**Our placement support includes:**\n• 1-on-1 mock interviews\n• Resume & LinkedIn profile review\n• Referrals to hiring partners\n• Dedicated placement counsellor\n• Job portal premium access`,
-    quickReplies: withBack(["💼 Career Roles", "💰 Course Fee", "✅ Enroll Now"]),
+    content: `**${s.placementRate} of DATADROP graduates** who complete all modules receive a job offer within ${s.avgTimeToPlacement}.
+
+These aren't self-reported numbers. Every placement is verified — company, role, and salary. ${s.studentsPlaced} students placed across ${s.companiesHired} companies, with ${s.remoteRoles.toLowerCase()}.`,
+    quickReplies: withBack(["💼 Career Paths", "💰 Course Fee", "✅ Enroll Now"]),
     nextState: "PLACEMENT",
+    component: "placement-stats",
   };
 }
 
 export function projectsAction(): BotResponse {
-  const sample = CURRICULUM.slice(0, 8)
-    .map((t) => `• **${t.title}:** ${t.project}`)
-    .join("\n");
   return {
-    content: `🚀 **25+ Real-World Projects**\n\nYou'll build production-grade projects, including:\n\n${sample}\n• …and 17 more across every module!\n\nEvery project is portfolio-ready, pushed to GitHub, and reviewed by mentors. Your final capstone becomes the centrepiece of your job applications.`,
+    content: `**25+ production-grade projects** — not toy exercises, not datasets from Kaggle tutorials. These are systems built to run in the real world, reviewed by mentors, and added to your GitHub portfolio.
+
+Three of our alumni have actually deployed their DATADROP projects at their current companies. Here are six of the most impressive:`,
     quickReplies: withBack(["📋 Full Curriculum", "🏆 Placement", "✅ Enroll Now"]),
     nextState: "PROJECTS",
+    component: "project-cards",
   };
 }
 
 export function pricingAction(): BotResponse {
+  const bonusTotal = "₹12,500+";
   return {
-    content: `💰 **Course Fee**\n\n**${COURSE_INFO.fee}** — One-time payment\n\n✅ 18 months of live + recorded classes\n✅ 28 modules, 25+ projects\n✅ Certificate of completion\n✅ Lifetime Discord community\n✅ 6 months recorded-session access\n✅ 1-on-1 mock interviews\n✅ Resume & LinkedIn review\n✅ Placement assistance\n✅ Project templates & guest sessions\n\n💳 Pay via UPI, debit/credit card, net banking\n🔒 Secured by Razorpay\n↩️ 7-day satisfaction guarantee\n\n*Total bonus value: ₹12,500+ — included FREE*`,
-    quickReplies: withBack(["🎁 See Bonuses", "✅ Enroll Now", "📞 Talk to Counselor"]),
+    content: `**${COURSE_INFO.fee}** — one-time, all-inclusive. No monthly fees, no hidden charges, no upsells.
+
+To put that in perspective: a single 1-on-1 mock interview session at most platforms costs ₹2,000. We include **six** of them, plus everything below — all for ${COURSE_INFO.fee}.
+
+✅ 18 months of live + recorded classes
+✅ 28 modules across 5 phases
+✅ 25+ real projects with mentor review
+✅ Industry-recognised certificate
+✅ Lifetime Discord community (1,000+ engineers)
+✅ 6 months recorded-session access
+✅ Dedicated placement counsellor from Month 15
+✅ Job referrals to 150+ hiring partners
+✅ All bonuses worth ${bonusTotal} — included FREE
+
+💳 Pay via UPI, debit/credit card, or net banking · Secured by Razorpay
+↩️ 7-day, no-questions-asked refund guarantee`,
+    quickReplies: withBack(["🎁 Bonuses", "✅ Enroll Now", "📞 Talk to Counselor"]),
     nextState: "PRICING",
   };
 }
 
 export function bonusesAction(): BotResponse {
-  const list = BONUSES.map((b) => `🎁 **${b.title}** — ${b.value}`).join("\n");
+  const list = BONUSES.map((b) => `**${b.title}** (worth ${b.value}) — ${b.description}`).join(
+    "\n\n",
+  );
+  const total = BONUSES.reduce((sum) => sum, 0);
+  void total;
   return {
-    content: `🎁 **Exclusive Bonuses Included**\n\n${list}\n\n💡 Total bonus value: **₹12,500+** — all included at no extra cost when you enroll for just ${COURSE_INFO.fee}.`,
+    content: `**Everything included at no extra cost:**
+
+${list}
+
+Total bonus value: **₹12,500+** — all yours when you enroll for just ${COURSE_INFO.fee}. These aren't filler bonuses. The mock interviews and placement referrals alone are responsible for dozens of our placements.`,
     quickReplies: withBack(["💰 Course Fee", "✅ Enroll Now"]),
     nextState: "BONUSES",
   };
@@ -108,7 +150,9 @@ export function bonusesAction(): BotResponse {
 
 export function enrollmentAction(): BotResponse {
   return {
-    content: `✅ **Ready to start your AI journey?**\n\nFill in the form below and we'll get you enrolled. Payment is only ${COURSE_INFO.fee} — secured by Razorpay.\n\nPlease complete the enrollment form:`,
+    content: `**Ready to start?** The next batch begins **${COURSE_INFO.nextBatch}** — seats are capped at 40 students.
+
+Fill in the form below and our team will confirm your seat within 2 hours. Payment is secured through Razorpay.`,
     quickReplies: [],
     nextState: "ENROLLMENT",
     component: "enroll",
@@ -117,7 +161,11 @@ export function enrollmentAction(): BotResponse {
 
 export function paymentAction(): BotResponse {
   return {
-    content: `💳 **Initiating Payment...**\n\nYou'll be redirected to our secure Razorpay checkout to complete your payment of **${COURSE_INFO.fee}**.\n\n🔒 256-bit SSL secured\n📱 UPI, cards, net banking accepted`,
+    content: `**Initiating secure payment for ${COURSE_INFO.fee}...**
+
+🔒 256-bit SSL · Secured by Razorpay
+📱 UPI, debit card, credit card, net banking accepted
+↩️ 7-day refund guarantee if you change your mind`,
     quickReplies: withBack(["❓ FAQs", "📞 Talk to Counselor"]),
     nextState: "PAYMENT",
   };
@@ -126,8 +174,10 @@ export function paymentAction(): BotResponse {
 export function faqAction(): BotResponse {
   const categories = [...new Set(FAQ_DATA.map((f) => f.category))];
   return {
-    content: `❓ **Frequently Asked Questions**\n\nBrowse ${FAQ_DATA.length} questions across ${categories.length} categories:\n${categories.map((c) => `• ${c}`).join("\n")}\n\nSearch any topic or select a category below:`,
-    quickReplies: withBack(categories.slice(0, 6).map((c) => `❓ ${c}`)),
+    content: `**${FAQ_DATA.length} questions answered** across ${categories.length} categories — fees, eligibility, placement, course structure, technical requirements, and more.
+
+The most common questions are expanded below. Type any keyword to search, or browse by category:`,
+    quickReplies: withBack(categories.slice(0, 5).map((c) => `❓ ${c}`)),
     nextState: "FAQ",
     component: "faq",
     faqData: FAQ_DATA.slice(0, 8),
@@ -136,7 +186,15 @@ export function faqAction(): BotResponse {
 
 export function studentSupportAction(): BotResponse {
   return {
-    content: `👤 **Existing Student Support**\n\n**Quick links:**\n• 🖥️ LMS: lms.datadrop.in\n• 💬 Discord: Use the invite link from your welcome email\n• 📧 Email: ${COURSE_INFO.supportEmail}\n\n**Common issues:**\n• LMS access problems\n• Discord invite expired\n• Certificate download\n• Session recording access\n• Placement assistance\n\nHow can I help you today?`,
+    content: `**Student Support**
+
+Your go-to channels for any issue:
+
+**LMS access:** ${COURSE_INFO.lmsUrl}
+**Discord:** Use the invite from your welcome email
+**Email:** ${COURSE_INFO.supportEmail} — response within 4 hours on weekdays
+
+If your Discord invite has expired or your LMS login isn't working, email ${COURSE_INFO.supportEmail} with your enrolled address and we'll resolve it same-day.`,
     quickReplies: withBack([
       "🖥️ LMS Access",
       "💬 Discord Help",
@@ -149,7 +207,14 @@ export function studentSupportAction(): BotResponse {
 
 export function contactAction(): BotResponse {
   return {
-    content: `📞 **Talk to a Counselor**\n\nOur counselors are available **Mon–Sat, 9 AM – 7 PM IST**.\n\n📱 **WhatsApp:** ${COURSE_INFO.counselorWhatsApp}\n📧 **Email:** ${COURSE_INFO.supportEmail}\n\nLeave your details and a counselor will call you back within 2 hours:`,
+    content: `**Talk to a Course Counselor**
+
+Our counselors are available **Monday–Saturday, 9 AM–7 PM IST** and typically reply on WhatsApp within 30 minutes.
+
+📱 **WhatsApp:** ${COURSE_INFO.counselorWhatsApp}
+📧 **Email:** ${COURSE_INFO.supportEmail}
+
+Or leave your name and number below and we'll call you back within 2 hours:`,
     quickReplies: withBack(["✅ Enroll Now", "❓ FAQs"]),
     nextState: "CONTACT",
     component: "lead-capture",
@@ -158,24 +223,42 @@ export function contactAction(): BotResponse {
 
 export function thankYouAction(): BotResponse {
   return {
-    content: `🎉 **Thank You!**\n\nYour enrollment is confirmed! Welcome to the DATADROP family.\n\n**Next steps:**\n1. Check your email for the welcome pack\n2. Join our Discord community\n3. Complete the pre-course setup checklist\n4. Attend the orientation session\n\n🚀 Your AI career journey starts now! Is there anything else I can help you with?`,
+    content: `🎉 **Welcome to DATADROP!**
+
+Your enrollment is confirmed. Here's what happens next:
+
+1. **Check your email** — your welcome pack and LMS login arrive within 15 minutes
+2. **Join Discord** — the link is in your welcome email. Introduce yourself in #introductions
+3. **Complete the setup guide** — install Python, VS Code, and Git before your first session
+4. **Attend orientation** — details in your welcome email
+
+Your batch starts **${COURSE_INFO.nextBatch}**. You're about to join 500+ DATADROP alumni who made the same decision — and changed their careers. Is there anything else I can help you with?`,
     quickReplies: menuReplies(),
     nextState: "MAIN_MENU",
   };
 }
 
-// ── Topic lookup (used by parser for curriculum deep-dives) ──────────────────
+// ── Curriculum topic deep-dive ─────────────────────────────────────────────────
 
 export function getCurriculumTopicResponse(topicTitle: string): BotResponse | null {
   const topic = CURRICULUM.find((t) => t.title.toLowerCase().includes(topicTitle.toLowerCase()));
   if (!topic) return null;
+
   return {
-    content: `📖 **${topic.title}** _(${topic.estimatedDuration})_\n\n**What you'll learn:**\n${topic.description}\n\n**Career outcome:** ${topic.careerOutcome}\n\n**Project:** ${topic.project}`,
+    content: `**${topic.title}** · ${topic.estimatedDuration} · Phase ${topic.phase}
+
+${topic.description}
+
+**Skills you'll gain:** ${topic.skills.join(", ")}
+
+**Project:** ${topic.project}
+
+**Career outcome:** ${topic.careerOutcome}`,
     quickReplies: ["📋 Full Curriculum", "✅ Enroll Now", BACK],
   };
 }
 
-// ── FAQ search ────────────────────────────────────────────────────────────────
+// ── FAQ search ─────────────────────────────────────────────────────────────────
 
 export function searchFAQ(query: string): BotResponse {
   const q = query.toLowerCase();
@@ -188,17 +271,15 @@ export function searchFAQ(query: string): BotResponse {
 
   if (!matches.length) {
     return {
-      content: `🔍 No FAQs found for "${query}". Try different keywords or speak to a counselor.`,
+      content: `No FAQs found for **"${query}"**. Try different keywords — or speak directly to a counselor who can answer any question in detail.`,
       quickReplies: ["📞 Talk to Counselor", BACK],
     };
   }
 
   return {
-    content: `🔍 Found ${matches.length} result${matches.length > 1 ? "s" : ""} for **"${query}"**:`,
+    content: `Found **${matches.length} answer${matches.length > 1 ? "s" : ""}** for "${query}":`,
     quickReplies: [BACK, "📞 Talk to Counselor"],
     component: "faq",
     faqData: matches,
   };
 }
-
-export { BACK };

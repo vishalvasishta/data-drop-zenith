@@ -19,7 +19,17 @@ export type ChatState =
 
 // ── Primitives ────────────────────────────────────────────────────────────────
 export type MessageSender = "bot" | "user";
-export type SpecialComponent = "faq" | "enroll" | "lead-capture" | null;
+export type SpecialComponent =
+  | "faq"
+  | "enroll"
+  | "lead-capture"
+  | "course-overview"
+  | "curriculum-cards"
+  | "roadmap"
+  | "placement-stats"
+  | "project-cards"
+  | "career-paths"
+  | null;
 
 // ── Domain Models ─────────────────────────────────────────────────────────────
 export interface FAQ {
@@ -27,14 +37,6 @@ export interface FAQ {
   question: string;
   answer: string;
   category: string;
-}
-
-export interface CourseTopic {
-  title: string;
-  description: string;
-  careerOutcome: string;
-  project: string;
-  estimatedDuration: string;
 }
 
 export interface MenuOption {
