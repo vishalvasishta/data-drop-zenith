@@ -98,6 +98,22 @@ export function ChatBody({
                 msg.quickReplies.length > 0 && (
                   <QuickReplies replies={msg.quickReplies} onSelect={onQuickReply} />
                 )}
+
+              {/* Contextual follow-up suggestions — shown below main quick replies */}
+              {isLast &&
+                msg.sender === "bot" &&
+                msg.followUpSuggestions &&
+                msg.followUpSuggestions.length > 0 && (
+                  <div className="px-4 pb-1">
+                    <p className="mb-1 text-[10px] font-medium uppercase tracking-wide text-zinc-600">
+                      Also explore
+                    </p>
+                    <QuickReplies
+                      replies={msg.followUpSuggestions}
+                      onSelect={onQuickReply}
+                    />
+                  </div>
+                )}
             </div>
           );
         })}

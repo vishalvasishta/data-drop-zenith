@@ -232,6 +232,7 @@ export function useChatbot() {
 
         await showBotResponse(response.content, {
           quickReplies: response.quickReplies,
+          followUpSuggestions: response.followUpSuggestions,
           component: response.component ?? null,
           faqData: response.faqData,
         });

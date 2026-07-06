@@ -4,6 +4,7 @@ import { MAIN_MENU } from "../data/menuData";
 import { FAQ_DATA } from "../data/faqData";
 import { WELCOME_MESSAGE, ROLE_QUICK_REPLIES } from "../data/conversations/welcome";
 import { MAIN_MENU_PROMPT } from "../data/conversations/mainMenu";
+import { FOLLOW_UP_SUGGESTIONS } from "../data/conversations/followUpSuggestions";
 
 export const BACK = "⬅️ Back to Menu";
 
@@ -42,6 +43,7 @@ Most AI programs give you theory and a certificate. We give you **25+ production
 
 Here's what makes DATADROP different from every other program in India:`,
     quickReplies: withBack(["🗺️ Learning Roadmap", "📋 Full Curriculum", "🏆 Placement Stats"]),
+    followUpSuggestions: FOLLOW_UP_SUGGESTIONS["ABOUT"],
     nextState: "ABOUT",
     component: "course-overview",
   };
@@ -66,6 +68,7 @@ export function curriculumAction(): BotResponse {
 
 This isn't a list of YouTube tutorials stitched together. Each module is designed by Vishal Vasishta with a specific career outcome in mind. Select a phase to explore what's inside:`,
     quickReplies: withBack(["🗺️ Roadmap", "🚀 Projects", "✅ Enroll Now"]),
+    followUpSuggestions: FOLLOW_UP_SUGGESTIONS["CURRICULUM"],
     nextState: "CURRICULUM",
     component: "curriculum-cards",
   };
@@ -89,6 +92,7 @@ export function placementAction(): BotResponse {
 
 These aren't self-reported numbers. Every placement is verified — company, role, and salary. ${s.studentsPlaced} students placed across ${s.companiesHired} companies, with ${s.remoteRoles.toLowerCase()}.`,
     quickReplies: withBack(["💼 Career Paths", "💰 Course Fee", "✅ Enroll Now"]),
+    followUpSuggestions: FOLLOW_UP_SUGGESTIONS["PLACEMENT"],
     nextState: "PLACEMENT",
     component: "placement-stats",
   };
@@ -125,6 +129,7 @@ To put that in perspective: a single 1-on-1 mock interview session at most platf
 💳 Pay via UPI, debit/credit card, or net banking · Secured by Razorpay
 ↩️ 7-day, no-questions-asked refund guarantee`,
     quickReplies: withBack(["🎁 Bonuses", "✅ Enroll Now", "📞 Talk to Counselor"]),
+    followUpSuggestions: FOLLOW_UP_SUGGESTIONS["PRICING"],
     nextState: "PRICING",
   };
 }

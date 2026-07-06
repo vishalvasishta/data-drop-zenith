@@ -64,6 +64,7 @@ export interface Message {
   sender: MessageSender;
   timestamp: Date;
   quickReplies?: string[];
+  followUpSuggestions?: string[];
   component?: SpecialComponent;
   faqData?: FAQ[];
 }
@@ -72,6 +73,7 @@ export interface Message {
 export interface BotResponse {
   content: string;
   quickReplies?: string[];
+  followUpSuggestions?: string[];
   nextState?: ChatState;
   component?: SpecialComponent;
   faqData?: FAQ[];
