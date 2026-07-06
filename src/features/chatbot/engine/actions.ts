@@ -19,12 +19,10 @@ function withBack(replies: string[]): string[] {
 
 export function welcomeAction(): BotResponse {
   return {
-    content: `👋 **Welcome to DATADROP!**
+    content: `👋 Hi there! I'm your AI Admissions Counselor at DATADROP.
 
-I'm your AI career advisor. Whether you're a fresher with no coding experience or a professional looking to switch into AI — I can help you figure out if this program is right for you.
-
-What would you like to explore?`,
-    quickReplies: menuReplies(),
+I'm here to help you figure out the right path into an AI career — no matter where you're starting from. To get you the most relevant info, tell me a bit about yourself:`,
+    quickReplies: ["🎓 Student", "💼 Working Professional", "🔄 Career Switcher", "🤔 Just Exploring"],
     nextState: "MAIN_MENU",
   };
 }
