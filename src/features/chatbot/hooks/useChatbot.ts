@@ -3,6 +3,7 @@ import type { ChatbotState, ChatbotAction, Message, ChatState, EnrollmentData, S
 import { generateId } from "../utils/formatters";
 import { processInput, getWelcomeResponse } from "../engine/chatbotEngine";
 import { mainMenuAction } from "../engine/actions";
+import { detectObjection } from "../engine/objectionHandler";
 
 // ── Reducer — exhaustive switch, no type assertions ───────────────────────────
 function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotState {
@@ -199,6 +200,23 @@ export function useChatbot() {
 
           const menuResponse = mainMenuAction();
           await showBotResponse(menuResponse.content, { quickReplies: menuResponse.quickReplies });
+
+          currentStateRef.current = "MAIN_MENU";
+          dispatch({ type: "SET_STATE", payload: "MAIN_MENU" });
+          return;
+        }
+
+        // Objection handling: a lightweight keyword layer that runs BEFORE the
+        // existing parser/state machine. It never changes ChatState directly —
+        // if no objection is detected, we fall through to the normal parser below.
+        const objectionResponse = detectObjection(userInput);
+        if (objectionResponse) {
+          await showBotResponse(objectionResponse);
+
+          const menuResponse = mainMenuAction();
+          await showBotResponse("Would you like to know anything else?", {
+            quickReplies: menuResponse.quickReplies,
+          });
 
           currentStateRef.current = "MAIN_MENU";
           dispatch({ type: "SET_STATE", payload: "MAIN_MENU" });
