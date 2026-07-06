@@ -65,16 +65,16 @@ function AdminPage() {
       setEnrollments(enrollmentData);
       setLeads(leadData);
     } catch (err) {
-  console.error("ADMIN LOGIN ERROR:", err);
+      console.error("ADMIN LOGIN ERROR:", err);
 
-  if (err instanceof Error) {
-    alert(err.stack || err.message);
-    setError(err.message);
-  } else {
-    alert(JSON.stringify(err));
-    setError(String(err));
-  }
-}
+      if (err instanceof Error) {
+        alert(err.stack || err.message);
+        setError(err.message);
+      } else {
+        alert(JSON.stringify(err));
+        setError(String(err));
+      }
+    }
 
   async function refresh() {
     setLoading(true);
@@ -85,14 +85,14 @@ function AdminPage() {
       ]);
       setEnrollments(enrollmentData);
       setLeads(leadData);
-    } catch {
+    } catch (err) {
+      console.error(err);
+      alert(err instanceof Error ? err.stack : JSON.stringify(err));
+
       setError("Session expired. Please log in again.");
       setEnrollments(null);
       setLeads(null);
-    } finally {
-      setLoading(false);
     }
-  }
 
   // ── Login Screen ─────────────────────────────────────────────────────────────
   if (!enrollments) {
