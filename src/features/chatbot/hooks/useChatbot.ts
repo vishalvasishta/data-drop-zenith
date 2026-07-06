@@ -18,8 +18,14 @@ function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotStat
       return { ...state, currentState: action.payload };
     case "SET_ENROLLMENT_DATA":
       return { ...state, enrollmentData: { ...state.enrollmentData, ...action.payload } };
+    case "SET_PROFILE_ROLE":
+      return { ...state, profile: { ...state.profile, role: action.payload } };
   }
 }
+
+// ── Conversation profiling: welcome role quick replies ────────────────────────
+const ROLE_QUICK_REPLIES = ["🎓 Student", "💼 Working Professional", "🔄 Career Switcher", "🤔 Just Exploring"];
+const EDUCATION_QUICK_REPLIES = ["Intermediate", "Degree", "B.Tech", "B.Com", "B.Sc", "MBA", "Other"];
 
 // ── Initial state ─────────────────────────────────────────────────────────────
 const INITIAL_STATE: ChatbotState = {
@@ -28,6 +34,7 @@ const INITIAL_STATE: ChatbotState = {
   isTyping: false,
   enrollmentData: {},
   isOpen: false,
+  profile: { role: null, education: null, careerGoal: null },
 };
 
 // ── Hook ──────────────────────────────────────────────────────────────────────
@@ -118,6 +125,16 @@ export function useChatbot() {
           sender: "user",
           timestamp: new Date(),
         });
+
+        // Conversation profiling: welcome quick-reply captures the student's role,
+        // then asks a follow-up education question, without touching the engine/parser.
+        if (ROLE_QUICK_REPLIES.includes(userInput)) {
+          dispatch({ type: "SET_PROFILE_ROLE", payload: userInput });
+          await showBotResponse("Great! What's your current education?", {
+            quickReplies: EDUCATION_QUICK_REPLIES,
+          });
+          return;
+        }
 
         // Read latest state from ref (not closure) to avoid stale-state races
         const { response, nextState } = processInput(currentStateRef.current, userInput);

@@ -84,6 +84,13 @@ export interface StateHandler {
 
 export type StateHandlerMap = Record<ChatState, StateHandler>;
 
+// ── Conversation Profiling ────────────────────────────────────────────────────
+export interface StudentProfile {
+  role: string | null;
+  education: string | null;
+  careerGoal: string | null;
+}
+
 // ── Chatbot Global State ──────────────────────────────────────────────────────
 export interface ChatbotState {
   currentState: ChatState;
@@ -91,6 +98,7 @@ export interface ChatbotState {
   isTyping: boolean;
   enrollmentData: Partial<EnrollmentData>;
   isOpen: boolean;
+  profile: StudentProfile;
 }
 
 export type ChatbotAction =
@@ -99,4 +107,5 @@ export type ChatbotAction =
   | { type: "ADD_MESSAGE"; payload: Message }
   | { type: "SET_TYPING"; payload: boolean }
   | { type: "SET_STATE"; payload: ChatState }
-  | { type: "SET_ENROLLMENT_DATA"; payload: Partial<EnrollmentData> };
+  | { type: "SET_ENROLLMENT_DATA"; payload: Partial<EnrollmentData> }
+  | { type: "SET_PROFILE_ROLE"; payload: string };
