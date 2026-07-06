@@ -108,4 +108,6 @@ export type ChatbotAction =
   | { type: "SET_TYPING"; payload: boolean }
   | { type: "SET_STATE"; payload: ChatState }
   | { type: "SET_ENROLLMENT_DATA"; payload: Partial<EnrollmentData> }
-  | { type: "SET_PROFILE_ROLE"; payload: string };
+  | { type: "SET_PROFILE_ROLE"; payload: string }
+  | { type: "SET_PROFILE_EDUCATION"; payload: string }
+  | { type: "SET_PROFILE_CAREER_GOAL"; payload: string };
