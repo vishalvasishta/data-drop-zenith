@@ -4,6 +4,21 @@ import { generateId } from "../utils/formatters";
 import { processInput, getWelcomeResponse } from "../engine/chatbotEngine";
 import { mainMenuAction } from "../engine/actions";
 import { detectObjection } from "../engine/objectionHandler";
+import {
+  ROLE_QUICK_REPLIES,
+  EDUCATION_QUESTION,
+  EDUCATION_QUICK_REPLIES,
+  CAREER_GOAL_QUESTION,
+  CAREER_GOAL_QUICK_REPLIES,
+} from "../data/conversations/welcome";
+import { ANYTHING_ELSE_PROMPT } from "../data/conversations/mainMenu";
+import {
+  NOT_SURE_RECOMMENDATION,
+  DEFAULT_RECOMMENDATION,
+  studentRecommendation,
+  workingProfessionalRecommendation,
+  careerSwitcherRecommendation,
+} from "../data/conversations/recommendations";
 
 // ── Reducer — exhaustive switch, no type assertions ───────────────────────────
 function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotState {
@@ -29,17 +44,6 @@ function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotStat
   }
 }
 
-// ── Conversation profiling: welcome role quick replies ────────────────────────
-const ROLE_QUICK_REPLIES = ["🎓 Student", "💼 Working Professional", "🔄 Career Switcher", "🤔 Just Exploring"];
-const EDUCATION_QUICK_REPLIES = ["Intermediate", "Degree", "B.Tech", "B.Com", "B.Sc", "MBA", "Other"];
-const CAREER_GOAL_QUICK_REPLIES = [
-  "📊 Data Analyst",
-  "🤖 AI Engineer",
-  "📈 Data Scientist",
-  "💼 Business Analyst",
-  "❓ Not Sure Yet",
-];
-
 // Strip a leading emoji + space from a quick-reply label (e.g. "📊 Data Analyst" → "Data Analyst")
 function stripEmoji(label: string): string {
   return label.replace(/^[\p{Emoji}\uFE0F\s]+/u, "").trim();
@@ -50,7 +54,7 @@ function buildPersonalizedRecommendation(profile: StudentProfile): string {
   const { role, education, careerGoal } = profile;
 
   if (careerGoal === "❓ Not Sure Yet") {
-    return "No worries at all! I'd recommend exploring all the AI career paths we offer — Data Analyst, Data Scientist, AI Engineer, and Business Analyst — so you can see which one excites you the most.";
+    return NOT_SURE_RECOMMENDATION;
   }
 
   const goalLabel = careerGoal ? stripEmoji(careerGoal) : "your goal career";
@@ -58,13 +62,13 @@ function buildPersonalizedRecommendation(profile: StudentProfile): string {
 
   switch (role) {
     case "🎓 Student":
-      return `Excellent choice! Since you're a ${educationLabel} student aiming to become a ${goalLabel}, this program starts with Python fundamentals and gradually builds your SQL, Power BI, Statistics, Machine Learning and AI skills.`;
+      return studentRecommendation(educationLabel, goalLabel);
     case "💼 Working Professional":
-      return `Great goal! As a working professional with a ${educationLabel} background aiming for a career transition into ${goalLabel}, this program is designed to fit around your schedule while building the practical, job-ready skills you need for that transition.`;
+      return workingProfessionalRecommendation(educationLabel, goalLabel);
     case "🔄 Career Switcher":
-      return `Perfect! Switching careers into ${goalLabel} is a big step, and with your ${educationLabel} background, this program gives you structured, step-by-step learning — from the fundamentals to job-ready skills — to make that switch smoothly.`;
+      return careerSwitcherRecommendation(educationLabel, goalLabel);
     default:
-      return `Great! Based on what you've shared, I'd recommend exploring all the AI career paths we offer — Data Analyst, Data Scientist, AI Engineer, and Business Analyst — to find the best fit for you.`;
+      return DEFAULT_RECOMMENDATION;
   }
 }
 
@@ -175,7 +179,7 @@ export function useChatbot() {
         if (ROLE_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, role: userInput };
           dispatch({ type: "SET_PROFILE_ROLE", payload: userInput });
-          await showBotResponse("Great! What's your current education?", {
+          await showBotResponse(EDUCATION_QUESTION, {
             quickReplies: EDUCATION_QUICK_REPLIES,
           });
           return;
@@ -185,7 +189,7 @@ export function useChatbot() {
         if (EDUCATION_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, education: userInput };
           dispatch({ type: "SET_PROFILE_EDUCATION", payload: userInput });
-          await showBotResponse("What career are you aiming for?", {
+          await showBotResponse(CAREER_GOAL_QUESTION, {
             quickReplies: CAREER_GOAL_QUICK_REPLIES,
           });
           return;
@@ -214,7 +218,7 @@ export function useChatbot() {
           await showBotResponse(objectionResponse);
 
           const menuResponse = mainMenuAction();
-          await showBotResponse("Would you like to know anything else?", {
+          await showBotResponse(ANYTHING_ELSE_PROMPT, {
             quickReplies: menuResponse.quickReplies,
           });
 

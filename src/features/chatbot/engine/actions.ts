@@ -2,6 +2,8 @@ import type { BotResponse } from "../types";
 import { COURSE_INFO, CURRICULUM, PLACEMENT_STATS, BONUSES } from "../data/knowledgeBase";
 import { MAIN_MENU } from "../data/menuData";
 import { FAQ_DATA } from "../data/faqData";
+import { WELCOME_MESSAGE, ROLE_QUICK_REPLIES } from "../data/conversations/welcome";
+import { MAIN_MENU_PROMPT } from "../data/conversations/mainMenu";
 
 export const BACK = "⬅️ Back to Menu";
 
@@ -19,17 +21,15 @@ function withBack(replies: string[]): string[] {
 
 export function welcomeAction(): BotResponse {
   return {
-    content: `👋 Hi there! I'm your AI Admissions Counselor at DATADROP.
-
-I'm here to help you figure out the right path into an AI career — no matter where you're starting from. To get you the most relevant info, tell me a bit about yourself:`,
-    quickReplies: ["🎓 Student", "💼 Working Professional", "🔄 Career Switcher", "🤔 Just Exploring"],
+    content: WELCOME_MESSAGE,
+    quickReplies: ROLE_QUICK_REPLIES,
     nextState: "MAIN_MENU",
   };
 }
 
 export function mainMenuAction(): BotResponse {
   return {
-    content: "What would you like to know?",
+    content: MAIN_MENU_PROMPT,
     quickReplies: menuReplies(),
   };
 }
