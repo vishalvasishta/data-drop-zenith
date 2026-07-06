@@ -1,0 +1,1 @@
+- [Lead Management Dashboard](lead-dashboard.md) — leads table auto-created (IF NOT EXISTS), saved on chatbot LeadCapture submit, shown as tab in /admin.

@@ -4,6 +4,7 @@ import { useChatbot } from "../hooks/useChatbot";
 import { FloatingButton } from "./FloatingButton";
 import { ChatWindow } from "./ChatWindow";
 import type { EnrollmentData } from "../types";
+import { saveLeadFn } from "@/lib/lead-fns";
 
 export function ChatWidget() {
   const { state, open, close, sendMessage, setEnrollmentData, confirmEnrollment } = useChatbot();
@@ -40,8 +41,22 @@ export function ChatWidget() {
     (data: { name: string; phone: string }) => {
       setEnrollmentData(data);
       sendMessage(`📞 Callback requested by ${data.name} (${data.phone})`);
+      // Fire-and-forget: persist the lead with current profile intelligence.
+      // Errors are swallowed intentionally — this must never break the chat flow.
+      saveLeadFn({
+        data: {
+          name: data.name,
+          phone: data.phone,
+          role: state.profile.role,
+          education: state.profile.education,
+          careerGoal: state.profile.careerGoal,
+          leadScore: state.profile.leadScore,
+          interests: state.profile.interests,
+          objections: state.profile.objections,
+        },
+      }).catch(() => {});
     },
-    [setEnrollmentData, sendMessage],
+    [setEnrollmentData, sendMessage, state.profile],
   );
 
   const unreadCount = minimized ? 1 : 0;
