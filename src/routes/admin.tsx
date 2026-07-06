@@ -65,11 +65,16 @@ function AdminPage() {
       setEnrollments(enrollmentData);
       setLeads(leadData);
     } catch (err) {
-      setError(err instanceof Error && err.message === "Unauthorized" ? "Incorrect password." : err instanceof Error ? err.message : String(err));
-    } finally {
-      setLoading(false);
-    }
+  console.error("ADMIN LOGIN ERROR:", err);
+
+  if (err instanceof Error) {
+    alert(err.stack || err.message);
+    setError(err.message);
+  } else {
+    alert(JSON.stringify(err));
+    setError(String(err));
   }
+}
 
   async function refresh() {
     setLoading(true);
