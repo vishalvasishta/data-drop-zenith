@@ -7,7 +7,7 @@ import type { EnrollmentData } from "../types";
 import { saveLeadFn } from "@/lib/lead-fns";
 
 export function ChatWidget() {
-  const { state, open, close, sendMessage, setEnrollmentData, confirmEnrollment } = useChatbot();
+  const { state, open, close, sendMessage, setEnrollmentData, confirmEnrollment, confirmLead } = useChatbot();
   const [minimized, setMinimized] = useState(false);
 
   const handleOpen = useCallback(() => {
@@ -40,30 +40,33 @@ export function ChatWidget() {
   const handleLeadSubmit = useCallback(
     (data: { name: string; phone: string }) => {
       setEnrollmentData(data);
-      sendMessage(`📞 Callback requested by ${data.name} (${data.phone})`);
       // Fire-and-forget: persist the lead with current profile intelligence.
       // Errors are swallowed intentionally — this must never break the chat flow.
-     saveLeadFn({
-      data: {
-        name: data.name,
-        phone: data.phone,
-        role: state.profile.role,
-        education: state.profile.education,
-        careerGoal: state.profile.careerGoal,
-        leadScore: state.profile.leadScore,
-        interests: state.profile.interests,
-        objections: state.profile.objections,
-      },
-    })
-    .then(() => {
-      console.log("Lead saved successfully");
-    })
-    .catch((err) => {
-      console.error("SAVE LEAD ERROR:", err);
-      alert(err instanceof Error ? err.message : JSON.stringify(err));
-    });
+      saveLeadFn({
+        data: {
+          name: data.name,
+          phone: data.phone,
+          role: state.profile.role,
+          education: state.profile.education,
+          careerGoal: state.profile.careerGoal,
+          leadScore: state.profile.leadScore,
+          interests: state.profile.interests,
+          objections: state.profile.objections,
+        },
+      })
+        .then(() => {
+          console.log("Lead saved successfully");
+        })
+        .catch((err) => {
+          console.error("SAVE LEAD ERROR:", err);
+        });
+      // Advance the conversation: show the main menu.
+      // Works for both the automatic post-onboarding gate and the manual
+      // "📞 Talk to Counselor" route — in both cases the right next step
+      // is to surface the main menu.
+      confirmLead();
     },
-    [setEnrollmentData, sendMessage, state.profile],
+    [setEnrollmentData, confirmLead, state.profile],
   );
 
   const unreadCount = minimized ? 1 : 0;

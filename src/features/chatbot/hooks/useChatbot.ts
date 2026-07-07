@@ -103,6 +103,10 @@ export function useChatbot() {
   // Always-current profile ref, same rationale — used to build the personalized
   // recommendation once role, education and careerGoal have all been collected.
   const profileRef = useRef<StudentProfile>(INITIAL_STATE.profile);
+  // Set to true while the automatic post-onboarding lead-capture gate is active.
+  // Prevents free-typed input from bypassing the form before it is submitted.
+  // Cleared by confirmLead(). NOT set for the manual "📞 Talk to Counselor" path.
+  const leadGateActive = useRef(false);
 
   const flushQueue = useCallback(async () => {
     if (processingRef.current) return;
@@ -181,6 +185,16 @@ export function useChatbot() {
           timestamp: new Date(),
         });
 
+        // Hard gate: while the post-onboarding lead-capture form is waiting for
+        // submission, ignore any typed input so the main menu cannot be reached
+        // by bypassing the form.
+        if (leadGateActive.current) {
+          await showBotResponse(
+            "Please fill in your name and phone number in the form above to continue 👆",
+          );
+          return;
+        }
+
         // Conversation profiling: welcome quick-reply captures the student's role,
         // then asks a follow-up education question, without touching the engine/parser.
         if (ROLE_QUICK_REPLIES.includes(userInput)) {
@@ -205,18 +219,25 @@ export function useChatbot() {
         }
 
         // Career-goal quick-reply captures the goal, shows a personalized
-        // recommendation built from the full profile, then returns to the main menu.
+        // recommendation built from the full profile, then gates the main menu
+        // behind the LeadCapture form. The main menu only appears after the
+        // form is submitted (via confirmLead).
         if (CAREER_GOAL_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, careerGoal: userInput };
           dispatch({ type: "SET_PROFILE_CAREER_GOAL", payload: userInput });
           dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
           await showBotResponse(buildPersonalizedRecommendation(profileRef.current));
 
-          const menuResponse = mainMenuAction();
-          await showBotResponse(menuResponse.content, { quickReplies: menuResponse.quickReplies });
+          // Automatically inject the lead-capture form — no quick replies so the
+          // user cannot bypass it. The main menu is shown only after submission.
+          await showBotResponse(
+            "🎯 You're on the right path!\n\nBefore we continue, leave your name and phone number and one of our AI Career Advisors will personally call you to help plan your roadmap.",
+            { component: "lead-capture" },
+          );
 
-          currentStateRef.current = "MAIN_MENU";
-          dispatch({ type: "SET_STATE", payload: "MAIN_MENU" });
+          leadGateActive.current = true;
+          currentStateRef.current = "CONTACT";
+          dispatch({ type: "SET_STATE", payload: "CONTACT" });
           return;
         }
 
@@ -286,6 +307,19 @@ export function useChatbot() {
     });
   }, [enqueue, showBotResponse]);
 
+  // Called by ChatWidget after a LeadCapture form submission. Advances the
+  // conversation to the main menu regardless of which flow triggered the form
+  // (automatic post-onboarding gate or manual "📞 Talk to Counselor" route).
+  const confirmLead = useCallback(() => {
+    leadGateActive.current = false; // lift the gate before showing menu
+    enqueue(async () => {
+      const menuResponse = mainMenuAction();
+      await showBotResponse(menuResponse.content, { quickReplies: menuResponse.quickReplies });
+      currentStateRef.current = "MAIN_MENU";
+      dispatch({ type: "SET_STATE", payload: "MAIN_MENU" });
+    });
+  }, [enqueue, showBotResponse]);
+
   return {
     state,
     open,
@@ -293,5 +327,6 @@ export function useChatbot() {
     sendMessage,
     setEnrollmentData,
     confirmEnrollment,
+    confirmLead,
   };
 }
