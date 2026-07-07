@@ -43,18 +43,25 @@ export function ChatWidget() {
       sendMessage(`📞 Callback requested by ${data.name} (${data.phone})`);
       // Fire-and-forget: persist the lead with current profile intelligence.
       // Errors are swallowed intentionally — this must never break the chat flow.
-      saveLeadFn({
-        data: {
-          name: data.name,
-          phone: data.phone,
-          role: state.profile.role,
-          education: state.profile.education,
-          careerGoal: state.profile.careerGoal,
-          leadScore: state.profile.leadScore,
-          interests: state.profile.interests,
-          objections: state.profile.objections,
-        },
-      }).catch(() => {});
+     saveLeadFn({
+      data: {
+        name: data.name,
+        phone: data.phone,
+        role: state.profile.role,
+        education: state.profile.education,
+        careerGoal: state.profile.careerGoal,
+        leadScore: state.profile.leadScore,
+        interests: state.profile.interests,
+        objections: state.profile.objections,
+      },
+    })
+    .then(() => {
+      console.log("Lead saved successfully");
+    })
+    .catch((err) => {
+      console.error("SAVE LEAD ERROR:", err);
+      alert(err instanceof Error ? err.message : JSON.stringify(err));
+    });
     },
     [setEnrollmentData, sendMessage, state.profile],
   );
