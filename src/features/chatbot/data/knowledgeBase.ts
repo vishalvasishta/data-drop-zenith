@@ -95,7 +95,341 @@ export const COURSE_INFO = {
   finalOutcome:
     "Students graduate with practical AI skills, an industry-ready portfolio, interview preparation, and career guidance for AI and Data Science roles.",
 };
+// ─────────────────────────────────────────────────────────────────────────────
+// COURSE FEATURES
+// High-level program highlights used throughout the chatbot.
+// ─────────────────────────────────────────────────────────────────────────────
 
+export interface CourseFeature {
+  id: string;
+  title: string;
+  description: string;
+  category:
+    | "learning"
+    | "career"
+    | "projects"
+    | "support"
+    | "placement"
+    | "community";
+}
+
+export const COURSE_FEATURES: CourseFeature[] = [
+  {
+    id: "live-classes",
+    title: "Live Interactive Classes",
+    description:
+      "Attend live weekend sessions where mentors teach concepts step-by-step and answer questions in real time.",
+    category: "learning",
+  },
+  {
+    id: "recordings",
+    title: "Class Recordings",
+    description:
+      "Every live class recording is shared so you can revise anytime.",
+    category: "learning",
+  },
+  {
+    id: "assignments",
+    title: "Assignments After Every Module",
+    description:
+      "Practice every concept with structured assignments designed to improve problem-solving skills.",
+    category: "learning",
+  },
+  {
+    id: "projects",
+    title: "Real Industry Projects",
+    description:
+      "Build production-style AI, Machine Learning and Generative AI projects that strengthen your portfolio.",
+    category: "projects",
+  },
+  {
+    id: "portfolio",
+    title: "Portfolio Building",
+    description:
+      "Create a professional GitHub portfolio showcasing your skills to recruiters.",
+    category: "projects",
+  },
+  {
+    id: "mentor-support",
+    title: "Mentor Support",
+    description:
+      "Get continuous guidance from experienced mentors whenever you get stuck.",
+    category: "support",
+  },
+  {
+    id: "doubt-support",
+    title: "Dedicated Doubt Support",
+    description:
+      "Ask unlimited questions during your learning journey.",
+    category: "support",
+  },
+  {
+    id: "resume",
+    title: "Resume Building",
+    description:
+      "Build an ATS-friendly resume that highlights your technical skills and projects.",
+    category: "career",
+  },
+  {
+    id: "linkedin",
+    title: "LinkedIn Profile Optimization",
+    description:
+      "Learn how to create a recruiter-friendly LinkedIn profile that attracts job opportunities.",
+    category: "career",
+  },
+  {
+    id: "mock-interviews",
+    title: "Mock Interviews",
+    description:
+      "Practice technical and HR interviews with personalized feedback.",
+    category: "placement",
+  },
+  {
+    id: "placement-guidance",
+    title: "Placement Guidance",
+    description:
+      "Receive complete guidance on job applications, interview preparation, and career planning.",
+    category: "placement",
+  },
+  {
+    id: "referrals",
+    title: "Referral Support",
+    description:
+      "Eligible students receive referrals through our hiring network whenever opportunities are available.",
+    category: "placement",
+  },
+  {
+    id: "community",
+    title: "Learning Community",
+    description:
+      "Become part of the DATADROP student community to network, collaborate and grow together.",
+    category: "community",
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+// COURSE FAQ DATABASE
+// Used for semantic FAQ search.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface FAQItem {
+  id: string;
+  category:
+    | "general"
+    | "learning"
+    | "curriculum"
+    | "projects"
+    | "placement"
+    | "certificate"
+    | "payment"
+    | "support"
+    | "eligibility";
+
+  question: string;
+  answer: string;
+
+  keywords: string[];
+}
+
+export const FAQS: FAQItem[] = [
+  {
+    id: "faq-live",
+    category: "learning",
+    question: "Are classes live?",
+    answer:
+      "Yes. Every weekend we conduct live interactive online classes where mentors teach concepts in real time and answer student questions.",
+    keywords: [
+      "live",
+      "classes",
+      "online",
+      "weekend",
+      "live class"
+    ],
+  },
+
+  {
+    id: "faq-recordings",
+    category: "learning",
+    question: "Will I get recordings?",
+    answer:
+      "Yes. Every live session is recorded and shared so you can watch it anytime for revision.",
+    keywords: [
+      "recording",
+      "recordings",
+      "video",
+      "miss class",
+      "watch later"
+    ],
+  },
+
+  {
+    id: "faq-language",
+    category: "general",
+    question: "What language is the course taught in?",
+    answer:
+      "Classes are taught in Telugu and English, making the concepts easy to understand for beginners.",
+    keywords: [
+      "language",
+      "telugu",
+      "english",
+      "medium"
+    ],
+  },
+
+  {
+    id: "faq-mode",
+    category: "general",
+    question: "Is the course online or offline?",
+    answer:
+      "The program is completely online with live weekend classes and recorded sessions.",
+    keywords: [
+      "online",
+      "offline",
+      "mode"
+    ],
+  },
+  {
+    id: "faq-beginner",
+    category: "eligibility",
+    question: "Can beginners join?",
+    answer:
+      "Absolutely. The course starts from the fundamentals and is designed for complete beginners.",
+    keywords: [
+      "beginner",
+      "fresher",
+      "zero knowledge",
+      "experience"
+    ],
+  },
+
+  {
+    id: "faq-coding",
+    category: "eligibility",
+    question: "Do I need coding knowledge?",
+    answer:
+      "No prior coding knowledge is required. Everything is taught from scratch.",
+    keywords: [
+      "coding",
+      "programming",
+      "python",
+      "experience"
+    ],
+  },
+
+  {
+    id: "faq-qualification",
+    category: "eligibility",
+    question: "Who can join?",
+    answer:
+      "The course is suitable for 12th pass students, degree students, fresh graduates, working professionals and career switchers.",
+    keywords: [
+      "eligibility",
+      "qualification",
+      "join",
+      "who can join"
+    ],
+  },
+  {
+    id: "faq-assignment",
+    category: "learning",
+    question: "Are assignments included?",
+    answer:
+      "Yes. Every module contains assignments to help you practice and strengthen your understanding.",
+    keywords: [
+      "assignment",
+      "assignments",
+      "practice"
+    ],
+  },
+
+  {
+    id: "faq-doubts",
+    category: "support",
+    question: "Can I ask doubts?",
+    answer:
+      "Yes. Students receive dedicated mentor and doubt support throughout the program.",
+    keywords: [
+      "doubt",
+      "mentor",
+      "support",
+      "help"
+    ],
+  },
+  {
+    id: "faq-projects",
+    category: "projects",
+    question: "Will I build projects?",
+    answer:
+      "Yes. Students build multiple real-world AI, Machine Learning and Generative AI projects during the program.",
+    keywords: [
+      "projects",
+      "portfolio",
+      "real projects"
+    ],
+  },
+  {
+    id: "faq-placement",
+    category: "placement",
+    question: "Do you provide placement support?",
+    answer:
+      "Yes. We provide placement guidance, resume building, LinkedIn optimization and mock interviews.",
+    keywords: [
+      "placement",
+      "job",
+      "interview"
+    ],
+  },
+
+  {
+    id: "faq-resume",
+    category: "placement",
+    question: "Will you help with resume?",
+    answer:
+      "Yes. Every student receives resume building and LinkedIn profile guidance.",
+    keywords: [
+      "resume",
+      "linkedin",
+      "cv"
+    ],
+  },
+  {
+    id: "faq-certificate",
+    category: "certificate",
+    question: "Will I receive a certificate?",
+    answer:
+      "Yes. Students who complete the program receive an industry-recognized DATADROP Certificate of Completion.",
+    keywords: [
+      "certificate",
+      "certification"
+    ],
+  },
+  {
+    id: "faq-fee",
+    category: "payment",
+    question: "What is the course fee?",
+    answer:
+      "The current course fee is ₹4,599.",
+    keywords: [
+      "fee",
+      "fees",
+      "price",
+      "cost"
+    ],
+  },
+
+  {
+    id: "faq-payment",
+    category: "payment",
+    question: "Which payment methods are accepted?",
+    answer:
+      "We accept UPI, Credit Card, Debit Card, Net Banking and Wallet payments.",
+    keywords: [
+      "payment",
+      "upi",
+      "credit card",
+      "debit card"
+    ],
+  },
+  ];
 export const CURRICULUM: CourseTopic[] = [
   // Phase 1 — Foundations
   {
