@@ -8,11 +8,9 @@ export const COURSE_INFO = {
   mode: "Live Online + Recorded",
   language: "Telugu & English",
   batchSize: "Max 40 students per batch",
-  nextBatch: "August 5, 2026",
+  nextBatch: "september 5, 2026",
   certificate: "Industry-recognised certificate of completion",
-  supportEmail: "support@datadrop.in",
-  counselorWhatsApp: "+91 98765 43210",
-  lmsUrl: "lms.datadrop.in",
+  counselorWhatsApp: "+91 8330961514",
 };
 
 // ── Curriculum — 28 modules across 5 phases ──────────────────────────────────
@@ -565,37 +563,30 @@ export const CAREER_PATHS: CareerPath[] = [
 export const BONUSES = [
   {
     title: "6 Mock Interviews",
-    value: "₹3,000",
     description: "1-on-1 sessions with senior ML engineers from top companies",
   },
   {
     title: "Resume & LinkedIn Makeover",
-    value: "₹1,500",
     description: "Personalised review and rewrite by a technical recruiter",
   },
   {
-    title: "100+ Interview Questions Pack",
-    value: "₹1,000",
+    title: "500+ Interview Questions Pack",
     description: "Curated ML, DL, SQL, and system design questions with model answers",
   },
   {
     title: "Private Discord Community",
-    value: "₹500",
     description: "Lifetime access to a community of 1,000+ AI professionals",
   },
   {
-    title: "3 Guest Sessions",
-    value: "₹2,000",
+    title: "6 Guest Sessions",
     description: "Live sessions with working AI engineers at Amazon, Microsoft, and startups",
   },
   {
     title: "Project Templates & Starter Kits",
-    value: "₹1,500",
     description: "25+ battle-tested project templates to fast-track your portfolio",
   },
   {
     title: "Placement Referral Network",
-    value: "₹3,000",
     description: "Direct introductions to hiring managers at 150+ partner companies",
   },
 ];
