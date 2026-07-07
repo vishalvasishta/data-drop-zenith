@@ -430,6 +430,224 @@ export const FAQS: FAQItem[] = [
     ],
   },
   ];
+// ─────────────────────────────────────────────────────────────────────────────
+// TOOLS & TECHNOLOGIES
+// Technologies covered during the program.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface CourseTool {
+  id: string;
+  name: string;
+  category:
+    | "Programming"
+    | "Data"
+    | "Machine Learning"
+    | "Deep Learning"
+    | "Generative AI"
+    | "Deployment"
+    | "Cloud"
+    | "Database"
+    | "Visualization";
+
+  description: string;
+  purpose: string;
+}
+
+export const COURSE_TOOLS: CourseTool[] = [{
+    id: "python",
+    name: "Python",
+    category: "Programming",
+    description: "The primary programming language used throughout the course.",
+    purpose: "Programming",
+  },
+
+  {
+    id: "sql",
+    name: "SQL",
+    category: "Database",
+    description: "Used to query and manage relational databases.",
+    purpose: "Database Management",
+  },
+
+  {
+    id: "git",
+    name: "Git",
+    category: "Programming",
+    description: "Version control used by software developers.",
+    purpose: "Source Code Management",
+  },
+
+  {
+    id: "github",
+    name: "GitHub",
+    category: "Programming",
+    description: "Platform to host and showcase projects.",
+    purpose: "Portfolio Building",
+  },
+                                           {
+                                             id: "numpy",
+                                             name: "NumPy",
+                                             category: "Data",
+                                             description: "Numerical computing library for Python.",
+                                             purpose: "Scientific Computing",
+                                           },
+
+                                           {
+                                             id: "pandas",
+                                             name: "Pandas",
+                                             category: "Data",
+                                             description: "Library used for data cleaning and analysis.",
+                                             purpose: "Data Analysis",
+                                           },
+
+                                           {
+                                             id: "matplotlib",
+                                             name: "Matplotlib",
+                                             category: "Visualization",
+                                             description: "Visualization library.",
+                                             purpose: "Charts",
+                                           },
+
+                                           {
+                                             id: "seaborn",
+                                             name: "Seaborn",
+                                             category: "Visualization",
+                                             description: "Advanced statistical visualization library.",
+                                             purpose: "Data Visualization",
+                                           },
+
+                                           {
+                                             id: "plotly",
+                                             name: "Plotly",
+                                             category: "Visualization",
+                                             description: "Interactive dashboard library.",
+                                             purpose: "Interactive Charts",
+                                           },
+                                           {
+                                             id: "scikit",
+                                             name: "Scikit-learn",
+                                             category: "Machine Learning",
+                                             description: "Industry standard ML library.",
+                                             purpose: "Machine Learning",
+                                           },
+
+                                           {
+                                             id: "xgboost",
+                                             name: "XGBoost",
+                                             category: "Machine Learning",
+                                             description: "High-performance gradient boosting library.",
+                                             purpose: "Prediction Models",
+                                           },
+                                           {
+                                             id: "tensorflow",
+                                             name: "TensorFlow",
+                                             category: "Deep Learning",
+                                             description: "Deep learning framework developed by Google.",
+                                             purpose: "Deep Learning",
+                                           },
+
+                                           {
+                                             id: "pytorch",
+                                             name: "PyTorch",
+                                             category: "Deep Learning",
+                                             description: "Deep learning framework widely used in research and industry.",
+                                             purpose: "AI Development",
+                                           },
+
+                                           {
+                                             id: "opencv",
+                                             name: "OpenCV",
+                                             category: "Deep Learning",
+                                             description: "Computer Vision library.",
+                                             purpose: "Image Processing",
+                                           },
+                                           {
+                                             id: "openai",
+                                             name: "OpenAI API",
+                                             category: "Generative AI",
+                                             description: "API used for building AI applications powered by GPT models.",
+                                             purpose: "LLM Development",
+                                           },
+
+                                           {
+                                             id: "gemini",
+                                             name: "Google Gemini API",
+                                             category: "Generative AI",
+                                             description: "Google's Generative AI API.",
+                                             purpose: "LLM Development",
+                                           },
+
+                                           {
+                                             id: "langchain",
+                                             name: "LangChain",
+                                             category: "Generative AI",
+                                             description: "Framework for building AI applications using LLMs.",
+                                             purpose: "AI Applications",
+                                           },
+
+                                           {
+                                             id: "langgraph",
+                                             name: "LangGraph",
+                                             category: "Generative AI",
+                                             description: "Framework for building AI Agents.",
+                                             purpose: "AI Agents",
+                                           },
+
+                                           {
+                                             id: "pinecone",
+                                             name: "Pinecone",
+                                             category: "Generative AI",
+                                             description: "Cloud Vector Database.",
+                                             purpose: "RAG Systems",
+                                           },
+
+                                           {
+                                             id: "faiss",
+                                             name: "FAISS",
+                                             category: "Generative AI",
+                                             description: "Vector similarity search library.",
+                                             purpose: "Semantic Search",
+                                           },
+                                           {
+                                             id: "fastapi",
+                                             name: "FastAPI",
+                                             category: "Deployment",
+                                             description: "Python framework for deploying AI models.",
+                                             purpose: "API Development",
+                                           },
+
+                                           {
+                                             id: "docker",
+                                             name: "Docker",
+                                             category: "Deployment",
+                                             description: "Containerization platform.",
+                                             purpose: "Deployment",
+                                           },
+                                           {
+                                             id: "aws",
+                                             name: "AWS SageMaker",
+                                             category: "Cloud",
+                                             description: "Amazon's Machine Learning platform.",
+                                             purpose: "Cloud AI",
+                                           },
+
+                                           {
+                                             id: "vertex",
+                                             name: "Google Vertex AI",
+                                             category: "Cloud",
+                                             description: "Google Cloud AI platform.",
+                                             purpose: "Cloud AI",
+                                           },
+
+                                           {
+                                             id: "azure",
+                                             name: "Azure Machine Learning",
+                                             category: "Cloud",
+                                             description: "Microsoft's AI platform.",
+                                             purpose: "Cloud AI",
+                                           },
+                                           ];
+
 export const CURRICULUM: CourseTopic[] = [
   // Phase 1 — Foundations
   {
