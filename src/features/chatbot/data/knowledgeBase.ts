@@ -105,12 +105,12 @@ export interface CourseFeature {
   title: string;
   description: string;
   category:
-    | "learning"
-    | "career"
-    | "projects"
-    | "support"
-    | "placement"
-    | "community";
+  | "learning"
+  | "career"
+  | "projects"
+  | "support"
+  | "placement"
+  | "community";
 }
 
 export const COURSE_FEATURES: CourseFeature[] = [
@@ -214,15 +214,15 @@ export const COURSE_FEATURES: CourseFeature[] = [
 export interface FAQItem {
   id: string;
   category:
-    | "general"
-    | "learning"
-    | "curriculum"
-    | "projects"
-    | "placement"
-    | "certificate"
-    | "payment"
-    | "support"
-    | "eligibility";
+  | "general"
+  | "learning"
+  | "curriculum"
+  | "projects"
+  | "placement"
+  | "certificate"
+  | "payment"
+  | "support"
+  | "eligibility";
 
   question: string;
   answer: string;
@@ -429,7 +429,7 @@ export const FAQS: FAQItem[] = [
       "debit card"
     ],
   },
-  ];
+];
 // ─────────────────────────────────────────────────────────────────────────────
 // TOOLS & TECHNOLOGIES
 // Technologies covered during the program.
@@ -439,214 +439,214 @@ export interface CourseTool {
   id: string;
   name: string;
   category:
-    | "Programming"
-    | "Data"
-    | "Machine Learning"
-    | "Deep Learning"
-    | "Generative AI"
-    | "Deployment"
-    | "Cloud"
-    | "Database"
-    | "Visualization";
+  | "Programming"
+  | "Data"
+  | "Machine Learning"
+  | "Deep Learning"
+  | "Generative AI"
+  | "Deployment"
+  | "Cloud"
+  | "Database"
+  | "Visualization";
 
   description: string;
   purpose: string;
 }
 
 export const COURSE_TOOLS: CourseTool[] = [{
-    id: "python",
-    name: "Python",
-    category: "Programming",
-    description: "The primary programming language used throughout the course.",
-    purpose: "Programming",
-  },
+  id: "python",
+  name: "Python",
+  category: "Programming",
+  description: "The primary programming language used throughout the course.",
+  purpose: "Programming",
+},
 
-  {
-    id: "sql",
-    name: "SQL",
-    category: "Database",
-    description: "Used to query and manage relational databases.",
-    purpose: "Database Management",
-  },
+{
+  id: "sql",
+  name: "SQL",
+  category: "Database",
+  description: "Used to query and manage relational databases.",
+  purpose: "Database Management",
+},
 
-  {
-    id: "git",
-    name: "Git",
-    category: "Programming",
-    description: "Version control used by software developers.",
-    purpose: "Source Code Management",
-  },
+{
+  id: "git",
+  name: "Git",
+  category: "Programming",
+  description: "Version control used by software developers.",
+  purpose: "Source Code Management",
+},
 
-  {
-    id: "github",
-    name: "GitHub",
-    category: "Programming",
-    description: "Platform to host and showcase projects.",
-    purpose: "Portfolio Building",
-  },
-                                           {
-                                             id: "numpy",
-                                             name: "NumPy",
-                                             category: "Data",
-                                             description: "Numerical computing library for Python.",
-                                             purpose: "Scientific Computing",
-                                           },
+{
+  id: "github",
+  name: "GitHub",
+  category: "Programming",
+  description: "Platform to host and showcase projects.",
+  purpose: "Portfolio Building",
+},
+{
+  id: "numpy",
+  name: "NumPy",
+  category: "Data",
+  description: "Numerical computing library for Python.",
+  purpose: "Scientific Computing",
+},
 
-                                           {
-                                             id: "pandas",
-                                             name: "Pandas",
-                                             category: "Data",
-                                             description: "Library used for data cleaning and analysis.",
-                                             purpose: "Data Analysis",
-                                           },
+{
+  id: "pandas",
+  name: "Pandas",
+  category: "Data",
+  description: "Library used for data cleaning and analysis.",
+  purpose: "Data Analysis",
+},
 
-                                           {
-                                             id: "matplotlib",
-                                             name: "Matplotlib",
-                                             category: "Visualization",
-                                             description: "Visualization library.",
-                                             purpose: "Charts",
-                                           },
+{
+  id: "matplotlib",
+  name: "Matplotlib",
+  category: "Visualization",
+  description: "Visualization library.",
+  purpose: "Charts",
+},
 
-                                           {
-                                             id: "seaborn",
-                                             name: "Seaborn",
-                                             category: "Visualization",
-                                             description: "Advanced statistical visualization library.",
-                                             purpose: "Data Visualization",
-                                           },
+{
+  id: "seaborn",
+  name: "Seaborn",
+  category: "Visualization",
+  description: "Advanced statistical visualization library.",
+  purpose: "Data Visualization",
+},
 
-                                           {
-                                             id: "plotly",
-                                             name: "Plotly",
-                                             category: "Visualization",
-                                             description: "Interactive dashboard library.",
-                                             purpose: "Interactive Charts",
-                                           },
-                                           {
-                                             id: "scikit",
-                                             name: "Scikit-learn",
-                                             category: "Machine Learning",
-                                             description: "Industry standard ML library.",
-                                             purpose: "Machine Learning",
-                                           },
+{
+  id: "plotly",
+  name: "Plotly",
+  category: "Visualization",
+  description: "Interactive dashboard library.",
+  purpose: "Interactive Charts",
+},
+{
+  id: "scikit",
+  name: "Scikit-learn",
+  category: "Machine Learning",
+  description: "Industry standard ML library.",
+  purpose: "Machine Learning",
+},
 
-                                           {
-                                             id: "xgboost",
-                                             name: "XGBoost",
-                                             category: "Machine Learning",
-                                             description: "High-performance gradient boosting library.",
-                                             purpose: "Prediction Models",
-                                           },
-                                           {
-                                             id: "tensorflow",
-                                             name: "TensorFlow",
-                                             category: "Deep Learning",
-                                             description: "Deep learning framework developed by Google.",
-                                             purpose: "Deep Learning",
-                                           },
+{
+  id: "xgboost",
+  name: "XGBoost",
+  category: "Machine Learning",
+  description: "High-performance gradient boosting library.",
+  purpose: "Prediction Models",
+},
+{
+  id: "tensorflow",
+  name: "TensorFlow",
+  category: "Deep Learning",
+  description: "Deep learning framework developed by Google.",
+  purpose: "Deep Learning",
+},
 
-                                           {
-                                             id: "pytorch",
-                                             name: "PyTorch",
-                                             category: "Deep Learning",
-                                             description: "Deep learning framework widely used in research and industry.",
-                                             purpose: "AI Development",
-                                           },
+{
+  id: "pytorch",
+  name: "PyTorch",
+  category: "Deep Learning",
+  description: "Deep learning framework widely used in research and industry.",
+  purpose: "AI Development",
+},
 
-                                           {
-                                             id: "opencv",
-                                             name: "OpenCV",
-                                             category: "Deep Learning",
-                                             description: "Computer Vision library.",
-                                             purpose: "Image Processing",
-                                           },
-                                           {
-                                             id: "openai",
-                                             name: "OpenAI API",
-                                             category: "Generative AI",
-                                             description: "API used for building AI applications powered by GPT models.",
-                                             purpose: "LLM Development",
-                                           },
+{
+  id: "opencv",
+  name: "OpenCV",
+  category: "Deep Learning",
+  description: "Computer Vision library.",
+  purpose: "Image Processing",
+},
+{
+  id: "openai",
+  name: "OpenAI API",
+  category: "Generative AI",
+  description: "API used for building AI applications powered by GPT models.",
+  purpose: "LLM Development",
+},
 
-                                           {
-                                             id: "gemini",
-                                             name: "Google Gemini API",
-                                             category: "Generative AI",
-                                             description: "Google's Generative AI API.",
-                                             purpose: "LLM Development",
-                                           },
+{
+  id: "gemini",
+  name: "Google Gemini API",
+  category: "Generative AI",
+  description: "Google's Generative AI API.",
+  purpose: "LLM Development",
+},
 
-                                           {
-                                             id: "langchain",
-                                             name: "LangChain",
-                                             category: "Generative AI",
-                                             description: "Framework for building AI applications using LLMs.",
-                                             purpose: "AI Applications",
-                                           },
+{
+  id: "langchain",
+  name: "LangChain",
+  category: "Generative AI",
+  description: "Framework for building AI applications using LLMs.",
+  purpose: "AI Applications",
+},
 
-                                           {
-                                             id: "langgraph",
-                                             name: "LangGraph",
-                                             category: "Generative AI",
-                                             description: "Framework for building AI Agents.",
-                                             purpose: "AI Agents",
-                                           },
+{
+  id: "langgraph",
+  name: "LangGraph",
+  category: "Generative AI",
+  description: "Framework for building AI Agents.",
+  purpose: "AI Agents",
+},
 
-                                           {
-                                             id: "pinecone",
-                                             name: "Pinecone",
-                                             category: "Generative AI",
-                                             description: "Cloud Vector Database.",
-                                             purpose: "RAG Systems",
-                                           },
+{
+  id: "pinecone",
+  name: "Pinecone",
+  category: "Generative AI",
+  description: "Cloud Vector Database.",
+  purpose: "RAG Systems",
+},
 
-                                           {
-                                             id: "faiss",
-                                             name: "FAISS",
-                                             category: "Generative AI",
-                                             description: "Vector similarity search library.",
-                                             purpose: "Semantic Search",
-                                           },
-                                           {
-                                             id: "fastapi",
-                                             name: "FastAPI",
-                                             category: "Deployment",
-                                             description: "Python framework for deploying AI models.",
-                                             purpose: "API Development",
-                                           },
+{
+  id: "faiss",
+  name: "FAISS",
+  category: "Generative AI",
+  description: "Vector similarity search library.",
+  purpose: "Semantic Search",
+},
+{
+  id: "fastapi",
+  name: "FastAPI",
+  category: "Deployment",
+  description: "Python framework for deploying AI models.",
+  purpose: "API Development",
+},
 
-                                           {
-                                             id: "docker",
-                                             name: "Docker",
-                                             category: "Deployment",
-                                             description: "Containerization platform.",
-                                             purpose: "Deployment",
-                                           },
-                                           {
-                                             id: "aws",
-                                             name: "AWS SageMaker",
-                                             category: "Cloud",
-                                             description: "Amazon's Machine Learning platform.",
-                                             purpose: "Cloud AI",
-                                           },
+{
+  id: "docker",
+  name: "Docker",
+  category: "Deployment",
+  description: "Containerization platform.",
+  purpose: "Deployment",
+},
+{
+  id: "aws",
+  name: "AWS SageMaker",
+  category: "Cloud",
+  description: "Amazon's Machine Learning platform.",
+  purpose: "Cloud AI",
+},
 
-                                           {
-                                             id: "vertex",
-                                             name: "Google Vertex AI",
-                                             category: "Cloud",
-                                             description: "Google Cloud AI platform.",
-                                             purpose: "Cloud AI",
-                                           },
+{
+  id: "vertex",
+  name: "Google Vertex AI",
+  category: "Cloud",
+  description: "Google Cloud AI platform.",
+  purpose: "Cloud AI",
+},
 
-                                           {
-                                             id: "azure",
-                                             name: "Azure Machine Learning",
-                                             category: "Cloud",
-                                             description: "Microsoft's AI platform.",
-                                             purpose: "Cloud AI",
-                                           },
-                                           ];
+{
+  id: "azure",
+  name: "Azure Machine Learning",
+  category: "Cloud",
+  description: "Microsoft's AI platform.",
+  purpose: "Cloud AI",
+},
+];
 
 export const CURRICULUM: CourseTopic[] = [
   // Phase 1 — Foundations
@@ -1210,5 +1210,937 @@ export const BONUSES = [
   {
     title: "Placement Referral Network",
     description: "Direct introductions to hiring managers at 150+ partner companies",
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+// AI & DATA CAREER KNOWLEDGE
+// Used for career guidance and recommendation.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface CareerRoleKnowledge {
+  id: string;
+  title: string;
+  category:
+  | "Data"
+  | "Machine Learning"
+  | "Deep Learning"
+  | "Generative AI"
+  | "Cloud"
+  | "Product"
+  | "Research";
+
+  description: string;
+
+  whoIsItFor: string;
+
+  dailyWork: string[];
+
+  skills: string[];
+
+  beginnerFriendly: boolean;
+
+  averageSalary: string;
+
+  experienceRange: string;
+
+  companies: string[];
+
+  futureDemand: "Very High" | "High" | "Growing";
+}
+
+export const CAREER_KNOWLEDGE: CareerRoleKnowledge[] = [
+  {
+    id: "data-analyst",
+
+    title: "Data Analyst",
+
+    category: "Data",
+
+    description:
+      "Analyze business data, prepare reports, create dashboards, and help companies make better decisions.",
+
+    whoIsItFor:
+      "Students who enjoy numbers, Excel, SQL and business insights.",
+
+    dailyWork: [
+      "Analyze datasets",
+      "Create dashboards",
+      "Prepare reports",
+      "Identify trends",
+      "Present insights"
+    ],
+
+    skills: [
+      "Python",
+      "SQL",
+      "Pandas",
+      "Excel",
+      "Power BI"
+    ],
+
+    beginnerFriendly: true,
+
+    averageSalary: "₹5–10 LPA",
+
+    experienceRange: "0–5 Years",
+
+    companies: [
+      "Infosys",
+      "TCS",
+      "Accenture",
+      "Amazon"
+    ],
+
+    futureDemand: "Very High",
+  },
+  {
+    id: "data-scientist",
+
+    title: "Data Scientist",
+
+    category: "Machine Learning",
+
+    description:
+      "Build predictive models using machine learning and statistics to solve business problems.",
+
+    whoIsItFor:
+      "Students interested in analytics, mathematics and machine learning.",
+
+    dailyWork: [
+      "Build ML models",
+      "Clean datasets",
+      "Feature engineering",
+      "Experimentation",
+      "Business analysis"
+    ],
+
+    skills: [
+      "Python",
+      "SQL",
+      "Statistics",
+      "Machine Learning",
+      "Scikit-learn"
+    ],
+
+    beginnerFriendly: true,
+
+    averageSalary: "₹8–18 LPA",
+
+    experienceRange: "0–6 Years",
+
+    companies: [
+      "PhonePe",
+      "Groww",
+      "Razorpay",
+      "Flipkart"
+    ],
+
+    futureDemand: "Very High",
+  },
+  {
+    id: "ml-engineer",
+
+    title: "Machine Learning Engineer",
+
+    category: "Machine Learning",
+
+    description:
+      "Develop, train and deploy machine learning models used in production applications.",
+
+    whoIsItFor:
+      "Students passionate about AI engineering and software development.",
+
+    dailyWork: [
+      "Train models",
+      "Deploy APIs",
+      "Improve accuracy",
+      "Model monitoring",
+      "Feature engineering"
+    ],
+
+    skills: [
+      "Python",
+      "PyTorch",
+      "TensorFlow",
+      "Docker",
+      "FastAPI"
+    ],
+
+    beginnerFriendly: true,
+
+    averageSalary: "₹8–20 LPA",
+
+    experienceRange: "0–6 Years",
+
+    companies: [
+      "Amazon",
+      "Swiggy",
+      "Flipkart",
+      "CRED"
+    ],
+
+    futureDemand: "Very High",
+  },
+  {
+    id: "llm-engineer",
+
+    title: "LLM Engineer",
+
+    category: "Generative AI",
+
+    description:
+      "Build AI applications using Large Language Models like GPT, Gemini and Llama.",
+
+    whoIsItFor:
+      "Students interested in Generative AI and modern AI applications.",
+
+    dailyWork: [
+      "Prompt Engineering",
+      "RAG",
+      "Fine Tuning",
+      "Build Chatbots",
+      "Deploy AI APIs"
+    ],
+
+    skills: [
+      "Python",
+      "LangChain",
+      "OpenAI API",
+      "Vector Databases",
+      "Prompt Engineering"
+    ],
+
+    beginnerFriendly: true,
+
+    averageSalary: "₹15–35 LPA",
+
+    experienceRange: "0–8 Years",
+
+    companies: [
+      "Microsoft",
+      "Google",
+      "AI Startups",
+      "OpenAI Partners"
+    ],
+
+    futureDemand: "Very High",
+  },
+  {
+    id: "computer-vision",
+
+    title: "Computer Vision Engineer",
+
+    category: "Deep Learning",
+
+    description:
+      "Develop AI systems that understand images and videos.",
+
+    whoIsItFor:
+      "Students interested in image processing and Deep Learning.",
+
+    dailyWork: [
+      "Object Detection",
+      "Image Classification",
+      "Model Training",
+      "Deploy Vision Models"
+    ],
+
+    skills: [
+      "OpenCV",
+      "YOLO",
+      "PyTorch",
+      "CNN"
+    ],
+
+    beginnerFriendly: false,
+
+    averageSalary: "₹10–22 LPA",
+
+    experienceRange: "2–8 Years",
+
+    companies: [
+      "Healthcare AI",
+      "Manufacturing",
+      "Retail AI"
+    ],
+
+    futureDemand: "High",
+  },
+  {
+    id: "mlops",
+
+    title: "MLOps Engineer",
+
+    category: "Cloud",
+
+    description:
+      "Deploy, monitor and maintain Machine Learning systems in production.",
+
+    whoIsItFor:
+      "Students interested in cloud computing and deployment.",
+
+    dailyWork: [
+      "Deploy models",
+      "CI/CD",
+      "Docker",
+      "Cloud",
+      "Monitoring"
+    ],
+
+    skills: [
+      "Docker",
+      "AWS",
+      "MLflow",
+      "Kubernetes",
+      "Python"
+    ],
+
+    beginnerFriendly: false,
+
+    averageSalary: "₹12–28 LPA",
+
+    experienceRange: "2–8 Years",
+
+    companies: [
+      "Amazon",
+      "Infosys",
+      "Flipkart",
+      "Microsoft"
+    ],
+
+    futureDemand: "Very High",
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+// COURSE FEATURES
+// Everything included with the program.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface CourseFeature {
+  id: string;
+
+  title: string;
+
+  category:
+  | "Learning"
+  | "Support"
+  | "Projects"
+  | "Career"
+  | "Community"
+  | "Certification"
+  | "Resources";
+
+  description: string;
+
+  benefits: string[];
+
+  included: boolean;
+}
+
+export const COURSE_FEATURES = [
+  {
+    id: "live-classes",
+
+    title: "Live Interactive Classes",
+
+    category: "Learning",
+
+    description:
+      "Weekend live online classes with experienced mentors.",
+
+    benefits: [
+      "Ask doubts live",
+      "Interactive sessions",
+      "Learn step-by-step",
+      "Real-time coding"
+    ],
+
+    included: true,
+  },
+  {
+    id: "recordings",
+
+    title: "Lifetime Recordings",
+
+    category: "Learning",
+
+    description:
+      "Every live class recording is provided for revision.",
+
+    benefits: [
+      "Watch anytime",
+      "Unlimited revisions",
+      "Never miss a class"
+    ],
+
+    included: true,
+  },
+  {
+    id: "assignments",
+
+    title: "Assignments",
+
+    category: "Learning",
+
+    description:
+      "Practice assignments after every major module.",
+
+    benefits: [
+      "Hands-on learning",
+      "Better understanding",
+      "Skill improvement"
+    ],
+
+    included: true,
+  },
+  {
+    id: "mentor-support",
+
+    title: "Mentor Support",
+
+    category: "Support",
+
+    description:
+      "Dedicated mentor support throughout the program.",
+
+    benefits: [
+      "Ask unlimited doubts",
+      "Personal guidance",
+      "Technical help"
+    ],
+
+    included: true,
+  },
+  {
+    id: "projects",
+
+    title: "Real World Projects",
+
+    category: "Projects",
+
+    description:
+      "Build industry-level AI projects for your portfolio.",
+
+    benefits: [
+      "Portfolio",
+      "Hands-on experience",
+      "Interview preparation"
+    ],
+
+    included: true,
+  },
+  {
+    id: "resume",
+
+    title: "Resume Building",
+
+    category: "Career",
+
+    description:
+      "Professional resume creation and optimization.",
+
+    benefits: [
+      "ATS Friendly Resume",
+      "Portfolio Guidance",
+      "LinkedIn Optimization"
+    ],
+
+    included: true,
+  },
+  {
+    id: "mock",
+
+    title: "Mock Interviews",
+
+    category: "Career",
+
+    description:
+      "Interview practice with detailed feedback.",
+
+    benefits: [
+      "Confidence Building",
+      "Technical Interview Practice",
+      "HR Interview Preparation"
+    ],
+
+    included: true,
+  },
+  {
+    id: "placement",
+
+    title: "Placement Assistance",
+
+    category: "Career",
+
+    description:
+      "Career guidance and placement assistance.",
+
+    benefits: [
+      "Interview Opportunities",
+      "Referral Network",
+      "Career Guidance"
+    ],
+
+    included: true,
+  },
+  {
+    id: "certificate",
+
+    title: "Certificate",
+
+    category: "Certification",
+
+    description:
+      "Industry-recognized course completion certificate.",
+
+    benefits: [
+      "Portfolio Value",
+      "Resume Addition",
+      "Professional Recognition"
+    ],
+
+    included: true,
+  },
+  {
+    id: "community",
+
+    title: "Private Student Community",
+
+    category: "Community",
+
+    description:
+      "Join a community of learners and mentors.",
+
+    benefits: [
+      "Networking",
+      "Peer Learning",
+      "Career Discussions"
+    ],
+
+    included: true,
+  },
+  {
+    id: "resources",
+
+    title: "Learning Resources",
+
+    category: "Resources",
+
+    description:
+      "Notes, templates, source code and additional study material.",
+
+    benefits: [
+      "PDF Notes",
+      "Source Code",
+      "Cheat Sheets",
+      "Practice Datasets"
+    ],
+
+    included: true,
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+// OBJECTION HANDLING KNOWLEDGE
+// Common student concerns and recommended responses.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface ObjectionKnowledge {
+  id: string;
+
+  objection: string;
+
+  category:
+  | "Fees"
+  | "Time"
+  | "Difficulty"
+  | "Placement"
+  | "Eligibility"
+  | "Confidence"
+  | "Trust";
+
+  response: string;
+
+  reassurance: string;
+
+  action: string;
+
+  keywords: string[];
+}
+
+export const OBJECTION_KNOWLEDGE: ObjectionKnowledge[] = [
+  {
+    id: "fee-high",
+
+    objection: "The course fee is too high.",
+
+    category: "Fees",
+
+    response:
+      "Learning AI is an investment in your career. The program is designed to provide practical skills, live mentoring, projects, and career support at an affordable fee.",
+
+    reassurance:
+      "Many students recover the course fee with their first job or internship.",
+
+    action:
+      "Speak with a counselor to understand the complete value included in the program.",
+
+    keywords: [
+      "expensive",
+      "costly",
+      "fee high",
+      "price",
+      "cost"
+    ],
+  },
+  {
+    id: "coding",
+
+    objection: "I don't know coding.",
+
+    category: "Difficulty",
+
+    response:
+      "No worries. The course starts from Python basics and assumes no prior programming knowledge.",
+
+    reassurance:
+      "Thousands of successful learners began without any coding experience.",
+
+    action:
+      "Start with the beginner-friendly foundation modules.",
+
+    keywords: [
+      "coding",
+      "programming",
+      "python",
+      "zero knowledge",
+      "beginner"
+    ],
+  },
+  {
+    id: "non-it",
+
+    objection: "I am from a non-IT background.",
+
+    category: "Eligibility",
+
+    response:
+      "Students from commerce, arts, science, mechanical, civil, MBA, B.Com, B.Sc., and many other backgrounds have successfully transitioned into AI careers.",
+
+    reassurance:
+      "Your background does not prevent you from learning AI if you are willing to practice consistently.",
+
+    action:
+      "Focus on the foundational modules before moving to advanced topics.",
+
+    keywords: [
+      "non it",
+      "commerce",
+      "civil",
+      "mechanical",
+      "arts",
+      "mba"
+    ],
+  },
+  {
+    id: "time",
+
+    objection: "I don't have enough time.",
+
+    category: "Time",
+
+    response:
+      "Weekend live classes and recorded sessions are designed to help students balance learning with college or work.",
+
+    reassurance:
+      "You can learn at your own pace using the recordings whenever needed.",
+
+    action:
+      "Plan a weekly study schedule of a few focused hours.",
+
+    keywords: [
+      "busy",
+      "time",
+      "working",
+      "college",
+      "office"
+    ],
+  },
+  {
+    id: "placement",
+
+    objection: "Will I really get a job?",
+
+    category: "Placement",
+
+    response:
+      "No institute can honestly guarantee a job. However, the program provides practical projects, portfolio development, resume guidance, mock interviews, and placement assistance to improve your job readiness.",
+
+    reassurance:
+      "Your results depend on consistent learning, project work, and interview preparation.",
+
+    action:
+      "Complete the curriculum, build your portfolio, and actively participate in placement activities.",
+
+    keywords: [
+      "job",
+      "placement",
+      "guarantee",
+      "interview"
+    ],
+  },
+  {
+    id: "english",
+
+    objection: "My English is not good.",
+
+    category: "Confidence",
+
+    response:
+      "The course is taught in Telugu and English so concepts are easier to understand.",
+
+    reassurance:
+      "Technical skills matter much more than perfect spoken English when you are learning.",
+
+    action:
+      "Focus on building technical knowledge first and improve communication gradually.",
+
+    keywords: [
+      "english",
+      "communication",
+      "language"
+    ],
+  },
+  {
+    id: "age",
+
+    objection: "Am I too old to learn AI?",
+
+    category: "Confidence",
+
+    response:
+      "AI can be learned by anyone who is willing to practice consistently. People from different age groups successfully transition into technology careers.",
+
+    reassurance:
+      "Learning ability is more important than age.",
+
+    action:
+      "Start with the fundamentals and progress step by step.",
+
+    keywords: [
+      "age",
+      "old",
+      "late"
+    ],
+  },
+  {
+    id: "trust",
+
+    objection: "How do I know this course is genuine?",
+
+    category: "Trust",
+
+    response:
+      "You can review the curriculum, projects, student testimonials, and speak directly with a counselor before making a decision.",
+
+    reassurance:
+      "We encourage students to ask questions and understand the program before enrolling.",
+
+    action:
+      "Contact a counselor for complete details and clarification.",
+
+    keywords: [
+      "fake",
+      "genuine",
+      "real",
+      "trust",
+      "scam"
+    ],
+  },
+];
+// ─────────────────────────────────────────────────────────────────────────────
+// QUESTION KNOWLEDGE BASE
+// Natural language questions that students frequently ask.
+// Parser can search keywords before falling back to FAQs.
+// ─────────────────────────────────────────────────────────────────────────────
+
+export interface QuestionKnowledge {
+  id: string;
+
+  question: string;
+
+  answer: string;
+
+  keywords: string[];
+
+  category:
+  | "Course"
+  | "Classes"
+  | "Eligibility"
+  | "Projects"
+  | "Placement"
+  | "Certification"
+  | "Support"
+  | "Payment";
+}
+
+export const QUESTION_KNOWLEDGE: QuestionKnowledge[] = [
+  {
+    id: "recordings",
+
+    question: "Will I get recordings?",
+
+    answer:
+      "Yes. Recordings of every live class are provided so you can revise anytime or catch up if you miss a session.",
+
+    keywords: [
+      "recording",
+      "recordings",
+      "video",
+      "videos",
+      "miss class",
+      "missed class",
+      "watch later"
+    ],
+
+    category: "Classes",
+  },
+  {
+    id: "assignments",
+
+    question: "Are assignments included?",
+
+    answer:
+      "Yes. Every major module includes assignments to help you practice and strengthen your understanding.",
+
+    keywords: [
+      "assignment",
+      "assignments",
+      "practice",
+      "homework"
+    ],
+
+    category: "Course",
+  },
+  {
+    id: "certificate",
+
+    question: "Will I get a certificate?",
+
+    answer:
+      "Yes. After successfully completing the program, you'll receive an industry-recognized course completion certificate.",
+
+    keywords: [
+      "certificate",
+      "certification",
+      "completion certificate"
+    ],
+
+    category: "Certification",
+  },
+  {
+    id: "mentor",
+
+    question: "Will I get mentor support?",
+
+    answer:
+      "Yes. Mentors are available to help you with doubts, assignments, projects, and learning guidance throughout the program.",
+
+    keywords: [
+      "mentor",
+      "support",
+      "doubt",
+      "help",
+      "guidance"
+    ],
+
+    category: "Support",
+  },
+  {
+    id: "weekend",
+
+    question: "Are classes on weekends?",
+
+    answer:
+      "Yes. The program is designed primarily with weekend live sessions so students and working professionals can attend comfortably.",
+
+    keywords: [
+      "weekend",
+      "saturday",
+      "sunday",
+      "weekends"
+    ],
+
+    category: "Classes",
+  },
+  {
+    id: "beginner",
+
+    question: "Can beginners join?",
+
+    answer:
+      "Absolutely. The course starts from Python fundamentals and assumes no prior coding experience.",
+
+    keywords: [
+      "beginner",
+      "fresher",
+      "new",
+      "zero",
+      "no coding",
+      "no experience"
+    ],
+
+    category: "Eligibility",
+  },
+  {
+    id: "projects",
+
+    question: "How many projects will I build?",
+
+    answer:
+      "You'll work on multiple hands-on projects throughout the course, ranging from data analysis to machine learning and Generative AI applications.",
+
+    keywords: [
+      "project",
+      "projects",
+      "portfolio"
+    ],
+
+    category: "Projects",
+  },
+  {
+    id: "placement",
+
+    question: "Do you provide placement assistance?",
+
+    answer:
+      "Yes. The program includes resume guidance, mock interviews, portfolio development, and placement assistance to help you become job-ready.",
+
+    keywords: [
+      "placement",
+      "job",
+      "career",
+      "interview"
+    ],
+
+    category: "Placement",
+  },
+  {
+    id: "payment",
+
+    question: "Can I pay online?",
+
+    answer:
+      "Yes. You can complete your enrollment securely through our online payment process. Contact a counselor if you need assistance.",
+
+    keywords: [
+      "payment",
+      "pay",
+      "upi",
+      "online payment",
+      "card",
+      "emi"
+    ],
+
+    category: "Payment",
   },
 ];
