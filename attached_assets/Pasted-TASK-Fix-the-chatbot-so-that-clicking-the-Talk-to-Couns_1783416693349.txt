@@ -1,0 +1,58 @@
+TASK: Fix the chatbot so that clicking the "📞 Talk to Counselor" quick reply automatically displays the LeadCapture form, exactly the same as when the user types "contact", "talk to counselor", or "callback".
+
+Current behavior:
+- Typing "contact", "talk to counselor", or "callback" correctly opens the LeadCapture form.
+- Clicking the quick reply "📞 Talk to Counselor" does NOT open the LeadCapture form.
+- Manual callback button works.
+- Leads save correctly.
+- Admin dashboard works.
+- contactAction() already returns:
+    component: "lead-capture"
+- ChatBody already renders:
+    {msg.component === "lead-capture" && <LeadCapture ... />}
+- useChatbot correctly forwards:
+    component: response.component
+
+Therefore the problem is NOT in:
+- contactAction
+- ChatBody
+- useChatbot
+- LeadCapture component
+
+The bug is almost certainly in the parser/menu routing.
+
+Please do the following:
+
+1. Search the project for every occurrence of:
+   "📞 Talk to Counselor"
+   "Talk to Counselor"
+   "CONTACT"
+
+2. Find where quick replies are converted into ChatState.
+
+3. Verify that the quick reply "📞 Talk to Counselor" is routed to CONTACT.
+
+4. If the parser strips emojis before matching, ensure the stripped text "Talk to Counselor" exists in the menu/state mapping.
+
+5. If the parser uses exact string matching, make sure the quick reply label exactly matches the parser key (including spelling, capitalization, punctuation, and spaces).
+
+6. If necessary, normalize quick replies before matching by trimming whitespace and removing emoji prefixes consistently.
+
+7. Do NOT modify:
+   - ChatBody
+   - LeadCapture
+   - contactAction
+   - useChatbot
+   unless absolutely required.
+
+8. After the fix, verify these behaviors:
+   ✅ Clicking "📞 Talk to Counselor" opens the LeadCapture form immediately.
+   ✅ Typing "contact" still works.
+   ✅ Typing "callback" still works.
+   ✅ Typing "talk to counselor" still works.
+   ✅ No other menu items are affected.
+
+Finally, explain:
+- Which file contained the bug.
+- What the root cause was.
+- Exactly what code was changed.

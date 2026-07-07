@@ -235,9 +235,8 @@ function AdminPage() {
               className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium text-white/70 transition hover:bg-white/10 disabled:opacity-50"
             >
               <RefreshCw
-                className={`h-3.5 w-3.5 ${
-                  loading ? "animate-spin" : ""
-                }`}
+                className={`h-3.5 w-3.5 ${loading ? "animate-spin" : ""
+                  }`}
               />
               Refresh
             </button>
@@ -264,11 +263,10 @@ function AdminPage() {
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`rounded-lg px-5 py-2 text-sm font-medium capitalize transition ${
-                activeTab === tab
-                  ? "bg-white/10 text-white"
-                  : "text-white/50 hover:text-white"
-              }`}
+              className={`rounded-lg px-5 py-2 text-sm font-medium capitalize transition ${activeTab === tab
+                ? "bg-white/10 text-white"
+                : "text-white/50 hover:text-white"
+                }`}
             >
               {tab}
             </button>

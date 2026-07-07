@@ -16,9 +16,15 @@ type ParsedIntent =
   | { kind: "faq-search"; query: string }
   | { kind: "unknown"; raw: string };
 
-const MENU_LABEL_MAP: Record<string, ChatState> = Object.fromEntries(
-  MAIN_MENU.map((m) => [m.label.toLowerCase(), m.targetState]),
-);
+// Build two entries per menu item:
+//  1. bare label          ("talk to counselor")   — matches typed input after emoji-stripping
+//  2. icon + space + label ("📞 talk to counselor") — matches the exact quick-reply chip string
+// This makes menu routing immune to emoji-regex edge cases (e.g. variation-selector suffixes
+// on multi-codepoint emoji like 🗺️ that the stripping pass may not fully consume).
+const MENU_LABEL_MAP: Record<string, ChatState> = Object.fromEntries([
+  ...MAIN_MENU.map((m) => [m.label.toLowerCase(), m.targetState]),
+  ...MAIN_MENU.map((m) => [`${m.icon} ${m.label}`.toLowerCase(), m.targetState]),
+]);
 
 // Additional keyword shortcuts
 const KEYWORD_STATE_MAP: Record<string, ChatState> = {
