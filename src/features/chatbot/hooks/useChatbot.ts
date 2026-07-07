@@ -48,6 +48,8 @@ function chatbotReducer(state: ChatbotState, action: ChatbotAction): ChatbotStat
       return { ...state, profile: { ...state.profile, objections: action.payload } };
     case "SET_PROFILE_LEAD_SCORE":
       return { ...state, profile: { ...state.profile, leadScore: action.payload } };
+    case "SET_LEAD_GATE":
+      return { ...state, isLeadGatePending: action.payload };
   }
 }
 
@@ -87,6 +89,7 @@ const INITIAL_STATE: ChatbotState = {
   enrollmentData: {},
   isOpen: false,
   profile: { role: null, education: null, careerGoal: null, interests: [], objections: [], leadScore: 0 },
+  isLeadGatePending: false,
 };
 
 // ── Hook ──────────────────────────────────────────────────────────────────────
@@ -236,6 +239,7 @@ export function useChatbot() {
           );
 
           leadGateActive.current = true;
+          dispatch({ type: "SET_LEAD_GATE", payload: true });
           currentStateRef.current = "CONTACT";
           dispatch({ type: "SET_STATE", payload: "CONTACT" });
           return;

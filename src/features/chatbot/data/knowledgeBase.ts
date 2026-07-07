@@ -2,29 +2,99 @@
 // Single source of truth for all chatbot content. No placeholder text.
 
 export const COURSE_INFO = {
+  // ─────────────────────────────────────────────────────────────
+  // Basic Information
+  // ─────────────────────────────────────────────────────────────
+
   name: "Complete AI Career Program",
+
+  tagline:
+    "A complete step-by-step AI career program designed for beginners who want to become job-ready AI professionals.",
+
   duration: "18 Months",
+
   fee: "₹4,599",
+
   mode: "Live Online + Recorded",
-  language: "Telugu & English",
-  batchSize: "Max 40 students per batch",
-  nextBatch: "september 5, 2026",
-  certificate: "Industry-recognised certificate of completion",
+
+  language: "Telugu + English",
+
+  level: "Beginner to Advanced",
+
+  category: "Artificial Intelligence, Machine Learning & Data Science",
+
+  // ─────────────────────────────────────────────────────────────
+  // Training Model
+  // ─────────────────────────────────────────────────────────────
+
+  liveClasses: true,
+
+  recordedClasses: true,
+
+  lifetimeRecordingAccess: true,
+
+  mentorSupport: true,
+
+  doubtSupport: true,
+
+  practicalTraining: true,
+
+  realProjects: true,
+
+  assignments: true,
+
+  quizzes: true,
+
+  mockInterviews: true,
+
+  placementSupport: true,
+
+  certificate: "Industry-recognised Certificate of Completion",
+
+  // ─────────────────────────────────────────────────────────────
+  // Batch Information
+  // ─────────────────────────────────────────────────────────────
+
+  nextBatch: "September 5, 2026",
+
+  batchSize: "Maximum 40 students",
+
+  seatsAvailable: "Limited",
+
+  enrollmentStatus: "Open",
+
+  // ─────────────────────────────────────────────────────────────
+  // Student Profile
+  // ─────────────────────────────────────────────────────────────
+
+  idealFor: [
+    "12th Pass Students",
+    "Degree Students",
+    "Fresh Graduates",
+    "Job Seekers",
+    "Career Switchers",
+    "Working Professionals",
+  ],
+
+  // ─────────────────────────────────────────────────────────────
+  // Contact
+  // ─────────────────────────────────────────────────────────────
+
   counselorWhatsApp: "+91 8330961514",
+
+  supportEmail: "support@datadrop.ai",
+
+  supportHours: "Monday - Saturday | 9:00 AM - 7:00 PM",
+
+  responseTime: "Usually within 30 minutes",
+
+  // ─────────────────────────────────────────────────────────────
+  // Learning Outcome
+  // ─────────────────────────────────────────────────────────────
+
+  finalOutcome:
+    "Students graduate with practical AI skills, an industry-ready portfolio, interview preparation, and career guidance for AI and Data Science roles.",
 };
-
-// ── Curriculum — 28 modules across 5 phases ──────────────────────────────────
-
-export interface CourseTopic {
-  id: string;
-  title: string;
-  phase: 1 | 2 | 3 | 4 | 5;
-  description: string;
-  careerOutcome: string;
-  project: string;
-  estimatedDuration: string;
-  skills: string[];
-}
 
 export const CURRICULUM: CourseTopic[] = [
   // Phase 1 — Foundations

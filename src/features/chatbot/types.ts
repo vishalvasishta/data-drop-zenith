@@ -104,6 +104,7 @@ export interface ChatbotState {
   enrollmentData: Partial<EnrollmentData>;
   isOpen: boolean;
   profile: StudentProfile;
+  isLeadGatePending: boolean;
 }
 
 export type ChatbotAction =
@@ -118,4 +119,5 @@ export type ChatbotAction =
   | { type: "SET_PROFILE_CAREER_GOAL"; payload: string }
   | { type: "SET_PROFILE_INTERESTS"; payload: string[] }
   | { type: "SET_PROFILE_OBJECTIONS"; payload: string[] }
-  | { type: "SET_PROFILE_LEAD_SCORE"; payload: number };
+  | { type: "SET_PROFILE_LEAD_SCORE"; payload: number }
+  | { type: "SET_LEAD_GATE"; payload: boolean };
