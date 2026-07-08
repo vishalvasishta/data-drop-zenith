@@ -129,7 +129,7 @@ export function parseInput(raw: string): ParsedIntent {
       default:
         break;
     }
-  }
+  }knowledgeSearch.ts
   // FAQ category quick-reply (e.g. "❓ Placement")
   const faqCategoryStripped = stripped.replace(/^❓\s*/, "");
   const FAQ_CATEGORIES = [
