@@ -344,3 +344,11 @@ export function useChatbot() {
     confirmLead,
   };
 }
+const knowledge = searchKnowledge(userInput);
+
+console.log("Knowledge Search:", knowledge);
+
+if (knowledge.found) {
+  await showBotResponse(knowledge.answer);
+  return;
+}
