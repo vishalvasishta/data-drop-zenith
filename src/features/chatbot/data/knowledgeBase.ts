@@ -325,6 +325,190 @@ export const FAQS: FAQItem[] = [
     ],
   },
 ];
+// ── Eligibility ───────────────────────────────────────────────────────────────
+
+export interface EligibilityRule {
+  id: string;
+  title: string;
+  eligible: boolean;
+  description: string;
+}
+
+export const ELIGIBILITY: EligibilityRule[] = [
+  {
+    id: "beginner",
+    title: "Complete Beginner",
+    eligible: true,
+    description:
+      "Yes. The program starts from absolute basics. No prior coding or AI knowledge is required.",
+  },
+  {
+    id: "non-it",
+    title: "Non-IT Background",
+    eligible: true,
+    description:
+      "Students from B.Com, BBA, BA, B.Sc., MBA, Diploma and other non-IT backgrounds can successfully learn this program.",
+  },
+  {
+    id: "engineering",
+    title: "Engineering Students",
+    eligible: true,
+    description:
+      "Engineering students from any branch can join and build AI, Machine Learning and Data Science skills.",
+  },
+  {
+    id: "degree",
+    title: "Degree Students",
+    eligible: true,
+    description:
+      "Students pursuing or completing any undergraduate degree are eligible.",
+  },
+  {
+    id: "working-professional",
+    title: "Working Professionals",
+    eligible: true,
+    description:
+      "Yes. Since classes are online and recordings are provided, working professionals can learn at their own pace.",
+  },
+  {
+    id: "college-student",
+    title: "College Students",
+    eligible: true,
+    description:
+      "College students can join to build industry-ready AI skills before graduation.",
+  },
+  {
+    id: "career-switch",
+    title: "Career Switchers",
+    eligible: true,
+    description:
+      "Professionals from any industry who want to transition into AI and Data Science are welcome.",
+  },
+  {
+    id: "housewife",
+    title: "Homemakers",
+    eligible: true,
+    description:
+      "Homemakers who want to restart or build a technology career can comfortably learn through live classes and recordings.",
+  },
+  {
+    id: "minimum-age",
+    title: "Minimum Age",
+    eligible: true,
+    description:
+      "Students who have completed at least Intermediate (12th) or an equivalent qualification are recommended.",
+  },
+  {
+    id: "coding",
+    title: "Coding Experience",
+    eligible: true,
+    description:
+      "No coding experience is required. Everything is taught from scratch in a beginner-friendly manner.",
+  },
+  {
+    id: "laptop",
+    title: "Laptop Requirement",
+    eligible: true,
+    description:
+      "A Windows, Mac or Linux laptop with a stable internet connection is recommended for practical sessions.",
+  },
+  {
+    id: "english",
+    title: "English Fluency",
+    eligible: true,
+    description:
+      "Fluent English is not required. Classes are taught primarily in Telugu with English technical terms explained clearly.",
+  },
+];
+// ── Payment Information & Policies ───────────────────────────────────────────
+
+export interface PaymentInformation {
+  courseFee: string;
+  currency: string;
+  paymentMethods: string[];
+  emiAvailable: boolean;
+  installmentAvailable: boolean;
+  registrationRequired: boolean;
+  invoiceProvided: boolean;
+  gstApplicable: boolean;
+  refundPolicy: string;
+  enrollmentConfirmation: string;
+  supportContact: string;
+}
+
+export const PAYMENT_INFO: PaymentInformation = {
+  courseFee: "₹4,599",
+  currency: "INR",
+
+  paymentMethods: [
+    "UPI",
+    "Credit Card",
+    "Debit Card",
+    "Net Banking",
+    "Wallets",
+  ],
+
+  emiAvailable: false,
+
+  installmentAvailable: false,
+
+  registrationRequired: true,
+
+  invoiceProvided: true,
+
+  gstApplicable: false,
+
+  refundPolicy:
+    "Please contact the admissions team for the latest refund and cancellation policy before completing your enrollment.",
+
+  enrollmentConfirmation:
+    "Once the payment is successfully completed, students receive an instant confirmation along with further onboarding instructions.",
+
+  supportContact: "+91 8330961514",
+};
+// ── Student Support & Contact ────────────────────────────────────────────────
+
+export interface StudentSupport {
+  whatsapp: string;
+  email: string;
+  supportHours: string;
+  responseTime: string;
+  classSupport: string;
+  technicalSupport: string;
+  assignmentSupport: string;
+  mentorshipSupport: string;
+  community: string;
+  officeMode: string;
+}
+
+export const STUDENT_SUPPORT: StudentSupport = {
+  whatsapp: "+91 8330961514",
+
+  email: "support@datadrop.ai",
+
+  supportHours: "Monday to Saturday • 9:00 AM – 7:00 PM IST",
+
+  responseTime:
+    "Most WhatsApp queries are answered within 30 minutes during support hours.",
+
+  classSupport:
+    "Students can ask questions during live classes and receive guidance from mentors.",
+
+  technicalSupport:
+    "Dedicated assistance is available for installation issues, software setup and project-related technical problems.",
+
+  assignmentSupport:
+    "Assignments are reviewed by mentors with personalized feedback and improvement suggestions.",
+
+  mentorshipSupport:
+    "Students receive continuous mentorship throughout the program to stay on track with learning and career preparation.",
+
+  community:
+    "Private student community for discussions, doubt clarification, announcements and networking.",
+
+  officeMode:
+    "Online Support",
+};
 // ─────────────────────────────────────────────────────────────────────────────
 // TOOLS & TECHNOLOGIES
 // Technologies covered during the program.
@@ -1005,6 +1189,36 @@ export interface CareerPath {
   keySkills: string[];
   topCompanies: string[];
 }
+// ── FAQ Knowledge Base ────────────────────────────────────────────────────────
+
+export type FAQCategory =
+  | "General"
+  | "Classes"
+  | "Curriculum"
+  | "Projects"
+  | "Assignments"
+  | "Placement"
+  | "Fees"
+  | "Payment"
+  | "Certification"
+  | "Eligibility"
+  | "Support"
+  | "Career"
+  | "Technical";
+
+export interface FAQItem {
+  id: string;
+
+  question: string;
+
+  answer: string;
+
+  category: FAQCategory;
+
+  keywords: string[];
+
+  relatedTopics?: string[];
+}
 
 export const CAREER_PATHS: CareerPath[] = [
   {
@@ -1107,11 +1321,529 @@ export const BONUSES = [
     description: "Direct introductions to hiring managers at 150+ partner companies",
   },
 ];
+// ── Industry Tools You'll Master ──────────────────────────────────────────────
+
+export interface LearningTool {
+  category: string;
+  tools: string[];
+}
+
+export const TOOLS_YOU_WILL_LEARN: LearningTool[] = [
+  {
+    category: "Programming",
+    tools: [
+      "Python",
+      "SQL",
+      "Git",
+      "GitHub",
+      "VS Code",
+      "Jupyter Notebook",
+    ],
+  },
+  {
+    category: "Data Analysis",
+    tools: [
+      "NumPy",
+      "Pandas",
+      "Matplotlib",
+      "Seaborn",
+      "Plotly",
+      "Excel",
+    ],
+  },
+  {
+    category: "Machine Learning",
+    tools: [
+      "Scikit-learn",
+      "XGBoost",
+      "LightGBM",
+      "Optuna",
+      "MLflow",
+    ],
+  },
+  {
+    category: "Deep Learning",
+    tools: [
+      "TensorFlow",
+      "PyTorch",
+      "OpenCV",
+      "YOLO",
+      "Hugging Face",
+    ],
+  },
+  {
+    category: "Generative AI",
+    tools: [
+      "OpenAI API",
+      "Gemini API",
+      "LangChain",
+      "LangGraph",
+      "Pinecone",
+      "FAISS",
+      "Weaviate",
+      "Llama 3",
+    ],
+  },
+  {
+    category: "Deployment",
+    tools: [
+      "FastAPI",
+      "Docker",
+      "Render",
+      "Vercel",
+      "AWS",
+      "Google Cloud",
+      "Azure",
+    ],
+  },
+];
+// ── Certifications ────────────────────────────────────────────────────────────
+
+export interface Certification {
+  title: string;
+  provider: string;
+  included: boolean;
+  description: string;
+}
+
+export const CERTIFICATIONS: Certification[] = [
+  {
+    title: "DATADROP AI Career Program Certificate",
+    provider: "DATADROP",
+    included: true,
+    description:
+      "Awarded after successfully completing the full AI Career Program and final capstone project.",
+  },
+  {
+    title: "Python Programming Certificate",
+    provider: "DATADROP",
+    included: true,
+    description:
+      "Demonstrates proficiency in Python programming, problem solving, and automation.",
+  },
+  {
+    title: "Machine Learning Certificate",
+    provider: "DATADROP",
+    included: true,
+    description:
+      "Recognizes practical skills in supervised learning, unsupervised learning, and model deployment.",
+  },
+  {
+    title: "Deep Learning Certificate",
+    provider: "DATADROP",
+    included: true,
+    description:
+      "Issued after completing neural networks, CNNs, NLP, and transformer modules.",
+  },
+  {
+    title: "Generative AI Certificate",
+    provider: "DATADROP",
+    included: true,
+    description:
+      "Covers Prompt Engineering, LLMs, RAG systems, AI Agents, and production AI applications.",
+  },
+  {
+    title: "Project Completion Certificate",
+    provider: "DATADROP",
+    included: true,
+    description:
+      "Awarded for successfully completing all portfolio projects included in the curriculum.",
+  },
+];
 // ─────────────────────────────────────────────────────────────────────────────
 // AI & DATA CAREER KNOWLEDGE
 // Used for career guidance and recommendation.
 // ─────────────────────────────────────────────────────────────────────────────
+// ── Program Features ──────────────────────────────────────────────────────────
 
+export interface ProgramFeature {
+  id: string;
+  title: string;
+  available: boolean;
+  description: string;
+}
+
+export const PROGRAM_FEATURES: ProgramFeature[] = [
+  {
+    id: "live-classes",
+    title: "Live Interactive Classes",
+    available: true,
+    description:
+      "Attend instructor-led live online classes where you can ask questions and interact with mentors in real time.",
+  },
+  {
+    id: "recordings",
+    title: "Class Recordings",
+    available: true,
+    description:
+      "Every live session is recorded so you can watch it anytime if you miss a class or want to revise.",
+  },
+  {
+    id: "assignments",
+    title: "Assignments",
+    available: true,
+    description:
+      "Each module includes practical assignments designed to reinforce concepts through hands-on practice.",
+  },
+  {
+    id: "practice",
+    title: "Practice Exercises",
+    available: true,
+    description:
+      "Coding exercises, quizzes, and implementation tasks are provided throughout the program.",
+  },
+  {
+    id: "projects",
+    title: "Industry Projects",
+    available: true,
+    description:
+      "Students build multiple portfolio-ready AI and Data Science projects using real-world datasets.",
+  },
+  {
+    id: "mentor-support",
+    title: "Mentor Support",
+    available: true,
+    description:
+      "Get guidance from mentors whenever you need help during your learning journey.",
+  },
+  {
+    id: "doubt-support",
+    title: "Doubt Resolution",
+    available: true,
+    description:
+      "Academic doubts are answered during dedicated support sessions and through the student community.",
+  },
+  {
+    id: "placement",
+    title: "Placement Assistance",
+    available: true,
+    description:
+      "Receive career guidance including resume preparation, interview practice, portfolio review, and placement assistance.",
+  },
+  {
+    id: "resume",
+    title: "Resume Building",
+    available: true,
+    description:
+      "Professional resume optimization tailored for AI and Data Science roles.",
+  },
+  {
+    id: "linkedin",
+    title: "LinkedIn Optimization",
+    available: true,
+    description:
+      "Learn how to build a strong LinkedIn profile that attracts recruiters.",
+  },
+  {
+    id: "mock-interviews",
+    title: "Mock Interviews",
+    available: true,
+    description:
+      "Participate in technical and HR mock interviews before attending real interviews.",
+  },
+  {
+    id: "community",
+    title: "Student Community",
+    available: true,
+    description:
+      "Join the exclusive DATADROP student community to network, collaborate, and receive announcements.",
+  },
+  {
+    id: "certificate",
+    title: "Course Certificate",
+    available: true,
+    description:
+      "Receive a certificate after successfully completing the program requirements.",
+  },
+  {
+    id: "lifetime-access",
+    title: "Lifetime Access",
+    available: false,
+    description:
+      "Lifetime access is not included unless explicitly mentioned during enrollment.",
+  },
+];
+// ── Learning Support ──────────────────────────────────────────────────────────
+
+export interface LearningSupport {
+  id: string;
+  title: string;
+  value: string;
+  description: string;
+}
+
+export const LEARNING_SUPPORT: LearningSupport[] = [
+  {
+    id: "class-mode",
+    title: "Class Mode",
+    value: "Live Online + Recorded",
+    description:
+      "Students attend live online classes and also receive recordings for revision.",
+  },
+  {
+    id: "language",
+    title: "Teaching Language",
+    value: "Telugu + English",
+    description:
+      "Complex concepts are explained in simple Telugu with English technical terminology.",
+  },
+  {
+    id: "recordings",
+    title: "Class Recordings",
+    value: "Available",
+    description:
+      "Every live session is recorded and shared with enrolled students.",
+  },
+  {
+    id: "mentor-guidance",
+    title: "Mentor Guidance",
+    value: "Available",
+    description:
+      "Students receive continuous guidance from mentors throughout the program.",
+  },
+  {
+    id: "doubt-support",
+    title: "Doubt Resolution",
+    value: "Available",
+    description:
+      "Students can ask questions during live classes and through the community support channels.",
+  },
+  {
+    id: "assignments",
+    title: "Assignments",
+    value: "Every Module",
+    description:
+      "Each module contains practical assignments to reinforce learning.",
+  },
+  {
+    id: "projects",
+    title: "Hands-on Projects",
+    value: "Included",
+    description:
+      "Students work on real-world AI and Data Science projects to build a professional portfolio.",
+  },
+  {
+    id: "revision",
+    title: "Revision Support",
+    value: "Available",
+    description:
+      "Students can revisit recordings and course materials whenever needed.",
+  },
+  {
+    id: "community",
+    title: "Student Community",
+    value: "Private Community",
+    description:
+      "Students collaborate, discuss doubts, and receive updates in the exclusive DATADROP community.",
+  },
+  {
+    id: "attendance",
+    title: "Missed Classes",
+    value: "Recordings Provided",
+    description:
+      "Missing a live class won't affect learning because recordings are available.",
+  },
+];
+// ── Placement Support ─────────────────────────────────────────────────────────
+
+export interface PlacementSupport {
+  id: string;
+  title: string;
+  available: boolean;
+  description: string;
+}
+
+export const PLACEMENT_SUPPORT: PlacementSupport[] = [
+  {
+    id: "career-guidance",
+    title: "Career Guidance",
+    available: true,
+    description:
+      "Students receive personalized career guidance to choose the right AI and Data Science career path.",
+  },
+  {
+    id: "resume-review",
+    title: "Resume Building",
+    available: true,
+    description:
+      "Professional AI-focused resume creation and review before applying for jobs.",
+  },
+  {
+    id: "linkedin",
+    title: "LinkedIn Optimization",
+    available: true,
+    description:
+      "Students learn how to build a recruiter-friendly LinkedIn profile that attracts opportunities.",
+  },
+  {
+    id: "portfolio",
+    title: "Portfolio Building",
+    available: true,
+    description:
+      "Students build an impressive portfolio of real-world AI projects to showcase their practical skills.",
+  },
+  {
+    id: "mock-interviews",
+    title: "Mock Interviews",
+    available: true,
+    description:
+      "Technical and HR mock interviews help students prepare confidently for real interviews.",
+  },
+  {
+    id: "interview-preparation",
+    title: "Interview Preparation",
+    available: true,
+    description:
+      "Interview preparation includes aptitude guidance, technical questions, communication tips, and HR preparation.",
+  },
+  {
+    id: "placement-assistance",
+    title: "Placement Assistance",
+    available: true,
+    description:
+      "DATADROP provides placement assistance to help eligible students connect with hiring opportunities.",
+  },
+  {
+    id: "job-alerts",
+    title: "Job Alerts",
+    available: true,
+    description:
+      "Students receive updates about relevant AI, ML, Data Science, and Python job openings.",
+  },
+  {
+    id: "referrals",
+    title: "Referral Support",
+    available: true,
+    description:
+      "Eligible students may receive referrals whenever suitable opportunities are available.",
+  },
+  {
+    id: "career-support",
+    title: "Career Support",
+    available: true,
+    description:
+      "Career support continues throughout the learning journey with guidance on interviews and career growth.",
+  },
+];
+// ── Master FAQ Database ───────────────────────────────────────────────────────
+
+export interface FAQItem {
+  id: string;
+  category: string;
+  keywords: string[];
+  question: string;
+  answer: string;
+}
+
+export const FAQS: FAQItem[] = [
+  {
+    id: "course-duration",
+    category: "Course",
+    keywords: ["duration", "course duration", "how long", "months"],
+    question: "What is the duration of the course?",
+    answer: "The Complete AI Career Program is an 18-month guided learning program."
+  },
+
+  {
+    id: "mode",
+    category: "Course",
+    keywords: ["online", "offline", "mode", "live", "classes"],
+    question: "Is the course online?",
+    answer: "Yes. The program is conducted online through live interactive classes along with recordings."
+  },
+
+  {
+    id: "language",
+    category: "Course",
+    keywords: ["language", "telugu", "english"],
+    question: "What language is used?",
+    answer: "Classes are taught in Telugu with English technical terminology so beginners can easily understand."
+  },
+
+  {
+    id: "batch-size",
+    category: "Course",
+    keywords: ["batch", "students", "batch size"],
+    question: "How many students are there in one batch?",
+    answer: "Each batch is limited to approximately 40 students for better mentor interaction."
+  },
+  {
+    id: "live-class",
+    category: "Classes",
+    keywords: ["live class", "live", "interactive"],
+    question: "Are classes live?",
+    answer: "Yes. All regular sessions are conducted live so students can interact directly with mentors."
+  },
+
+  {
+    id: "recordings",
+    category: "Classes",
+    keywords: ["recording", "recordings", "miss class", "watch later"],
+    question: "Do I get recordings?",
+    answer: "Yes. Every live class is recorded and shared with enrolled students for revision."
+  },
+
+  {
+    id: "miss-class",
+    category: "Classes",
+    keywords: ["miss class", "absent", "cannot attend"],
+    question: "What if I miss a class?",
+    answer: "No problem. You can watch the recording later and continue learning at your own pace."
+  },
+  {
+    id: "assignments",
+    category: "Learning",
+    keywords: ["assignment", "assignments", "practice"],
+    question: "Are assignments included?",
+    answer: "Yes. Every module includes practical assignments to strengthen your understanding."
+  },
+
+  {
+    id: "projects",
+    category: "Learning",
+    keywords: ["projects", "real projects", "portfolio"],
+    question: "Will I build projects?",
+    answer: "Yes. Students work on multiple industry-oriented projects that can be showcased in their portfolio."
+  },
+
+  {
+    id: "mentor",
+    category: "Learning",
+    keywords: ["mentor", "mentors", "guidance"],
+    question: "Do I get mentor support?",
+    answer: "Yes. Mentors guide students throughout the learning journey and help with doubts."
+  },
+  {
+    id: "placement",
+    category: "Placement",
+    keywords: ["placement", "job", "placement support"],
+    question: "Do you provide placement assistance?",
+    answer: "Yes. Eligible students receive placement assistance including resume building, mock interviews, portfolio guidance and interview preparation."
+  },
+
+  {
+    id: "mock",
+    category: "Placement",
+    keywords: ["mock interview", "interview"],
+    question: "Are mock interviews included?",
+    answer: "Yes. Mock technical and HR interviews are included to help students prepare confidently."
+  },
+
+  {
+    id: "resume",
+    category: "Placement",
+    keywords: ["resume", "cv"],
+    question: "Do you help with resumes?",
+    answer: "Yes. Students receive professional resume building and review support."
+  },
+  {
+    id: "certificate",
+    category: "Certificate",
+    keywords: ["certificate", "certification"],
+    question: "Will I receive a certificate?",
+    answer: "Yes. Students who successfully complete the program receive a course completion certificate."
+  },
+];
 export interface CareerRoleKnowledge {
   id: string;
   title: string;

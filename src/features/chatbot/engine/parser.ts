@@ -1,7 +1,9 @@
 import type { ChatState } from "../types";
 import { MAIN_MENU } from "../data/menuData";
 import { CURRICULUM } from "../data/knowledgeBase";
+import { SYNONYMS } from "../data/synonyms";
 import { BACK } from "./actions";
+
 
 // ── Normalise raw user input ──────────────────────────────────────────────────
 export function normaliseInput(raw: string): string {
@@ -68,7 +70,15 @@ const KEYWORD_STATE_MAP: Record<string, ChatState> = {
   hello: "MAIN_MENU",
   hey: "MAIN_MENU",
 };
+function synonymMatch(input: string): string | null {
+  for (const [category, words] of Object.entries(SYNONYMS)) {
+    if (words.some((word) => input.includes(word))) {
+      return category;
+    }
+  }
 
+  return null;
+}
 export function parseInput(raw: string): ParsedIntent {
   const input = normaliseInput(raw);
 
@@ -94,7 +104,32 @@ export function parseInput(raw: string): ParsedIntent {
     (t) => input.includes(t.title.toLowerCase()) || t.title.toLowerCase().includes(input),
   );
   if (topicMatch) return { kind: "curriculum-topic", title: topicMatch.title };
+  const synonym = synonymMatch(input);
 
+  if (synonym) {
+    switch (synonym) {
+      case "fee":
+        return { kind: "navigate", state: "PRICING" };
+
+      case "curriculum":
+        return { kind: "navigate", state: "CURRICULUM" };
+
+      case "placement":
+        return { kind: "navigate", state: "PLACEMENT" };
+
+      case "project":
+        return { kind: "navigate", state: "PROJECTS" };
+
+      case "contact":
+        return { kind: "navigate", state: "CONTACT" };
+
+      case "eligibility":
+        return { kind: "navigate", state: "ABOUT" };
+
+      default:
+        break;
+    }
+  }
   // FAQ category quick-reply (e.g. "❓ Placement")
   const faqCategoryStripped = stripped.replace(/^❓\s*/, "");
   const FAQ_CATEGORIES = [
