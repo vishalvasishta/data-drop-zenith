@@ -2,6 +2,7 @@ import { useReducer, useCallback, useRef } from "react";
 import type { ChatbotState, ChatbotAction, Message, ChatState, EnrollmentData, StudentProfile } from "../types";
 import { generateId } from "../utils/formatters";
 import { processInput, getWelcomeResponse } from "../engine/chatbotEngine";
+import { searchKnowledge } from "../engine/knowledgeSearch";
 import { mainMenuAction } from "../engine/actions";
 import { detectObjection } from "../engine/objectionHandler";
 import { detectObjectionLabel, computeLeadScore, INTEREST_STATES } from "../engine/leadIntelligence";
@@ -248,6 +249,7 @@ export function useChatbot() {
         // Objection handling: a lightweight keyword layer that runs BEFORE the
         // existing parser/state machine. It never changes ChatState directly —
         // if no objection is detected, we fall through to the normal parser below.
+
         const objectionResponse = detectObjection(userInput);
         if (objectionResponse) {
           // Track the objection label and recompute lead score (objections are high-intent signals)
@@ -267,6 +269,14 @@ export function useChatbot() {
 
           currentStateRef.current = "MAIN_MENU";
           dispatch({ type: "SET_STATE", payload: "MAIN_MENU" });
+          return;
+        }
+        // Knowledge Search
+        const knowledge = searchKnowledge(userInput);
+
+        if (knowledge.found) {
+          await showBotResponse(knowledge.answer);
+
           return;
         }
 
