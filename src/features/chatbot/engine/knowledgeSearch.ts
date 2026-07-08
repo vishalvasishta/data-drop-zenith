@@ -2,7 +2,6 @@ import {
   COURSE_INFO,
   PAYMENT_INFO,
   STUDENT_SUPPORT,
-  TEACHING_METHODOLOGY,
   CERTIFICATIONS,
   ELIGIBILITY,
 } from "../data/knowledgeBase";
