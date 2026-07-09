@@ -1,3 +1,4 @@
+
 import type { BotResponse } from "../types";
 import { COURSE_INFO, CURRICULUM, PLACEMENT_STATS, BONUSES } from "../data/knowledgeBase";
 import { MAIN_MENU } from "../data/menuData";
@@ -274,13 +275,13 @@ export function searchFAQ(query: string): BotResponse {
 
   if (!matches.length) {
     return {
-      content: `No FAQs found for **"${query}"**. Try different keywords — or speak directly to a counselor who can answer any question in detail.`,
+      content: `No FAQs found for "${query}". Try different keywords — or speak directly to a counselor who can answer any question in detail.`,
       quickReplies: ["📞 Talk to Counselor", BACK],
     };
   }
 
   return {
-    content: `Found **${matches.length} answer${matches.length > 1 ? "s" : ""}** for "${query}":`,
+    content: `Found ${matches.length} answer${matches.length > 1 ? "s" : ""} for "${query}":`,
     quickReplies: [BACK, "📞 Talk to Counselor"],
     component: "faq",
     faqData: matches,

@@ -102,23 +102,22 @@ export function MessageBubble({ message, showAvatar }: MessageBubbleProps) {
         className={`group flex max-w-[78%] flex-col gap-1 ${isBot ? "items-start" : "items-end"}`}
       >
         <div
-          className={`rounded-2xl px-4 py-2.5 text-[13.5px] ${
-            isBot ? "rounded-bl-sm text-zinc-200" : "rounded-br-sm text-white"
-          }`}
+          className={`rounded-2xl px-4 py-2.5 text-[13.5px] ${isBot ? "rounded-bl-sm text-zinc-200" : "rounded-br-sm text-white"
+            }`}
           style={
             isBot
               ? {
-                  background: "rgba(255,255,255,0.055)",
-                  border: "1px solid rgba(255,255,255,0.07)",
-                }
+                background: "rgba(255,255,255,0.055)",
+                border: "1px solid rgba(255,255,255,0.07)",
+              }
               : {
-                  background: "linear-gradient(145deg, #7c3aed, #6d28d9)",
-                  boxShadow: "0 2px 12px rgba(109,40,217,0.35)",
-                }
+                background: "linear-gradient(145deg, #7c3aed, #6d28d9)",
+                boxShadow: "0 2px 12px rgba(109,40,217,0.35)",
+              }
           }
         >
           {isBot ? (
-            <div className="cb-md space-y-0.5">{renderMarkdown(message.content)}</div>
+            <div className="cb-md space-y-0.5">{renderMarkdown(message.content ?? "")}</div>
           ) : (
             <span className="leading-relaxed">{message.content}</span>
           )}

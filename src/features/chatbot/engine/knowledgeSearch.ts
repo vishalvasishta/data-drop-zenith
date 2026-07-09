@@ -2,10 +2,11 @@ import {
   COURSE_INFO,
   PAYMENT_INFO,
   STUDENT_SUPPORT,
+  TEACHING_METHODOLOGY,
   CERTIFICATIONS,
   ELIGIBILITY,
 } from "../data/knowledgeBase";
-
+import { searchFAQs } from "./search";
 export interface KnowledgeAnswer {
   found: boolean;
   answer: string;
@@ -13,6 +14,21 @@ export interface KnowledgeAnswer {
 
 export function searchKnowledge(question: string): KnowledgeAnswer {
   const q = question.toLowerCase();
+
+  // ---------- Intelligent FAQ Search ----------
+  const bestMatch = searchFAQs(question);
+
+  if (
+    bestMatch &&
+    bestMatch.score >= 3
+  ) {
+    return {
+      found: true,
+      answer: bestMatch.faq.answer,
+    };
+  }
+
+  // ---------- Legacy Rule Engine ----------
 
   // Live classes
   if (

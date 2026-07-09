@@ -116,92 +116,7 @@ export interface EligibilityRule {
   description: string;
 }
 
-export const ELIGIBILITY: EligibilityRule[] = [
-  {
-    id: "beginner",
-    title: "Complete Beginner",
-    eligible: true,
-    description:
-      "Yes. The program starts from absolute basics. No prior coding or AI knowledge is required.",
-  },
-  {
-    id: "non-it",
-    title: "Non-IT Background",
-    eligible: true,
-    description:
-      "Students from B.Com, BBA, BA, B.Sc., MBA, Diploma and other non-IT backgrounds can successfully learn this program.",
-  },
-  {
-    id: "engineering",
-    title: "Engineering Students",
-    eligible: true,
-    description:
-      "Engineering students from any branch can join and build AI, Machine Learning and Data Science skills.",
-  },
-  {
-    id: "degree",
-    title: "Degree Students",
-    eligible: true,
-    description:
-      "Students pursuing or completing any undergraduate degree are eligible.",
-  },
-  {
-    id: "working-professional",
-    title: "Working Professionals",
-    eligible: true,
-    description:
-      "Yes. Since classes are online and recordings are provided, working professionals can learn at their own pace.",
-  },
-  {
-    id: "college-student",
-    title: "College Students",
-    eligible: true,
-    description:
-      "College students can join to build industry-ready AI skills before graduation.",
-  },
-  {
-    id: "career-switch",
-    title: "Career Switchers",
-    eligible: true,
-    description:
-      "Professionals from any industry who want to transition into AI and Data Science are welcome.",
-  },
-  {
-    id: "housewife",
-    title: "Homemakers",
-    eligible: true,
-    description:
-      "Homemakers who want to restart or build a technology career can comfortably learn through live classes and recordings.",
-  },
-  {
-    id: "minimum-age",
-    title: "Minimum Age",
-    eligible: true,
-    description:
-      "Students who have completed at least Intermediate (12th) or an equivalent qualification are recommended.",
-  },
-  {
-    id: "coding",
-    title: "Coding Experience",
-    eligible: true,
-    description:
-      "No coding experience is required. Everything is taught from scratch in a beginner-friendly manner.",
-  },
-  {
-    id: "laptop",
-    title: "Laptop Requirement",
-    eligible: true,
-    description:
-      "A Windows, Mac or Linux laptop with a stable internet connection is recommended for practical sessions.",
-  },
-  {
-    id: "english",
-    title: "English Fluency",
-    eligible: true,
-    description:
-      "Fluent English is not required. Classes are taught primarily in Telugu with English technical terms explained clearly.",
-  },
-];
+
 // ── Payment Information & Policies ───────────────────────────────────────────
 
 export interface PaymentInformation {
@@ -218,36 +133,7 @@ export interface PaymentInformation {
   supportContact: string;
 }
 
-export const PAYMENT_INFO: PaymentInformation = {
-  courseFee: "₹4,599",
-  currency: "INR",
 
-  paymentMethods: [
-    "UPI",
-    "Credit Card",
-    "Debit Card",
-    "Net Banking",
-    "Wallets",
-  ],
-
-  emiAvailable: false,
-
-  installmentAvailable: false,
-
-  registrationRequired: true,
-
-  invoiceProvided: true,
-
-  gstApplicable: false,
-
-  refundPolicy:
-    "Please contact the admissions team for the latest refund and cancellation policy before completing your enrollment.",
-
-  enrollmentConfirmation:
-    "Once the payment is successfully completed, students receive an instant confirmation along with further onboarding instructions.",
-
-  supportContact: "+91 8330961514",
-};
 // ── Student Support & Contact ────────────────────────────────────────────────
 
 export interface StudentSupport {
@@ -263,34 +149,7 @@ export interface StudentSupport {
   officeMode: string;
 }
 
-export const STUDENT_SUPPORT: StudentSupport = {
-  whatsapp: "+91 8330961514",
 
-  email: "support@datadrop.ai",
-
-  supportHours: "Monday to Saturday • 9:00 AM – 7:00 PM IST",
-
-  responseTime:
-    "Most WhatsApp queries are answered within 30 minutes during support hours.",
-
-  classSupport:
-    "Students can ask questions during live classes and receive guidance from mentors.",
-
-  technicalSupport:
-    "Dedicated assistance is available for installation issues, software setup and project-related technical problems.",
-
-  assignmentSupport:
-    "Assignments are reviewed by mentors with personalized feedback and improvement suggestions.",
-
-  mentorshipSupport:
-    "Students receive continuous mentorship throughout the program to stay on track with learning and career preparation.",
-
-  community:
-    "Private student community for discussions, doubt clarification, announcements and networking.",
-
-  officeMode:
-    "Online Support",
-};
 // ─────────────────────────────────────────────────────────────────────────────
 // TOOLS & TECHNOLOGIES
 // Technologies covered during the program.
@@ -1188,50 +1047,7 @@ export interface Certification {
   description: string;
 }
 
-export const CERTIFICATIONS: Certification[] = [
-  {
-    title: "DATADROP AI Career Program Certificate",
-    provider: "DATADROP",
-    included: true,
-    description:
-      "Awarded after successfully completing the full AI Career Program and final capstone project.",
-  },
-  {
-    title: "Python Programming Certificate",
-    provider: "DATADROP",
-    included: true,
-    description:
-      "Demonstrates proficiency in Python programming, problem solving, and automation.",
-  },
-  {
-    title: "Machine Learning Certificate",
-    provider: "DATADROP",
-    included: true,
-    description:
-      "Recognizes practical skills in supervised learning, unsupervised learning, and model deployment.",
-  },
-  {
-    title: "Deep Learning Certificate",
-    provider: "DATADROP",
-    included: true,
-    description:
-      "Issued after completing neural networks, CNNs, NLP, and transformer modules.",
-  },
-  {
-    title: "Generative AI Certificate",
-    provider: "DATADROP",
-    included: true,
-    description:
-      "Covers Prompt Engineering, LLMs, RAG systems, AI Agents, and production AI applications.",
-  },
-  {
-    title: "Project Completion Certificate",
-    provider: "DATADROP",
-    included: true,
-    description:
-      "Awarded for successfully completing all portfolio projects included in the curriculum.",
-  },
-];
+
 // ─────────────────────────────────────────────────────────────────────────────
 // AI & DATA CAREER KNOWLEDGE
 // Used for career guidance and recommendation.
@@ -2552,4 +2368,564 @@ export const QUESTION_KNOWLEDGE: QuestionKnowledge[] = [
 
     category: "Payment",
   },
+];
+// ── Teaching Methodology ──────────────────────────────────────────────────────
+
+export const TEACHING_METHODOLOGY = {
+  liveClasses:
+    "All classes are conducted live online by experienced industry mentors. Students can interact with trainers, ask questions, and participate in live coding sessions.",
+
+  recordings:
+    "Every live class recording is provided. Students get lifetime access to recordings so they can revise concepts anytime.",
+
+  assignments:
+    "Every module contains practical assignments, coding exercises, quizzes, and mini-projects to reinforce learning.",
+
+  projects:
+    "Students build multiple real-world portfolio projects throughout the program using industry-standard tools and technologies.",
+
+  mentorship:
+    "Regular doubt-clearing sessions and mentor guidance are provided throughout the learning journey.",
+
+  practice:
+    "Students receive hands-on practice datasets, coding challenges, interview questions, and project templates after every major topic.",
+
+  language:
+    "Classes are taught in simple Telugu mixed with English so beginners can understand advanced AI concepts easily.",
+
+  mode:
+    "Students can attend classes live or watch recordings later if they miss a session.",
+
+  assessments:
+    "Regular assessments and module-wise evaluations help students track their progress.",
+
+  revision:
+    "Dedicated revision sessions are conducted before major projects and placement preparation."
+};
+// ── Student Support ───────────────────────────────────────────────────────────
+
+export const STUDENT_SUPPORT = {
+  doubtSupport:
+    "Students receive dedicated doubt support throughout the program. Questions can be asked during live classes and through the student community.",
+
+  mentorship:
+    "Industry mentors guide students with learning plans, project reviews, career advice, and interview preparation.",
+
+  community:
+    "Students become part of the exclusive DATADROP community where they can interact with mentors and fellow learners.",
+
+  projectReviews:
+    "Projects are reviewed by mentors with detailed feedback and suggestions for improvement.",
+
+  technicalSupport:
+    "Technical assistance is available whenever students face issues with software installation or project setup.",
+
+  careerGuidance:
+    "Students receive career guidance including resume building, LinkedIn optimization, interview preparation, and placement support.",
+
+  placementSupport:
+    "Placement assistance continues until students are job-ready through mock interviews, interview scheduling guidance, and career mentoring.",
+
+  responseTime:
+    "Most student queries are answered within 24 hours by the support team.",
+
+  access:
+    "Students retain access to learning materials and recordings even after completing the course."
+};
+// ── Payment Information ───────────────────────────────────────────────────────
+
+export const PAYMENT_INFO = {
+  methods: [
+    "UPI",
+    "Credit Card",
+    "Debit Card",
+    "Net Banking",
+    "Wallets",
+  ],
+
+  gateway:
+    "All payments are processed through secure and trusted payment gateways.",
+
+  installments:
+    "Easy EMI and installment options may be available depending on the active payment partner.",
+
+  confirmation:
+    "Students receive instant payment confirmation along with enrollment details after successful payment.",
+
+  receipt:
+    "A payment receipt is generated automatically and can be shared for future reference.",
+
+  enrollment:
+    "Your seat is confirmed only after successful payment verification.",
+
+  security:
+    "All payment transactions are encrypted and processed securely.",
+
+  refundPolicy:
+    "Refund requests, if applicable, are handled according to the official DATADROP refund policy.",
+
+  support:
+    "If you experience any payment issues, our support team will assist you as quickly as possible.",
+
+  currency:
+    "All course fees are charged in Indian Rupees (INR)."
+};
+// ── Certifications ────────────────────────────────────────────────────────────
+
+export const CERTIFICATIONS = {
+  completion:
+    "Students receive an Industry-Recognized DATADROP Certificate after successfully completing the program.",
+
+  projectCertificate:
+    "Students also complete multiple real-world AI projects that strengthen their portfolio and demonstrate practical skills.",
+
+  skillsValidation:
+    "The certificate validates practical skills learned throughout the program, including Python, Machine Learning, Deep Learning, Generative AI, and AI Engineering.",
+
+  eligibility:
+    "Certificates are awarded after completing the required modules, projects, and assessments.",
+
+  digital:
+    "Certificates are issued in digital format for easy sharing on LinkedIn, resumes, and job applications.",
+
+  portfolio:
+    "Students graduate with both a certificate and an industry-ready portfolio showcasing real AI projects."
+};
+// ── Eligibility ───────────────────────────────────────────────────────────────
+
+export const ELIGIBILITY = {
+  minimumQualification:
+    "Anyone who has completed 12th standard or above can join the program.",
+
+  suitableFor: [
+    "12th Pass Students",
+    "Degree Students",
+    "Final Year Students",
+    "Fresh Graduates",
+    "Working Professionals",
+    "Career Switchers",
+    "Job Seekers",
+    "Freelancers",
+  ],
+
+  codingExperience:
+    "No prior coding knowledge is required. The program starts from absolute basics and gradually progresses to advanced AI concepts.",
+
+  educationBackground:
+    "Students from any educational background including B.Tech, B.Sc, B.Com, BBA, BA, BCA, MCA, Diploma, and other streams can join.",
+
+  ageLimit:
+    "There is no strict age limit. Anyone interested in building a career in AI and Data Science is welcome.",
+
+  laptop:
+    "A Windows or Mac laptop with a stable internet connection is recommended for hands-on practice.",
+
+  language:
+    "Classes are taught in simple Telugu mixed with English, making them beginner-friendly.",
+
+  attendance:
+    "Students are encouraged to attend live classes, but recordings are available if a session is missed.",
+
+  commitment:
+    "Students should dedicate a few hours every week for learning, assignments, and project practice to get the best results."
+};
+// ── Searchable FAQ Knowledge Base ────────────────────────────────────────────
+
+export interface FAQItem {
+  id: string;
+  category: string;
+  question: string;
+  answer: string;
+  keywords: string[];
+}
+export const FAQ_DATA: FAQItem[] = [
+  {
+    id: "faq-live-classes",
+    category: "Classes",
+    question: "Are classes live?",
+    answer: "Yes. Regular live online classes are conducted by experienced instructors. Students can interact, ask questions, and learn in real time.",
+    keywords: ["live", "live classes", "online classes", "class", "zoom", "google meet"]
+  },
+
+  {
+    id: "faq-recordings",
+    category: "Classes",
+    question: "Will I get class recordings?",
+    answer: "Yes. Every live class recording is provided so you can revise anytime or catch up if you miss a session.",
+    keywords: ["recording", "recordings", "miss class", "watch later", "replay"]
+  },
+
+  {
+    id: "faq-language",
+    category: "Classes",
+    question: "What language are classes taught in?",
+    answer: "Classes are taught in simple Telugu mixed with English so that beginners can understand concepts comfortably.",
+    keywords: ["language", "telugu", "english", "medium"]
+  },
+
+  {
+    id: "faq-mode",
+    category: "Classes",
+    question: "Is the course online or offline?",
+    answer: "The Complete AI Career Program is conducted online with live classes and recorded sessions.",
+    keywords: ["online", "offline", "mode", "remote"]
+  },
+
+  {
+    id: "faq-duration",
+    category: "Course",
+    question: "How long is the course?",
+    answer: "The Complete AI Career Program is an 18-month guided learning program.",
+    keywords: ["duration", "months", "course duration", "18 months"]
+  },
+
+  {
+    id: "faq-beginner",
+    category: "Eligibility",
+    question: "Can beginners join?",
+    answer: "Absolutely. The course starts from Python basics and gradually progresses to advanced AI topics. No prior coding experience is required.",
+    keywords: ["beginner", "no coding", "start from zero", "fresh"]
+  },
+
+  {
+    id: "faq-coding",
+    category: "Eligibility",
+    question: "Do I need coding knowledge?",
+    answer: "No. Everything is taught from the fundamentals before moving into advanced AI and Machine Learning concepts.",
+    keywords: ["coding", "programming", "experience", "python knowledge"]
+  },
+
+  {
+    id: "faq-assignments",
+    category: "Learning",
+    question: "Are assignments included?",
+    answer: "Yes. Every major module includes assignments and practical exercises to strengthen your understanding before moving to the next topic.",
+    keywords: ["assignment", "assignments", "practice", "homework", "tasks"]
+  },
+
+  {
+    id: "faq-projects-count",
+    category: "Projects",
+    question: "How many projects will I build?",
+    answer: "Students build multiple real-world AI and Data Science projects throughout the program, creating a strong portfolio for placements.",
+    keywords: ["projects", "portfolio", "real projects", "hands on"]
+  },
+
+  {
+    id: "faq-support",
+    category: "Support",
+    question: "Will I get doubt support?",
+    answer: "Yes. Students receive continuous doubt support through mentors, live sessions, and the student community.",
+    keywords: ["doubt", "support", "mentor", "help", "questions"]
+  },
+  // ── Fees & Payment ───────────────────────────────────────────────────────
+
+  {
+    id: "faq-fee",
+    category: "Fees",
+    question: "What is the course fee?",
+    answer: "The Complete AI Career Program fee is ₹4,599.",
+    keywords: ["fee", "fees", "price", "cost", "course fee", "amount"]
+  },
+
+  {
+    id: "faq-emi",
+    category: "Payment",
+    question: "Is EMI available?",
+    answer: "Yes. EMI options may be available depending on the payment partner. Please contact a course counselor for the latest payment options.",
+    keywords: ["emi", "installment", "monthly payment", "finance"]
+  },
+
+  {
+    id: "faq-payment-methods",
+    category: "Payment",
+    question: "What payment methods are accepted?",
+    answer: "Students can pay using UPI, debit card, credit card, net banking, and other supported online payment methods.",
+    keywords: ["payment", "upi", "credit card", "debit card", "net banking", "gpay", "phonepe", "paytm"]
+  },
+
+  {
+    id: "faq-refund",
+    category: "Payment",
+    question: "Is there a refund policy?",
+    answer: "Please contact the DATADROP counseling team to understand the latest refund and cancellation policy before enrollment.",
+    keywords: ["refund", "cancel", "cancellation", "money back"]
+  },
+
+  // ── Placement ────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-placement",
+    category: "Placement",
+    question: "Do you provide placement assistance?",
+    answer: "Yes. Students receive placement guidance including resume building, mock interviews, portfolio preparation, and career support.",
+    keywords: ["placement", "job", "jobs", "placement assistance", "career support"]
+  },
+
+  {
+    id: "faq-placement-guarantee",
+    category: "Placement",
+    question: "Is placement guaranteed?",
+    answer: "No training institute can ethically guarantee a job. DATADROP provides placement assistance, mentorship, interview preparation, and career guidance to help students become job-ready.",
+    keywords: ["guarantee", "guaranteed job", "100 placement", "job guarantee"]
+  },
+
+  {
+    id: "faq-salary",
+    category: "Placement",
+    question: "What salary can I expect?",
+    answer: "Salary depends on your skills, interview performance, location, and experience. AI and Data Science roles generally offer competitive salaries with strong career growth.",
+    keywords: ["salary", "package", "lpa", "ctc", "income", "pay"]
+  },
+
+  {
+    id: "faq-companies",
+    category: "Placement",
+    question: "Which companies hire students?",
+    answer: "Students prepare for opportunities in startups, product companies, service companies, and organizations hiring AI, Machine Learning, and Data Science professionals.",
+    keywords: ["companies", "hiring", "amazon", "microsoft", "flipkart", "jobs"]
+  },
+
+  // ── Certificates ─────────────────────────────────────────────────────────
+
+  {
+    id: "faq-certificate",
+    category: "Certificate",
+    question: "Will I receive a certificate?",
+    answer: "Yes. Students receive an Industry-Recognized DATADROP Certificate after successfully completing the program.",
+    keywords: ["certificate", "certification", "completion certificate"]
+  },
+
+  {
+    id: "faq-linkedin",
+    category: "Certificate",
+    question: "Can I add the certificate to LinkedIn?",
+    answer: "Yes. The digital certificate can be added to LinkedIn, resumes, and job applications.",
+    keywords: ["linkedin", "resume", "cv", "digital certificate"]
+  },
+
+  // ── Enrollment ───────────────────────────────────────────────────────────
+
+  {
+    id: "faq-enroll",
+    category: "Enrollment",
+    question: "How do I enroll?",
+    answer: "Click the Enroll Now option in the chatbot or contact a DATADROP counselor. After completing the payment process, your enrollment will be confirmed.",
+    keywords: ["enroll", "join", "registration", "admission", "register"]
+  },
+
+  {
+    id: "faq-batch",
+    category: "Enrollment",
+    question: "When is the next batch?",
+    answer: "The next batch starts on September 5, 2026.",
+    keywords: ["next batch", "batch", "start date", "when does it start"]
+  },
+  // ── Curriculum ────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-curriculum",
+    category: "Curriculum",
+    question: "What topics are covered?",
+    answer: "The program covers Python, SQL, Data Analysis, Machine Learning, Deep Learning, NLP, Computer Vision, Generative AI, LLMs, RAG, AI Agents, MLOps, Cloud AI, and Production AI systems.",
+    keywords: ["curriculum", "syllabus", "topics", "modules", "subjects"]
+  },
+
+  {
+    id: "faq-python",
+    category: "Curriculum",
+    question: "Do you teach Python from scratch?",
+    answer: "Yes. Python is taught from the absolute basics, making the course suitable even for students with no programming background.",
+    keywords: ["python", "python basics", "learn python", "from scratch"]
+  },
+
+  {
+    id: "faq-generative-ai",
+    category: "Curriculum",
+    question: "Will I learn Generative AI?",
+    answer: "Yes. Students learn Prompt Engineering, LLM Engineering, RAG, AI Agents, Vector Databases, and modern Generative AI application development.",
+    keywords: ["generative ai", "gen ai", "chatgpt", "llm", "rag", "ai agents"]
+  },
+
+  {
+    id: "faq-tools",
+    category: "Curriculum",
+    question: "Which tools will I learn?",
+    answer: "Students work with Python, Pandas, NumPy, Scikit-learn, PyTorch, OpenCV, FastAPI, Docker, GitHub, LangChain, Pinecone, and other industry-standard AI tools.",
+    keywords: ["tools", "software", "libraries", "technology", "tech stack"]
+  },
+
+  // ── Projects ──────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-real-projects",
+    category: "Projects",
+    question: "Are the projects real-world?",
+    answer: "Yes. Students build practical AI and Data Science projects based on real industry use cases that strengthen their portfolio.",
+    keywords: ["real project", "industry project", "portfolio", "hands-on"]
+  },
+
+  {
+    id: "faq-capstone",
+    category: "Projects",
+    question: "Is there a final capstone project?",
+    answer: "Yes. Students complete a production-grade capstone AI project before finishing the program.",
+    keywords: ["capstone", "final project", "major project"]
+  },
+
+  // ── Mentorship ────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-mentor",
+    category: "Mentorship",
+    question: "Will I get mentorship?",
+    answer: "Yes. Students receive guidance from experienced mentors throughout the learning journey.",
+    keywords: ["mentor", "mentorship", "guidance", "coach"]
+  },
+
+  {
+    id: "faq-code-review",
+    category: "Mentorship",
+    question: "Will my projects be reviewed?",
+    answer: "Yes. Mentors provide feedback and guidance to help students improve their projects and practical skills.",
+    keywords: ["review", "code review", "project review", "feedback"]
+  },
+
+  // ── Student Support ───────────────────────────────────────────────────────
+
+  {
+    id: "faq-community",
+    category: "Support",
+    question: "Is there a student community?",
+    answer: "Yes. Students become part of the DATADROP learning community where they can interact, ask questions, and collaborate.",
+    keywords: ["community", "discord", "group", "student group"]
+  },
+
+  {
+    id: "faq-lifetime-access",
+    category: "Support",
+    question: "Will I have lifetime access?",
+    answer: "Students receive access according to the program policy. Please contact a counselor for the latest access details.",
+    keywords: ["lifetime", "access", "course access"]
+  },
+
+  {
+    id: "faq-doubts",
+    category: "Support",
+    question: "How are doubts cleared?",
+    answer: "Students can ask questions during live classes and receive mentor support throughout the course.",
+    keywords: ["doubts", "questions", "support", "help", "ask doubts"]
+  },
+
+  // ── Schedule ──────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-class-time",
+    category: "Schedule",
+    question: "When are the classes conducted?",
+    answer: "Class schedules are shared with enrolled students before each batch begins. Please contact a counselor for the latest timetable.",
+    keywords: ["class timing", "schedule", "time", "weekend", "weekday"]
+  },
+  // ── Career & Eligibility ───────────────────────────────────────────────
+
+  {
+    id: "faq-working-professional",
+    category: "Eligibility",
+    question: "Can working professionals join?",
+    answer: "Yes. The program is suitable for both students and working professionals who want to transition into AI and Data Science.",
+    keywords: ["working professional", "job", "employee", "office", "working"]
+  },
+
+  {
+    id: "faq-degree",
+    category: "Eligibility",
+    question: "Can any degree student join?",
+    answer: "Yes. Students from B.Tech, B.Sc, B.Com, BBA, BCA, MCA, M.Tech, Degree, Diploma and other educational backgrounds can join.",
+    keywords: ["degree", "btech", "bsc", "bcom", "bca", "bba", "mca", "mtech", "diploma"]
+  },
+
+  {
+    id: "faq-age",
+    category: "Eligibility",
+    question: "Is there an age limit?",
+    answer: "No. Anyone interested in learning AI and building a career can join the program.",
+    keywords: ["age", "age limit", "minimum age", "maximum age"]
+  },
+
+  // ── Laptop Requirements ────────────────────────────────────────────────
+
+  {
+    id: "faq-laptop",
+    category: "Requirements",
+    question: "Do I need a laptop?",
+    answer: "Yes. A Windows or Mac laptop with at least 8 GB RAM is recommended for practicing AI and Data Science projects.",
+    keywords: ["laptop", "computer", "pc", "system", "ram", "requirements"]
+  },
+
+  {
+    id: "faq-mobile",
+    category: "Requirements",
+    question: "Can I learn using only a mobile phone?",
+    answer: "A laptop is strongly recommended because students will write code, build projects, and use professional development tools.",
+    keywords: ["mobile", "phone", "android", "iphone"]
+  },
+
+  // ── Attendance ─────────────────────────────────────────────────────────
+
+  {
+    id: "faq-miss-class",
+    category: "Classes",
+    question: "What if I miss a class?",
+    answer: "No problem. Every live class recording is shared, so you can watch it later and continue your learning.",
+    keywords: ["miss class", "missed class", "absent", "recording"]
+  },
+
+  // ── Bonuses ────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-bonus",
+    category: "Bonuses",
+    question: "Will I receive bonuses?",
+    answer: "Yes. Students receive several bonuses including mock interviews, resume support, LinkedIn optimization, interview preparation resources, and community access.",
+    keywords: ["bonus", "bonuses", "free", "extra"]
+  },
+
+  // ── Career Opportunities ───────────────────────────────────────────────
+
+  {
+    id: "faq-careers",
+    category: "Career",
+    question: "Which careers can I pursue after this course?",
+    answer: "Students can prepare for careers such as Data Analyst, Data Scientist, Machine Learning Engineer, AI Engineer, Generative AI Engineer, Computer Vision Engineer, NLP Engineer, and MLOps Engineer.",
+    keywords: ["career", "job roles", "roles", "future", "opportunities"]
+  },
+
+  // ── Contact ────────────────────────────────────────────────────────────
+
+  {
+    id: "faq-contact",
+    category: "Contact",
+    question: "How can I contact DATADROP?",
+    answer: "You can contact a DATADROP course counselor through WhatsApp or email using the contact details available inside the chatbot.",
+    keywords: ["contact", "phone", "email", "whatsapp", "counselor"]
+  },
+
+  // ── Miscellaneous ──────────────────────────────────────────────────────
+
+  {
+    id: "faq-demo",
+    category: "General",
+    question: "Can I attend a demo session?",
+    answer: "Please contact a DATADROP course counselor to know about demo classes or upcoming orientation sessions.",
+    keywords: ["demo", "trial", "sample class", "orientation"]
+  },
+
+  {
+    id: "faq-updates",
+    category: "General",
+    question: "Will the curriculum be updated?",
+    answer: "Yes. The curriculum is continuously updated to include the latest AI tools, technologies, and industry practices.",
+    keywords: ["updated", "updates", "latest", "new syllabus", "curriculum update"]
+  },
+
 ];

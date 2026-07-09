@@ -108,7 +108,7 @@ export function parseInput(raw: string): ParsedIntent {
 
   if (synonym) {
     switch (synonym) {
-      case "fee":
+      case "fees":
         return { kind: "navigate", state: "PRICING" };
 
       case "curriculum":
@@ -117,7 +117,7 @@ export function parseInput(raw: string): ParsedIntent {
       case "placement":
         return { kind: "navigate", state: "PLACEMENT" };
 
-      case "project":
+      case "projects":
         return { kind: "navigate", state: "PROJECTS" };
 
       case "contact":
@@ -129,7 +129,7 @@ export function parseInput(raw: string): ParsedIntent {
       default:
         break;
     }
-  }knowledgeSearch.ts
+  }
   // FAQ category quick-reply (e.g. "❓ Placement")
   const faqCategoryStripped = stripped.replace(/^❓\s*/, "");
   const FAQ_CATEGORIES = [
