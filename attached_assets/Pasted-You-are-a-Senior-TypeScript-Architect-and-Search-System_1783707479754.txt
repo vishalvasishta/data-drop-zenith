@@ -1,0 +1,222 @@
+You are a Senior TypeScript Architect and Search Systems Engineer.
+
+We are building a production-quality deterministic chatbot.
+
+Do NOT modify any code yet.
+
+I want a complete engineering audit of the search engine before we begin refactoring.
+
+Target file
+
+Inspect the entire search system, starting with:
+
+- src/features/chatbot/engine/search.ts
+
+Also inspect any imported files that influence matching or scoring.
+
+Your task
+
+Read the entire search implementation and produce an audit.
+
+1. Matching Strategies
+
+Identify every matching strategy currently used, such as:
+
+- Exact match
+- Phrase match
+- Substring match
+- Word contains keyword
+- Keyword contains word
+- Synonym expansion
+- Fuzzy matching
+- Regex matching
+- Any other strategy
+
+For each strategy report:
+
+- Function name
+- File
+- Line numbers
+- Score value
+- Threshold
+- Purpose
+
+---
+
+2. includes() Audit
+
+Find every usage of:
+
+- includes()
+- startsWith()
+- endsWith()
+- indexOf()
+- regex matching
+
+For each one explain:
+
+- Why it exists
+- Whether it is safe
+- Possible false positives
+- Possible false negatives
+- Recommendation
+
+---
+
+3. Scoring Audit
+
+Create a table showing every score currently awarded.
+
+Example:
+
+Exact match .......... +15
+
+Substring ............ +8
+
+Word contains ........ +6
+
+Synonym .............. +?
+
+Phrase ............... +?
+
+Threshold ............ ?
+
+---
+
+4. Threshold Audit
+
+Identify every threshold.
+
+Examples:
+
+Minimum FAQ score
+
+Minimum Knowledge score
+
+Minimum Intent score
+
+Fallback thresholds
+
+Explain why each exists.
+
+---
+
+5. Search Flow
+
+Draw the complete flow.
+
+Example:
+
+User Query
+
+↓
+
+Normalization
+
+↓
+
+Synonym Expansion
+
+↓
+
+Tokenization
+
+↓
+
+Matcher A
+
+↓
+
+Matcher B
+
+↓
+
+Matcher C
+
+↓
+
+Scoring
+
+↓
+
+Threshold
+
+↓
+
+Best Result
+
+---
+
+6. Weaknesses
+
+List every architectural weakness.
+
+Examples:
+
+- Character-level substring matching
+- Duplicate scoring
+- Order-dependent behavior
+- Magic numbers
+- Mixed responsibilities
+- Difficult to extend
+- Difficult to test
+
+Do not suggest fixes yet.
+
+---
+
+7. Refactoring Plan
+
+Propose a phased refactor.
+
+The plan must use very small safe steps.
+
+Example:
+
+Step 1
+
+Extract scoring constants
+
+↓
+
+Step 2
+
+Extract ExactMatcher
+
+↓
+
+Step 3
+
+Extract PhraseMatcher
+
+↓
+
+Step 4
+
+Extract TokenMatcher
+
+↓
+
+Step 5
+
+Extract SynonymMatcher
+
+↓
+
+Step 6
+
+Extract FuzzyMatcher
+
+Each step must preserve existing behavior.
+
+---
+
+Constraints
+
+- Do NOT edit files.
+- Do NOT generate code changes.
+- Do NOT redesign unrelated systems.
+- Do NOT modify parser, context resolver, or conversation memory.
+- Only analyze the search engine.
+
+The output should read like an engineering design review for a production SaaS search engine.
