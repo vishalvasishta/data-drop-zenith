@@ -1,3 +1,5 @@
+import { resolveContext } from "../engine/contextResolver";
+import { rememberContext } from "../engine/conversationMemory";
 import { useReducer, useCallback, useRef } from "react";
 import type { ChatbotState, ChatbotAction, Message, ChatState, EnrollmentData, StudentProfile } from "../types";
 import { generateId } from "../utils/formatters";
@@ -167,6 +169,10 @@ export function useChatbot() {
           component: response.component ?? null,
           faqData: response.faqData,
         });
+        // Remember the topic before updating state
+        rememberContext({
+          topic: nextState,
+        });
         currentStateRef.current = nextState;
         dispatch({ type: "SET_STATE", payload: nextState });
       });
@@ -271,17 +277,31 @@ export function useChatbot() {
           dispatch({ type: "SET_STATE", payload: "MAIN_MENU" });
           return;
         }
+        // Intent Router
+
         // Knowledge Search
-        const knowledge = searchKnowledge(userInput);
+        // Intent Router
+        // Let the parser try first. If it doesn't recognize a navigation intent,
+        // we'll fall back to the knowledge search.
+        const context = resolveContext(userInput);
+        const {
+          handled,
+          response,
+          nextState,
+        } = processInput(
+          currentStateRef.current,
+          userInput,
+        );
 
-        if (knowledge.found) {
-          await showBotResponse(knowledge.answer);
+        // If parser couldn't understand the message, try the knowledge base.
+        if (!handled) {
+          const knowledge = searchKnowledge(context.resolvedMessage);
 
-          return;
+          if (knowledge.found) {
+            await showBotResponse(knowledge.answer);
+            return;
+          }
         }
-
-        // Read latest state from ref (not closure) to avoid stale-state races
-        const { response, nextState } = processInput(currentStateRef.current, userInput);
 
         // Track interest from the state being entered and recompute lead score
         const interestLabel = INTEREST_STATES[nextState];

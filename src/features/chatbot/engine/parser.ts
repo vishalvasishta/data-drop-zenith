@@ -2,7 +2,9 @@ import type { ChatState } from "../types";
 import { MAIN_MENU } from "../data/menuData";
 import { CURRICULUM } from "../data/knowledgeBase";
 import { SYNONYMS } from "../data/synonyms";
+import { INTENTS } from "../data/intent";
 import { BACK } from "./actions";
+import { normalizeText } from "../utils/textNormalization";
 
 
 // ── Normalise raw user input ──────────────────────────────────────────────────
@@ -70,6 +72,8 @@ const KEYWORD_STATE_MAP: Record<string, ChatState> = {
   hello: "MAIN_MENU",
   hey: "MAIN_MENU",
 };
+// Natural language navigation patterns
+
 function synonymMatch(input: string): string | null {
   for (const [category, words] of Object.entries(SYNONYMS)) {
     if (words.some((word) => input.includes(word))) {
@@ -79,8 +83,127 @@ function synonymMatch(input: string): string | null {
 
   return null;
 }
+const STOP_WORDS = new Set([
+  "i",
+  "me",
+  "my",
+  "mine",
+  "you",
+  "your",
+  "yours",
+  "we",
+  "our",
+  "ours",
+
+  "a",
+  "an",
+  "the",
+
+  "is",
+  "are",
+  "was",
+  "were",
+  "be",
+  "been",
+  "being",
+
+  "do",
+  "does",
+  "did",
+
+  "can",
+  "could",
+  "would",
+  "should",
+  "will",
+
+  "please",
+
+  "tell",
+  "show",
+  "give",
+  "know",
+  "want",
+  "need",
+  "explain",
+
+  "to",
+  "for",
+  "of",
+  "about",
+  "on",
+  "in",
+  "at",
+  "with",
+  "from",
+
+  "more",
+  "some",
+  "any",
+
+  "what",
+  "when",
+  "where",
+  "why",
+  "how",
+
+  "this",
+  "that",
+  "these",
+  "those",
+
+  "get",
+  "got",
+  "have",
+  "has",
+  "had",
+]);
+function scoreIntent(
+  input: string,
+  phrases: string[],
+): number {
+  let bestScore = 0;
+
+  const words = input
+    .toLowerCase()
+    .split(/\s+/)
+    .filter(Boolean)
+    .filter(word => !STOP_WORDS.has(word));
+
+  for (const phrase of phrases) {
+    const phraseWords = phrase
+      .toLowerCase()
+      .split(/\s+/)
+      .filter(word => !STOP_WORDS.has(word));
+
+    let score = 0;
+
+    for (const word of phraseWords) {
+      if (words.includes(word)) {
+        score++;
+      }
+    }
+
+    // Exact phrase gets a bonus
+    if (input.includes(phrase)) {
+      score += 5;
+    }
+
+    // Bonus when every important word matches
+    if (
+      phraseWords.length > 0 &&
+      phraseWords.every(word => words.includes(word))
+    ) {
+      score += 2;
+    }
+
+    bestScore = Math.max(bestScore, score);
+  }
+
+  return bestScore;
+}
 export function parseInput(raw: string): ParsedIntent {
-  const input = normaliseInput(raw);
+  const input = normalizeText(normaliseInput(raw));
 
   // Back navigation
   if (raw === BACK || input === "back" || input === "⬅️ back to menu") {
@@ -95,9 +218,47 @@ export function parseInput(raw: string): ParsedIntent {
   if (menuState) return { kind: "navigate", state: menuState };
 
   // Keyword match (single word)
+  // Natural language navigation patterns
+  // Natural-language intent matching
+  let bestIntent: ChatState | null = null;
+  let bestScore = 0;
+
+  for (const intent of INTENTS) {
+    const score = scoreIntent(
+      input,
+      intent.phrases,
+    );
+
+    if (score > bestScore) {
+      bestScore = score;
+      bestIntent = intent.state;
+    }
+  }
+
+  if (bestIntent && bestScore >= 2) {
+    console.log(
+      "[Intent Match]",
+      "Input:", input,
+      "Intent:", bestIntent,
+      "Score:", bestScore,
+    );
+
+    return {
+      kind: "navigate",
+      state: bestIntent,
+    };
+  }
+
+  // Keyword match (single word)
   const firstWord = input.split(/\s+/)[0];
   const kwState = KEYWORD_STATE_MAP[input] ?? KEYWORD_STATE_MAP[firstWord];
-  if (kwState) return { kind: "navigate", state: kwState };
+
+  if (kwState) {
+    return {
+      kind: "navigate",
+      state: kwState,
+    };
+  }
 
   // Curriculum topic match
   const topicMatch = CURRICULUM.find(
@@ -149,21 +310,5 @@ export function parseInput(raw: string): ParsedIntent {
   if (FAQ_CATEGORIES.includes(faqCategoryStripped.toLowerCase())) {
     return { kind: "faq-search", query: faqCategoryStripped };
   }
-
-  // Generic FAQ search for question-like inputs
-  if (
-    input.includes("?") ||
-    input.startsWith("what") ||
-    input.startsWith("how") ||
-    input.startsWith("when") ||
-    input.startsWith("why") ||
-    input.startsWith("is ") ||
-    input.startsWith("does") ||
-    input.startsWith("can ") ||
-    input.startsWith("do ")
-  ) {
-    return { kind: "faq-search", query: raw };
-  }
-
   return { kind: "unknown", raw };
 }

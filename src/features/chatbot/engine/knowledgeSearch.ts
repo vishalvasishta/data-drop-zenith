@@ -1,3 +1,5 @@
+import { getLastTopic } from "../engine/conversationMemory";
+import { normalizeText } from "../utils/textNormalization";
 import {
   COURSE_INFO,
   PAYMENT_INFO,
@@ -11,9 +13,79 @@ export interface KnowledgeAnswer {
   found: boolean;
   answer: string;
 }
+const NAVIGATION_PHRASES = [
+  // About
+  "📚 about course",
+  "about course",
+  "tell me about the course",
+  "about the course",
+  "about your course",
+  "what is this course",
+  "explain the course",
+  "tell me about datadrop",
+  "about datadrop",
+
+  // Curriculum
+  "🎓 complete curriculum",
+  "complete curriculum",
+  "show curriculum",
+  "course curriculum",
+  "course syllabus",
+  "what will i learn",
+
+  // Roadmap
+  "🗺️ learning roadmap",
+  "learning roadmap",
+  "roadmap",
+
+  // Careers
+  "💼 career opportunities",
+  "career opportunities",
+
+  // Placement
+  "🏆 placement",
+  "placement",
+
+  // Projects
+  "🚀 projects",
+  "projects",
+
+  // Pricing
+  "💰 course fee",
+  "course fee",
+
+  // Bonuses
+  "🎁 bonuses",
+  "bonuses",
+
+  // Enrollment
+  "✅ enroll now",
+  "enroll now",
+
+  // FAQ
+  "❓ faqs",
+  "faqs",
+
+  // Contact
+  "📞 talk to counselor",
+  "talk to counselor",
+];
 
 export function searchKnowledge(question: string): KnowledgeAnswer {
-  const q = question.toLowerCase();
+  const q = normalizeText(question);
+  const lastTopic = getLastTopic();
+  // Let the parser handle navigation-style requests.
+  if (
+    NAVIGATION_PHRASES.some(
+      phrase => q.includes(phrase) || phrase.includes(q)
+    )
+  ) {
+    return {
+      found: false,
+      answer: "",
+    };
+  }
+
 
   // ---------- Intelligent FAQ Search ----------
   const bestMatch = searchFAQs(question);
@@ -29,7 +101,58 @@ export function searchKnowledge(question: string): KnowledgeAnswer {
   }
 
   // ---------- Legacy Rule Engine ----------
+  // --------------------
+  // Conversation Memory
+  // --------------------
 
+  // User previously asked about the course
+  if (
+    lastTopic === "ABOUT" &&
+    (q.includes("duration") ||
+      q.includes("how long") ||
+      q === "how long is it")
+  ) {
+    return {
+      found: true,
+      answer: `The Complete AI Career Program runs for ${COURSE_INFO.duration}.`,
+    };
+  }
+
+  if (
+    lastTopic === "ABOUT" &&
+    (q.includes("fee") ||
+      q.includes("fees") ||
+      q.includes("price") ||
+      q.includes("cost") ||
+      q.includes("how much"))
+  ) {
+    return {
+      found: true,
+      answer: `The Complete AI Career Program fee is ${COURSE_INFO.fee}.`,
+    };
+  }
+
+  if (
+    lastTopic === "ABOUT" &&
+    (q.includes("project") || q.includes("projects"))
+  ) {
+    return {
+      found: true,
+      answer:
+        "Students build 25+ real-world projects covering Data Analytics, Machine Learning, Deep Learning, Generative AI, RAG, AI Agents, and Production AI systems.",
+    };
+  }
+
+  if (
+    lastTopic === "ABOUT" &&
+    (q.includes("placement") || q.includes("job"))
+  ) {
+    return {
+      found: true,
+      answer:
+        "Students receive complete placement guidance including resume building, portfolio reviews, mock interviews, and job referrals.",
+    };
+  }
   // Live classes
   if (
     q.includes("live") &&
