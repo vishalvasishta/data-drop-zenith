@@ -1,6 +1,58 @@
+import { analyzeQuestion } from "./context/questionAnalyzer";
+import { rewriteMessage } from "./context/messageRewriter";
+import { hasContextPronoun } from "./context/pronounResolver";
 import { TOPIC_CONTEXT } from "./topicContext";
-import { getLastTopic } from "./memoryManager";
+import {
+  getContextSnapshot,
+  getLastTopic,
+} from "./conversationMemory";
 import type { ChatState } from "../types";
+export interface ResolvedInput {
+  /**
+   * The exact message the user typed.
+   */
+  original: string;
+
+  /**
+   * The message after context resolution.
+   */
+  resolvedMessage: string;
+
+  /**
+   * Whether conversation context was used.
+   */
+  usedContext: boolean;
+
+  /**
+   * Semantic topic (not ChatState).
+   * Examples:
+   * "course"
+   * "pricing"
+   * "curriculum"
+   * "placement"
+   */
+  topic?: string;
+
+  /**
+   * Specific entity being discussed.
+   * Examples:
+   * "certificate"
+   * "projects"
+   * "mentor"
+   */
+  entity?: string;
+
+  /**
+   * Resolved intent name.
+   */
+  intent?: string;
+
+  /**
+   * Resolver confidence.
+   * 0.0 → 1.0
+   */
+  confidence: number;
+}
 
 export interface ContextResolution {
   resolved: boolean;
@@ -16,34 +68,21 @@ export interface ContextResolution {
 
 export function resolveContext(message: string): ContextResolution {
   const lastTopic = getLastTopic();
-
+  const context = getContextSnapshot();
   const normalizedMessage = message.toLowerCase();
+  const questionType = analyzeQuestion(normalizedMessage);
 
-  const contextualWords = [
-    "it",
-    "its",
-    "they",
-    "them",
-    "their",
-    "this",
-    "that",
-    "these",
-    "those",
-  ];
 
-  const hasContextWord = contextualWords.some((word) =>
-    normalizedMessage
-      .split(/\s+/)
-      .includes(word)
-  );
+
+  const hasContextWord = hasContextPronoun(normalizedMessage);
 
   if (hasContextWord && lastTopic) {
     const topicContext = TOPIC_CONTEXT[lastTopic];
 
     if (topicContext) {
-      const rewrittenMessage = message.replace(
-        /\b(it|its|they|them|their|this|that|these|those)\b/gi,
-        `the ${topicContext.defaultEntity}`,
+      const rewrittenMessage = rewriteMessage(
+        message,
+        topicContext.defaultEntity,
       );
 
       return {

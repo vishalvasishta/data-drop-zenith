@@ -7,7 +7,7 @@ export interface ConversationEvent {
   topic?: ChatState;
 
   intent?: string;
-
+  clear
   entity?: string;
 
   timestamp: number;
@@ -34,6 +34,15 @@ export interface ConversationContext {
 
   conversationHistory: ConversationEvent[];
 }
+export interface ContextSnapshot {
+  topic?: ChatState;
+
+  entity?: string;
+
+  intent?: string;
+
+  question?: string;
+}
 
 let memory: ConversationContext = {
   currentTopic: undefined,
@@ -50,12 +59,12 @@ let memory: ConversationContext = {
 };
 
 
-  export function rememberContext({
-    topic,
-    intent,
-    entity,
-    question,
-  }: ConversationUpdate) {
+export function rememberContext({
+  topic,
+  intent,
+  entity,
+  question,
+}: ConversationUpdate) {
   if (topic) {
     memory.previousTopic = memory.currentTopic;
     memory.currentTopic = topic;
@@ -90,6 +99,17 @@ let memory: ConversationContext = {
 
 export function getLastTopic(): ChatState | null {
   return memory.currentTopic ?? null;
+}
+export function getConversationMemory(): Readonly<ConversationContext> {
+  return memory;
+}
+export function getContextSnapshot(): Readonly<ContextSnapshot> {
+  return {
+    topic: memory.currentTopic,
+    entity: memory.lastEntity,
+    intent: memory.lastIntent,
+    question: memory.lastQuestion,
+  };
 }
 
 export function clearConversationMemory() {

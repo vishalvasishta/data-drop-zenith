@@ -1,3 +1,5 @@
+import { routeKnowledgeIntent } from "../search/router";
+import { analyzeQuestion } from "../engine/context/questionAnalyzer";
 import { getLastTopic } from "../engine/conversationMemory";
 import { normalizeText } from "../utils/textNormalization";
 import {
@@ -73,6 +75,15 @@ const NAVIGATION_PHRASES = [
 
 export function searchKnowledge(question: string): KnowledgeAnswer {
   const q = normalizeText(question);
+  const questionType = analyzeQuestion(q);
+  const route = routeKnowledgeIntent(questionType);
+
+  if (route.handled && route.response) {
+    return {
+      found: true,
+      answer: route.response.content,
+    };
+  }
   const lastTopic = getLastTopic();
   // Let the parser handle navigation-style requests.
   if (

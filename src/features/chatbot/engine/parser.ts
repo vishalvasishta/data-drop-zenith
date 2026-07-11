@@ -1,3 +1,4 @@
+import { analyzeQuestion } from "./context/questionAnalyzer";
 import type { ChatState } from "../types";
 import { MAIN_MENU } from "../data/menuData";
 import { CURRICULUM } from "../data/knowledgeBase";
@@ -199,12 +200,11 @@ function scoreIntent(
 
     bestScore = Math.max(bestScore, score);
   }
-
   return bestScore;
 }
 export function parseInput(raw: string): ParsedIntent {
   const input = normalizeText(normaliseInput(raw));
-
+  const questionType = analyzeQuestion(input);
   // Back navigation
   if (raw === BACK || input === "back" || input === "⬅️ back to menu") {
     return { kind: "back" };
@@ -235,7 +235,11 @@ export function parseInput(raw: string): ParsedIntent {
     }
   }
 
-  if (bestIntent && bestScore >= 2) {
+    if (
+      bestIntent &&
+      bestScore >= 2 &&
+      questionType === "unknown"
+    ) {
     console.log(
       "[Intent Match]",
       "Input:", input,
@@ -253,7 +257,7 @@ export function parseInput(raw: string): ParsedIntent {
   const firstWord = input.split(/\s+/)[0];
   const kwState = KEYWORD_STATE_MAP[input] ?? KEYWORD_STATE_MAP[firstWord];
 
-  if (kwState) {
+  if (kwState && questionType === "unknown") {
     return {
       kind: "navigate",
       state: kwState,

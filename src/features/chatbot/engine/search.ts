@@ -1,6 +1,17 @@
 import { FAQ_DATA, type FAQItem } from "../data/knowledgeBase";
 import { SYNONYMS } from "./synonyms";
+const SEARCH_WEIGHTS = {
+  EXACT_QUESTION_MATCH: 100,
+  QUESTION_PHRASE_MATCH: 40,
+  ANSWER_PHRASE_MATCH: 20,
+  EXACT_KEYWORD_MATCH: 15,
+  KEYWORD_CONTAINS_TOKEN: 8,
+  TOKEN_CONTAINS_KEYWORD: 6,
+} as const;
 
+const SEARCH_THRESHOLDS = {
+  MIN_FAQ_SCORE: 10,
+} as const;
 export interface SearchResult {
   faq: FAQItem;
   score: number;
@@ -15,6 +26,24 @@ function normalize(text: string): string {
     .trim()
     .replace(/[^\w\s]/g, " ")
     .replace(/\s+/g, " ");
+}
+function keywordHasToken(keyword: string, token: string): boolean {
+  if (token.length < 3) {
+    return false;
+  }
+
+  const keywordTokens = normalize(keyword).split(/\s+/);
+
+  return keywordTokens.includes(token);
+}
+function tokenMatchesKeyword(token: string, keyword: string): boolean {
+  if (keyword.length < 3) {
+    return false;
+  }
+
+  const tokenWords = normalize(token).split(/\s+/);
+
+  return tokenWords.includes(normalize(keyword));
 }
 function tokenize(text: string): string[] {
   return normalize(text)
@@ -38,6 +67,7 @@ function expandWords(words: string[]): string[] {
 }
 function scoreFAQ(query: string, faq: FAQItem): number {
   let score = 0;
+  const reasons: string[] = [];
 
   const normalizedQuery = normalize(query);
   const queryWords = expandWords(tokenize(query));
@@ -48,17 +78,17 @@ function scoreFAQ(query: string, faq: FAQItem): number {
 
   // Exact question match
   if (normalizedQuery === question) {
-    score += 100;
+    score += SEARCH_WEIGHTS.EXACT_QUESTION_MATCH;
   }
 
   // Query appears in question
   if (question.includes(normalizedQuery)) {
-    score += 40;
+    score += SEARCH_WEIGHTS.QUESTION_PHRASE_MATCH;
   }
 
   // Query appears in answer
   if (answer.includes(normalizedQuery)) {
-    score += 20;
+    score += SEARCH_WEIGHTS.ANSWER_PHRASE_MATCH;
   }
 
   // Keyword scoring
@@ -69,13 +99,13 @@ function scoreFAQ(query: string, faq: FAQItem): number {
       if (matched.has(keyword)) continue;
 
       if (word === keyword) {
-        score += 15;
+        score += SEARCH_WEIGHTS.EXACT_KEYWORD_MATCH;
         matched.add(keyword);
-      } else if (keyword.includes(word)) {
-        score += 8;
+      } else if (keywordHasToken(keyword, word)) {
+        score += SEARCH_WEIGHTS.KEYWORD_CONTAINS_TOKEN;
         matched.add(keyword);
-      } else if (word.includes(keyword)) {
-        score += 6;
+      } else if (tokenMatchesKeyword(word, keyword)) {
+        score += SEARCH_WEIGHTS.TOKEN_CONTAINS_KEYWORD;
         matched.add(keyword);
       }
     }
@@ -93,7 +123,7 @@ export function searchFAQs(query: string): SearchResult | null {
 
   const best = results[0];
 
-  if (!best || best.score < 10) {
+  if (!best || best.score < SEARCH_THRESHOLDS.MIN_FAQ_SCORE) {
     return null;
   }
 

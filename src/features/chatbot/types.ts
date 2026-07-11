@@ -77,6 +77,7 @@ export interface BotResponse {
   nextState?: ChatState;
   component?: SpecialComponent;
   faqData?: FAQ[];
+  intent?: string;
 }
 
 export interface StateHandler {
