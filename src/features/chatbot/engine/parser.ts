@@ -206,7 +206,10 @@ export function parseInput(raw: string): ParsedIntent {
   const input = normalizeText(normaliseInput(raw));
   const questionType = analyzeQuestion(input);
   // Back navigation
-  if (raw === BACK || input === "back" || input === "⬅️ back to menu") {
+  if (
+    input === "back" ||
+    input === "back to menu"
+  ) {
     return { kind: "back" };
   }
 
@@ -235,11 +238,11 @@ export function parseInput(raw: string): ParsedIntent {
     }
   }
 
-    if (
-      bestIntent &&
-      bestScore >= 2 &&
-      questionType === "unknown"
-    ) {
+  if (
+    bestIntent &&
+    bestScore >= 2 &&
+    questionType === "unknown"
+  ) {
     console.log(
       "[Intent Match]",
       "Input:", input,

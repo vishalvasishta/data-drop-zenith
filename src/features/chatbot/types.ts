@@ -89,14 +89,30 @@ export type StateHandlerMap = Record<ChatState, StateHandler>;
 
 // ── Conversation Profiling ────────────────────────────────────────────────────
 export interface StudentProfile {
+  // Collected during onboarding
   role: string | null;
   education: string | null;
   careerGoal: string | null;
+
+  // Learned during conversation
+  codingLevel: "none" | "basic" | "intermediate" | null;
+  budgetConcern: boolean;
+  parentConcern: boolean;
+  primaryInterest: string | null;
+
   interests: string[];
   objections: string[];
-  leadScore: number;
-}
 
+  leadScore: number;
+  trustLevel: number;
+
+  conversationStage:
+  | "discovery"
+  | "interest"
+  | "evaluation"
+  | "decision"
+  | "enrollment";
+}
 // ── Chatbot Global State ──────────────────────────────────────────────────────
 export interface ChatbotState {
   currentState: ChatState;

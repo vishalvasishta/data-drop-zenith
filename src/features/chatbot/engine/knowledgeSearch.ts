@@ -11,9 +11,11 @@ import {
   ELIGIBILITY,
 } from "../data/knowledgeBase";
 import { searchFAQs } from "./search";
+import type { BotResponse } from "../types";
+
 export interface KnowledgeAnswer {
   found: boolean;
-  answer: string;
+  response?: BotResponse;
 }
 const NAVIGATION_PHRASES = [
   // About
@@ -81,7 +83,7 @@ export function searchKnowledge(question: string): KnowledgeAnswer {
   if (route.handled && route.response) {
     return {
       found: true,
-      answer: route.response.content,
+      response: route.response,
     };
   }
   const lastTopic = getLastTopic();
@@ -92,8 +94,7 @@ export function searchKnowledge(question: string): KnowledgeAnswer {
     )
   ) {
     return {
-      found: false,
-      answer: "",
+        found: false,
     };
   }
 
@@ -263,7 +264,6 @@ export function searchKnowledge(question: string): KnowledgeAnswer {
   }
 
   return {
-    found: false,
-    answer: "",
+      found: false,
   };
 }

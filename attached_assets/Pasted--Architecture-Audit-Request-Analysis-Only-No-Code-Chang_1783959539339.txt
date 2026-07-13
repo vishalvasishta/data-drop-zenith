@@ -1,0 +1,264 @@
+# Architecture Audit Request (Analysis Only - No Code Changes)
+
+You are acting as a Senior Software Architect and TypeScript Engineer.
+
+**IMPORTANT:** This task is **analysis only**. Do **NOT** modify, refactor, rename, create, or delete any files. Do **NOT** generate code. Your only goal is to understand and document the current chatbot architecture.
+
+## Objective
+
+Perform a complete architecture audit of the chatbot and produce a detailed report showing exactly how a user message flows through the system.
+
+I want to identify why different questions are being answered by different components (Parser, FAQ Search, Curriculum Search, Legacy Rules, Intent Router, etc.) and understand the exact execution order.
+
+---
+
+## Deliverables
+
+### 1. End-to-End Request Flow
+
+Trace the complete execution path beginning from:
+
+* ChatInput
+* useChatbot
+* handleMessage
+* Orchestrator
+* Parser
+* Context Resolver
+* Conversation Analyzer
+* Intent Classifier
+* Knowledge Search
+* Response Pipeline
+* Final Bot Response
+
+Produce a flowchart similar to:
+
+User
+↓
+ChatInput
+↓
+useChatbot
+↓
+handleMessage()
+↓
+...
+
+For every step explain:
+
+* File path
+* Function name
+* Input
+* Output
+* Whether execution continues or returns
+
+---
+
+### 2. Decision Tree
+
+Identify every place where execution can return early.
+
+For example:
+
+if (parserResult.handled)
+return ...
+
+if (knowledge.found)
+return ...
+
+Continue until the entire decision tree is documented.
+
+---
+
+### 3. Search System Inventory
+
+Identify every search system currently used.
+
+Examples:
+
+* FAQ Search
+* Curriculum Search
+* Knowledge Search
+* Intent Router
+* RouteKnowledgeIntent
+* searchFAQs()
+* Legacy Rule Engine
+* Navigation Router
+* Context Resolver
+
+For each one document:
+
+* File
+* Function
+* Purpose
+* When it executes
+* Whether it can prevent later searches from running
+
+---
+
+### 4. Routing Order
+
+Determine the exact runtime order.
+
+For example:
+
+Parser
+↓
+
+Curriculum Search
+↓
+
+FAQ Search
+↓
+
+Legacy Rules
+
+(or whatever the actual order is)
+
+I want the REAL execution order, not assumptions.
+
+---
+
+### 5. Early Return Analysis
+
+List every location where the chatbot stops processing.
+
+Example:
+
+Parser handled
+↓
+
+Return immediately
+
+Knowledge found
+↓
+
+Return immediately
+
+Document every early exit.
+
+---
+
+### 6. Duplicate Logic
+
+Identify duplicated logic including:
+
+* Multiple intent classifiers
+* Multiple search engines
+* Multiple keyword matchers
+* Multiple normalization functions
+* Multiple response builders
+
+For each duplication explain:
+
+* Why it exists
+* Whether it is still needed
+* Whether it causes conflicts
+
+---
+
+### 7. Response Sources
+
+Document every possible source of a BotResponse.
+
+Examples:
+
+Parser
+
+Knowledge Search
+
+FAQ Search
+
+Legacy Rules
+
+Conversation Pipeline
+
+Response Enhancer
+
+Any others
+
+Explain which one ultimately reaches the UI.
+
+---
+
+### 8. File Dependency Map
+
+Produce a dependency tree beginning with:
+
+useChatbot.ts
+
+Show every imported chatbot file until the final response is produced.
+
+---
+
+### 9. Potential Architecture Problems
+
+Identify:
+
+* Dead code
+* Unused search systems
+* Conflicting routers
+* Competing search engines
+* Duplicate execution paths
+* Circular dependencies
+* Legacy code that should be removed
+
+Do NOT fix anything.
+
+Simply explain.
+
+---
+
+### 10. Recommended Architecture
+
+Based on the current implementation, recommend a clean architecture showing:
+
+User
+↓
+
+Orchestrator
+↓
+
+Parser
+↓
+
+Search Orchestrator
+↓
+
+FAQ Search
+
+Curriculum Search
+
+Career Search
+
+Tool Search
+
+Placement Search
+
+↓
+
+Conversation Pipeline
+
+↓
+
+Response Enhancer
+
+↓
+
+Final Response
+
+Explain why this architecture is better.
+
+---
+
+## Rules
+
+* Analysis only.
+* No code changes.
+* No refactoring.
+* No new files.
+* No deleting files.
+* No assumptions—inspect the actual codebase.
+* Reference exact file names and function names.
+* If something is unused, explicitly state that it appears unused.
+* If two systems overlap, explain exactly how they interact.
+
+The final output should read like a professional software architecture review prepared for a senior engineering team.

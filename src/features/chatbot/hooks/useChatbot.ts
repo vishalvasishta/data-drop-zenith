@@ -1,13 +1,16 @@
-import { resolveContext } from "../engine/contextResolver";
+import { updateLeadScore } from "../engine/messageHandlers/profileHandler";
+import { handleMessage } from "../engine/orchestrator";
+import { getWelcomeResponse } from "../engine/chatbotEngine";
 import { rememberContext } from "../engine/conversationMemory";
 import { useReducer, useCallback, useRef } from "react";
 import type { ChatbotState, ChatbotAction, Message, ChatState, EnrollmentData, StudentProfile } from "../types";
 import { generateId } from "../utils/formatters";
-import { processInput, getWelcomeResponse } from "../engine/chatbotEngine";
-import { searchKnowledge } from "../engine/knowledgeSearch";
 import { mainMenuAction } from "../engine/actions";
 import { detectObjection } from "../engine/objectionHandler";
-import { detectObjectionLabel, computeLeadScore, INTEREST_STATES } from "../engine/leadIntelligence";
+import {
+  detectObjectionLabel,
+  INTEREST_STATES,
+} from "../engine/leadIntelligence";
 import {
   ROLE_QUICK_REPLIES,
   EDUCATION_QUESTION,
@@ -91,7 +94,26 @@ const INITIAL_STATE: ChatbotState = {
   isTyping: false,
   enrollmentData: {},
   isOpen: false,
-  profile: { role: null, education: null, careerGoal: null, interests: [], objections: [], leadScore: 0 },
+  profile: {
+    // Collected during onboarding
+    role: null,
+    education: null,
+    careerGoal: null,
+
+    // Learned during conversation
+    codingLevel: null,
+    budgetConcern: false,
+    parentConcern: false,
+    primaryInterest: null,
+
+    interests: [],
+    objections: [],
+
+    leadScore: 0,
+    trustLevel: 0,
+
+    conversationStage: "discovery",
+  },
   isLeadGatePending: false,
 };
 
@@ -210,7 +232,12 @@ export function useChatbot() {
         if (ROLE_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, role: userInput };
           dispatch({ type: "SET_PROFILE_ROLE", payload: userInput });
-          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+          profileRef.current = updateLeadScore(profileRef.current);
+
+          dispatch({
+            type: "SET_PROFILE_LEAD_SCORE",
+            payload: profileRef.current.leadScore,
+          });
           await showBotResponse(EDUCATION_QUESTION, {
             quickReplies: EDUCATION_QUICK_REPLIES,
           });
@@ -221,7 +248,12 @@ export function useChatbot() {
         if (EDUCATION_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, education: userInput };
           dispatch({ type: "SET_PROFILE_EDUCATION", payload: userInput });
-          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+          profileRef.current = updateLeadScore(profileRef.current);
+
+          dispatch({
+            type: "SET_PROFILE_LEAD_SCORE",
+            payload: profileRef.current.leadScore,
+          });
           await showBotResponse(CAREER_GOAL_QUESTION, {
             quickReplies: CAREER_GOAL_QUICK_REPLIES,
           });
@@ -235,7 +267,12 @@ export function useChatbot() {
         if (CAREER_GOAL_QUICK_REPLIES.includes(userInput)) {
           profileRef.current = { ...profileRef.current, careerGoal: userInput };
           dispatch({ type: "SET_PROFILE_CAREER_GOAL", payload: userInput });
-          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+          profileRef.current = updateLeadScore(profileRef.current);
+
+          dispatch({
+            type: "SET_PROFILE_LEAD_SCORE",
+            payload: profileRef.current.leadScore,
+          });
           await showBotResponse(buildPersonalizedRecommendation(profileRef.current));
 
           // Automatically inject the lead-capture form — no quick replies so the
@@ -264,7 +301,12 @@ export function useChatbot() {
             const newObjections = [...profileRef.current.objections, objLabel];
             profileRef.current = { ...profileRef.current, objections: newObjections };
             dispatch({ type: "SET_PROFILE_OBJECTIONS", payload: newObjections });
-            dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+            profileRef.current = updateLeadScore(profileRef.current);
+
+            dispatch({
+              type: "SET_PROFILE_LEAD_SCORE",
+              payload: profileRef.current.leadScore,
+            });
           }
           await showBotResponse(objectionResponse);
 
@@ -283,25 +325,16 @@ export function useChatbot() {
         // Intent Router
         // Let the parser try first. If it doesn't recognize a navigation intent,
         // we'll fall back to the knowledge search.
-        const context = resolveContext(userInput);
+
         const {
           handled,
           response,
           nextState,
-        } = processInput(
-          currentStateRef.current,
+        } = handleMessage({
+          currentState: currentStateRef.current,
           userInput,
-        );
-
-        // If parser couldn't understand the message, try the knowledge base.
-        if (!handled) {
-          const knowledge = searchKnowledge(context.resolvedMessage);
-
-          if (knowledge.found) {
-            await showBotResponse(knowledge.answer);
-            return;
-          }
-        }
+          profile: profileRef.current,
+        });
 
         // Track interest from the state being entered and recompute lead score
         const interestLabel = INTEREST_STATES[nextState];
@@ -309,7 +342,12 @@ export function useChatbot() {
           const newInterests = [...profileRef.current.interests, interestLabel];
           profileRef.current = { ...profileRef.current, interests: newInterests };
           dispatch({ type: "SET_PROFILE_INTERESTS", payload: newInterests });
-          dispatch({ type: "SET_PROFILE_LEAD_SCORE", payload: computeLeadScore(profileRef.current) });
+          profileRef.current = updateLeadScore(profileRef.current);
+
+          dispatch({
+            type: "SET_PROFILE_LEAD_SCORE",
+            payload: profileRef.current.leadScore,
+          });
         }
 
         await showBotResponse(response.content, {
