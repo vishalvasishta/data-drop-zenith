@@ -1,3 +1,5 @@
+import type { ChatState } from "../../chatbot/types"
+
 // ── DATADROP Knowledge Base ───────────────────────────────────────────────────
 // Single source of truth for all chatbot content. No placeholder text.
 
@@ -1334,9 +1336,10 @@ export const PLACEMENT_SUPPORT: PlacementSupport[] = [
 export interface FAQItem {
   id: string;
   category: string;
-  keywords: string[];
+  topic: ChatState;
   question: string;
   answer: string;
+  keywords: string[];
 }
 
 export const FAQS: FAQItem[] = [
@@ -2540,6 +2543,7 @@ export const ELIGIBILITY = {
 export interface FAQItem {
   id: string;
   category: string;
+  topic: ChatState;
   question: string;
   answer: string;
   keywords: string[];

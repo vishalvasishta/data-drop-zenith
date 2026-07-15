@@ -1,9 +1,12 @@
 import type { FAQ } from "../types";
 
+
+
 export const FAQ_DATA: FAQ[] = [
   // ── Admissions & Eligibility ───────────────────────────────────────────────
   {
     id: "faq-elig-1",
+    topic: "ABOUT",
     category: "Eligibility",
     question: "Do I need prior coding experience to join?",
     answer:
@@ -11,6 +14,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-elig-2",
+    topic: "ABOUT",
     category: "Eligibility",
     question: "What educational qualification is required?",
     answer:
@@ -18,6 +22,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-elig-3",
+    topic: "ABOUT",
     category: "Eligibility",
     question: "I'm a working professional — can I manage this alongside my job?",
     answer:
@@ -26,6 +31,7 @@ export const FAQ_DATA: FAQ[] = [
   {
     id: "faq-elig-4",
     category: "Eligibility",
+    topic: "ABOUT",
     question: "Is there an age limit?",
     answer:
       "None. Our youngest enrolled student is 19 and our oldest is 54. If you're motivated to build an AI career, you're eligible.",
@@ -34,6 +40,7 @@ export const FAQ_DATA: FAQ[] = [
   // ── Course Structure ────────────────────────────────────────────────────────
   {
     id: "faq-struct-1",
+    topic: "CURRICULUM",
     category: "Course Structure",
     question: "How is the 18-month program structured?",
     answer:
@@ -41,6 +48,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-struct-2",
+    topic: "CURRICULUM",
     category: "Course Structure",
     question: "Are the classes live or pre-recorded?",
     answer:
@@ -48,6 +56,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-struct-3",
+    topic: "CURRICULUM",
     category: "Course Structure",
     question: "What is the batch size?",
     answer:
@@ -55,6 +64,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-struct-4",
+    topic: "CURRICULUM",
     category: "Course Structure",
     question: "What language are the classes taught in?",
     answer:
@@ -62,6 +72,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-struct-5",
+    topic: "CURRICULUM",
     category: "Course Structure",
     question: "How many projects will I build during the program?",
     answer:
@@ -69,6 +80,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-struct-6",
+    topic: "CURRICULUM",
     category: "Course Structure",
     question: "When is the next batch starting?",
     answer:
@@ -78,6 +90,7 @@ export const FAQ_DATA: FAQ[] = [
   // ── Fees & Payment ──────────────────────────────────────────────────────────
   {
     id: "faq-fee-1",
+    topic: "PRICING",
     category: "Fees & Payment",
     question: "What is the course fee?",
     answer:
@@ -85,6 +98,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-fee-2",
+    topic: "PRICING",
     category: "Fees & Payment",
     question: "Is EMI or instalment payment available?",
     answer:
@@ -92,6 +106,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-fee-3",
+    topic: "PRICING",
     category: "Fees & Payment",
     question: "What payment methods are accepted?",
     answer:
@@ -99,6 +114,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-fee-4",
+    topic: "PRICING",
     category: "Fees & Payment",
     question: "Is there a refund policy?",
     answer:
@@ -106,6 +122,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-fee-5",
+    topic: "PRICING",
     category: "Fees & Payment",
     question: "Why is the fee so low compared to other programs?",
     answer:
@@ -115,6 +132,7 @@ export const FAQ_DATA: FAQ[] = [
   // ── Placement ───────────────────────────────────────────────────────────────
   {
     id: "faq-place-1",
+    topic: "PLACEMENT",
     category: "Placement",
     question: "What is the placement rate?",
     answer:
@@ -122,6 +140,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-place-2",
+    topic: "PLACEMENT",
     category: "Placement",
     question: "What is the average salary of placed students?",
     answer:
@@ -129,6 +148,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-place-3",
+    topic: "PLACEMENT",
     category: "Placement",
     question: "Which companies have hired DATADROP students?",
     answer:
@@ -136,6 +156,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-place-4",
+    topic: "PLACEMENT",
     category: "Placement",
     question: "What placement support is provided?",
     answer:
@@ -143,6 +164,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-place-5",
+    topic: "PLACEMENT",
     category: "Placement",
     question: "Can freshers (no work experience) get placed?",
     answer:
@@ -150,6 +172,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-place-6",
+    topic: "PLACEMENT",
     category: "Placement",
     question: "Is international job placement possible?",
     answer:
@@ -159,6 +182,7 @@ export const FAQ_DATA: FAQ[] = [
   // ── Mentorship & Support ────────────────────────────────────────────────────
   {
     id: "faq-mentor-1",
+    topic: "STUDENT_SUPPORT",
     category: "Mentorship",
     question: "Who teaches the program?",
     answer:
@@ -166,6 +190,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-mentor-2",
+    topic: "STUDENT_SUPPORT",
     category: "Mentorship",
     question: "How do I get help if I'm stuck on an assignment?",
     answer:
@@ -173,6 +198,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-mentor-3",
+    topic: "STUDENT_SUPPORT",
     category: "Mentorship",
     question: "Is there peer learning or group projects?",
     answer:
@@ -182,13 +208,16 @@ export const FAQ_DATA: FAQ[] = [
   // ── Technical Requirements ──────────────────────────────────────────────────
   {
     id: "faq-tech-1",
+    topic: "STUDENT_SUPPORT",
     category: "Technical Requirements",
+    
     question: "What computer / laptop specifications do I need?",
     answer:
       "A laptop with at least 8 GB RAM and an i5 or Ryzen 5 processor (or equivalent) is recommended. For GPU-intensive modules (Deep Learning, LLM Fine-tuning), we use cloud platforms like Google Colab Pro and AWS — so you don't need a personal GPU.",
   },
   {
     id: "faq-tech-2",
+    topic: "STUDENT_SUPPORT",
     category: "Technical Requirements",
     question: "What software do I need to install?",
     answer:
@@ -196,6 +225,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-tech-3",
+    topic: "STUDENT_SUPPORT",
     category: "Technical Requirements",
     question: "Is a good internet connection required?",
     answer:
@@ -205,6 +235,7 @@ export const FAQ_DATA: FAQ[] = [
   // ── Certificate & Outcomes ─────────────────────────────────────────────────
   {
     id: "faq-cert-1",
+    topic: "ABOUT",
     category: "Certificate",
     question: "Is the certificate recognised by employers?",
     answer:
@@ -212,6 +243,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-cert-2",
+    topic: "ABOUT",
     category: "Certificate",
     question: "When do I receive the certificate?",
     answer:
@@ -221,6 +253,7 @@ export const FAQ_DATA: FAQ[] = [
   // ── Existing Students ───────────────────────────────────────────────────────
   {
     id: "faq-stu-1",
+    topic: "STUDENT_SUPPORT",
     category: "Existing Students",
     question: "I can't access the LMS — what should I do?",
     answer:
@@ -228,6 +261,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-stu-2",
+    topic: "STUDENT_SUPPORT",
     category: "Existing Students",
     question: "My Discord invite link has expired — how do I get a new one?",
     answer:
@@ -235,6 +269,7 @@ export const FAQ_DATA: FAQ[] = [
   },
   {
     id: "faq-stu-3",
+    topic: "STUDENT_SUPPORT",
     category: "Existing Students",
     question: "How long do I have access to recorded sessions?",
     answer:

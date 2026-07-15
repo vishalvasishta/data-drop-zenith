@@ -1,3 +1,4 @@
+
 // ── Chat States ───────────────────────────────────────────────────────────────
 export type ChatState =
   | "WELCOME"
@@ -34,9 +35,11 @@ export type SpecialComponent =
 // ── Domain Models ─────────────────────────────────────────────────────────────
 export interface FAQ {
   id: string;
+  topic: ChatState;
+  category: string;
   question: string;
   answer: string;
-  category: string;
+  keywords?: string[];
 }
 
 export interface MenuOption {

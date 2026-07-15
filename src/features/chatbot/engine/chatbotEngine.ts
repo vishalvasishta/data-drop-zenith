@@ -43,29 +43,29 @@ export function processInput(currentState: ChatState, userInput: string): Proces
         nextState: "CURRICULUM",
       };
     }
-      case "faq-search": {
-        const faqResponse = searchFAQ(intent.query);
+    case "faq-search": {
+      const faqResult = searchFAQ(intent.query);
 
-        if (faqResponse.faqData?.length) {
-          return {
-            handled: true,
-            response: faqResponse,
-            nextState: "FAQ",
-          };
-        }
-
+      if (faqResult.found) {
         return {
-          handled: false,
-          response: {
-            content: "I couldn't find any matching FAQ.",
-            quickReplies: [
-              "📞 Talk to Counselor",
-              "⬅️ Back to Menu",
-            ],
-          },
-          nextState: currentState,
+          handled: true,
+          response: faqResult.response,
+          nextState: faqResult.topic ?? "FAQ",
         };
-      }  
+      }
+
+      return {
+        handled: false,
+        response: {
+          content: "I couldn't find any matching FAQ.",
+          quickReplies: [
+            "📞 Talk to Counselor",
+            "⬅️ Back to Menu",
+          ],
+        },
+        nextState: currentState,
+      };
+    }
     case "unknown": {
 
 
@@ -84,13 +84,13 @@ export function processInput(currentState: ChatState, userInput: string): Proces
       }
 
       // Then fall back to FAQ search
-      const faqResponse = searchFAQ(intent.raw);
+      const faqResult = searchFAQ(intent.raw);
 
-      if (faqResponse.faqData && faqResponse.faqData.length > 0) {
+      if (faqResult.found) {
         return {
           handled: true,
-          response: faqResponse,
-          nextState: "FAQ",
+          response: faqResult.response,
+          nextState: faqResult.topic ?? currentState,
         };
       }
 

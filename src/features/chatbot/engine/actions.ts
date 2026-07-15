@@ -1,4 +1,4 @@
-
+import type { ChatState } from "../types";
 import type { BotResponse } from "../types";
 import { COURSE_INFO, CURRICULUM, PLACEMENT_STATS, BONUSES } from "../data/knowledgeBase";
 import { MAIN_MENU } from "../data/menuData";
@@ -100,16 +100,16 @@ These aren't self-reported numbers. Every placement is verified — company, rol
   };
 }
 
-  export function projectsAction(): BotResponse {
-    return {
-      content: `**25+ production-grade projects** — not toy exercises, not datasets from Kaggle tutorials. These are systems built to run in the real world, reviewed by mentors, and added to your GitHub portfolio.
+export function projectsAction(): BotResponse {
+  return {
+    content: `**25+ production-grade projects** — not toy exercises, not datasets from Kaggle tutorials. These are systems built to run in the real world, reviewed by mentors, and added to your GitHub portfolio.
   
   Three of our alumni have actually deployed their DATADROP projects at their current companies. Here are six of the most impressive:`,
-      quickReplies: withBack(["📋 Full Curriculum", "🏆 Placement", "✅ Enroll Now"]),
-      nextState: "PROJECTS",
-      component: "project-cards",
-    };
-  }
+    quickReplies: withBack(["📋 Full Curriculum", "🏆 Placement", "✅ Enroll Now"]),
+    nextState: "PROJECTS",
+    component: "project-cards",
+  };
+}
 
 export function pricingAction(): BotResponse {
   const bonusTotal = "₹12,500+";
@@ -264,8 +264,12 @@ ${topic.description}
 }
 
 // ── FAQ search ─────────────────────────────────────────────────────────────────
-
-export function searchFAQ(query: string): BotResponse {
+export interface FAQSearchResult {
+  found: boolean;
+  response: BotResponse;
+  topic?: ChatState;
+}
+export function searchFAQ(query: string): FAQSearchResult {
   const normalizedQuery = normalize(query);
   // Only whole query words of 3+ letters count as a match — a raw substring
   // check (e.g. "it") would otherwise false-match inside unrelated words
@@ -291,18 +295,25 @@ export function searchFAQ(query: string): BotResponse {
 
   if (!matches.length) {
     return {
-      content: `No FAQs found for "${query}". Try different keywords — or speak directly to a counselor who can answer any question in detail.`,
-      quickReplies: ["📞 Talk to Counselor", BACK],
+      found: false,
+      response: {
+        content: `No FAQs found for "${query}". Try different keywords — or speak directly to a counselor who can answer any question in detail.`,
+        quickReplies: ["📞 Talk to Counselor", BACK],
+      },
     };
   }
 
   const bestAnswer = matches[0];
 
   return {
-    content: bestAnswer.answer,
-    quickReplies: [
-      BACK,
-      "📞 Talk to Counselor",
-    ],
+    found: true,
+    response: {
+      content: bestAnswer.answer,
+      quickReplies: [
+        BACK,
+        "📞 Talk to Counselor",
+      ],
+    },
+    topic: bestAnswer.topic,
   };
 }
