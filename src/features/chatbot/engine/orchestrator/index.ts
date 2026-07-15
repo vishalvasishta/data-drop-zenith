@@ -70,7 +70,7 @@ export function handleMessage({
       profile,
     });
     rememberContext({
-      topic: currentState,
+      topic: knowledge.topic ?? currentState,
       question: userInput,
     });
     console.log("[Memory]", getConversationMemory());

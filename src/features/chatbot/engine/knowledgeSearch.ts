@@ -1,3 +1,4 @@
+
 import { createKnowledgeResponse } from "./knowledgeResponse";
 import { routeKnowledgeIntent } from "../search/router";
 import { analyzeQuestion } from "../engine/context/questionAnalyzer";
@@ -23,11 +24,10 @@ export function searchKnowledge(question: string): KnowledgeAnswer {
 
 
   if (route.handled && route.response) {
-
-
     return {
       found: true,
       response: route.response,
+      topic: route.topic,
     };
   }
 

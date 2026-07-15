@@ -10,11 +10,11 @@ import type { QuestionType } from "../engine/context/questionAnalyzer";
 import { handleCurriculum } from "./handlers/curriculum";
 import { handleProjects } from "./handlers/projects";
 import { handlePlacement } from "./handlers/placement";
-import type { BotResponse } from "../types";
-
+import type { ChatState, BotResponse } from "../types";
 export interface KnowledgeRoute {
   handled: boolean;
   response?: BotResponse;
+  topic?: ChatState;
 }
 export function routeKnowledgeIntent(
   questionType: QuestionType,
@@ -23,38 +23,64 @@ export function routeKnowledgeIntent(
   console.log("[Eligibility Handler]");
   switch (questionType) {
     case "mentorship":
-      return handleMentorship();
+      return {
+        ...handleMentorship(),
+        topic: "STUDENT_SUPPORT",
+      };
     case "duration":
-      return handleDuration();
+      return {
+        ...handleDuration(),
+        topic: "ABOUT",
+      };
     case "projects":
-      return handleProjects();
+      return {
+        ...handleProjects(),
+        topic: "PROJECTS",
+      };
     case "pricing":
-      return handlePricing();
+      return {
+        ...handlePricing(),
+        topic: "PRICING",
+      };
 
     case "certificate":
-      return handleCertificate();
+      return {
+        ...handleCertificate(),
+        topic: "ABOUT",
+      };
 
     case "recordings":
-      return handleRecordings();
+      return {
+        ...handleRecordings(),
+        topic: "STUDENT_SUPPORT",
+      };
     case "assignments":
-      return handleAssignments();
+      return {
+        ...handleAssignments(),
+        topic: "STUDENT_SUPPORT",
+      };
     case "projects":
       return handleProjects();
 
     case "placement":
-      return handlePlacement();
+      return {
+        ...handlePlacement(),
+        topic: "PLACEMENT",
+      };
 
     case "curriculum":
-      return handleCurriculum();
+      return {
+        ...handleCurriculum(),
+        topic: "CURRICULUM",
+      };
     case "eligibility": {
-        console.log("[Router] Before handler");
+      const result = handleEligibility();
 
-        const result = handleEligibility();
-
-        console.log("[Router] After handler", result);
-
-      return result;
-      }
+      return {
+        ...result,
+        topic: "ABOUT",
+      };
+    }
 
     // Remaing question types (projects, placement, certificate,
     // eligibility, curriculum, recordings, mentorship, assignments) do not
