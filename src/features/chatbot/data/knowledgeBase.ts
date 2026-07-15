@@ -508,8 +508,14 @@ export const CURRICULUM: CourseTopic[] = [
   },
   {
     id: "nlp",
-    title: "Natural Language Processing",
-    phase: 3,
+      title: "Natural Language Processing",
+
+      aliases: [
+        "nlp",
+        "natural language processing",
+        "text processing",
+        "language processing"
+      ],
     description:
       "Text preprocessing, TF-IDF, word embeddings (Word2Vec, GloVe), sentiment analysis, named entity recognition, and text classification. The foundation for every LLM-powered application.",
     careerOutcome: "NLP Engineer / AI Engineer",

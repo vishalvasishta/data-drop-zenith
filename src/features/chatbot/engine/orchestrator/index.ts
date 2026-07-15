@@ -1,7 +1,6 @@
+import { rememberContext,getConversationMemory, } from "../../engine/conversationMemory";
 import type { BotResponse, ChatState, StudentProfile } from "../../types";
-import { analyzeConversation } from "../analysis/conversationAnalyzer";
 import { resolveContext } from "../contextResolver";
-import { classifyConversationIntent } from "../context/conversationIntentClassifier";
 import { processInput } from "../chatbotEngine";
 import { searchKnowledge } from "../knowledgeSearch";
 import { runConversationPipeline } from "../response/conversationPipeline";
@@ -39,6 +38,17 @@ export function handleMessage({
       response: parserResult.response,
       profile,
     });
+    console.log(
+      "[Pipeline]",
+      "User:", userInput,
+      "NextState:", parserResult.nextState,
+      "Handled:", parserResult.handled,
+    );
+    rememberContext({
+      topic: parserResult.nextState,
+      question: userInput,
+    });
+    console.log("[Memory]", getConversationMemory());
 
     return {
       handled: true,
@@ -59,6 +69,11 @@ export function handleMessage({
       response: knowledge.response,
       profile,
     });
+    rememberContext({
+      topic: currentState,
+      question: userInput,
+    });
+    console.log("[Memory]", getConversationMemory());
 
     return {
       handled: true,

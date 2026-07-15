@@ -1,3 +1,4 @@
+import { searchKnowledge } from "./knowledgeSearch";
 import type { BotResponse, ChatState } from "../types";
 import { parseInput } from "./parser";
 import { getStateResponse } from "./stateMachine";
@@ -42,17 +43,49 @@ export function processInput(currentState: ChatState, userInput: string): Proces
         nextState: "CURRICULUM",
       };
     }
-    case "faq-search": {
-      const response = searchFAQ(intent.query);
-      return {
-        handled: true,
-        response,
-        nextState: "FAQ",
-      };
-    }
+      case "faq-search": {
+        const faqResponse = searchFAQ(intent.query);
+
+        if (faqResponse.faqData?.length) {
+          return {
+            handled: true,
+            response: faqResponse,
+            nextState: "FAQ",
+          };
+        }
+
+        return {
+          handled: false,
+          response: {
+            content: "I couldn't find any matching FAQ.",
+            quickReplies: [
+              "📞 Talk to Counselor",
+              "⬅️ Back to Menu",
+            ],
+          },
+          nextState: currentState,
+        };
+      }  
     case "unknown": {
-      // Fallback: try FAQ search before giving up
+
+
+      const knowledge = searchKnowledge(intent.raw);
+
+
+
+      if (knowledge.found) {
+
+
+        return {
+          handled: true,
+          response: knowledge.response!,
+          nextState: currentState,
+        };
+      }
+
+      // Then fall back to FAQ search
       const faqResponse = searchFAQ(intent.raw);
+
       if (faqResponse.faqData && faqResponse.faqData.length > 0) {
         return {
           handled: true,
@@ -60,6 +93,8 @@ export function processInput(currentState: ChatState, userInput: string): Proces
           nextState: "FAQ",
         };
       }
+
+      // Finally show the default help menu
       return {
         handled: false,
         response: {
@@ -75,9 +110,8 @@ export function processInput(currentState: ChatState, userInput: string): Proces
         },
         nextState: currentState,
       };
-    
+    }
   }
-}
 }
 
 // ── Initial bot message on open ───────────────────────────────────────────────

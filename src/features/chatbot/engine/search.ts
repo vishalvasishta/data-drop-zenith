@@ -20,7 +20,7 @@ export interface SearchResult {
 
 // 👇 Add this function below the interface
 
-function normalize(text: string): string {
+export function normalize(text: string): string {
   return text
     .toLowerCase()
     .trim()
@@ -45,7 +45,7 @@ function tokenMatchesKeyword(token: string, keyword: string): boolean {
 
   return tokenWords.includes(normalize(keyword));
 }
-function tokenize(text: string): string[] {
+export function tokenize(text: string): string[] {
   return normalize(text)
     .split(" ")
     .filter((word) => word.length > 1);

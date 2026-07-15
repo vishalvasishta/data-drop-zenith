@@ -1,4 +1,4 @@
-import type { BotResponse } from "../types";
+import type { BotResponse } from "./types";
 
 export interface ResponseOptions {
   content: string;

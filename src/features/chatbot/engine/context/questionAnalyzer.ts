@@ -34,9 +34,14 @@ export function analyzeQuestion(message: string): QuestionType {
   }
 
   if (
-    text.includes("price") ||
+    text.includes("fee") ||
     text.includes("fees") ||
+    text.includes("price") ||
+    text.includes("pricing") ||
     text.includes("cost") ||
+    text.includes("charges") ||
+    text.includes("payment") ||
+    text.includes("amount") ||
     text.includes("how much")
   ) {
     return "pricing";
@@ -65,33 +70,67 @@ export function analyzeQuestion(message: string): QuestionType {
   if (
     text.includes("eligible") ||
     text.includes("eligibility") ||
-    text.includes("who can join")
+    text.includes("who can join") ||
+    text.includes("who is this course for") ||
+    text.includes("can beginners join") ||
+    text.includes("beginner") ||
+    text.includes("no coding")
   ) {
     return "eligibility";
   }
 
   if (
     text.includes("curriculum") ||
-    text.includes("syllabus")
+    text.includes("syllabus") ||
+    text.includes("roadmap") ||
+    text.includes("modules") ||
+    text.includes("topics") ||
+    text.includes("subjects") ||
+    text.includes("what will i learn") ||
+    text.includes("what do you teach") ||
+    text.includes("course content")
   ) {
     return "curriculum";
   }
 
   if (
-    text.includes("recording")
+    text.includes("recording") ||
+    text.includes("recordings") ||
+    text.includes("missed class") ||
+    text.includes("miss class") ||
+    text.includes("watch later") ||
+    text.includes("watch again") ||
+    text.includes("replay") ||
+    text.includes("class recording")
   ) {
     return "recordings";
   }
 
   if (
     text.includes("mentor") ||
-    text.includes("mentorship")
+    text.includes("mentorship") ||
+    text.includes("mentoring") ||
+    text.includes("trainer") ||
+    text.includes("faculty") ||
+    text.includes("teacher") ||
+    text.includes("instructor") ||
+    text.includes("doubt support") ||
+    text.includes("guidance") ||
+    text.includes("who will teach") ||
+    text.includes("one on one") ||
+    text.includes("1-on-1")
   ) {
     return "mentorship";
   }
 
   if (
-    text.includes("assignment")
+    text.includes("assignment") ||
+    text.includes("assignments") ||
+    text.includes("practice") ||
+    text.includes("homework") ||
+    text.includes("tasks") ||
+    text.includes("exercise") ||
+    text.includes("exercises")
   ) {
     return "assignments";
   }
@@ -113,9 +152,14 @@ export function analyzeQuestions(message: string): QuestionType[] {
   }
 
   if (
-    text.includes("price") ||
+    text.includes("fee") ||
     text.includes("fees") ||
+    text.includes("price") ||
+    text.includes("pricing") ||
     text.includes("cost") ||
+    text.includes("charges") ||
+    text.includes("payment") ||
+    text.includes("amount") ||
     text.includes("how much")
   ) {
     intents.push("pricing");
@@ -123,9 +167,15 @@ export function analyzeQuestions(message: string): QuestionType[] {
 
   if (
     text.includes("project") ||
-    text.includes("projects")
+    text.includes("projects") ||
+    text.includes("portfolio") ||
+    text.includes("real world") ||
+    text.includes("hands on") ||
+    text.includes("practical") ||
+    text.includes("build") ||
+    text.includes("capstone")
   ) {
-    intents.push("projects");
+    return "projects";
   }
 
   if (

@@ -1,4 +1,3 @@
-import { analyzeQuestion } from "./context/questionAnalyzer";
 import { rewriteMessage } from "./context/messageRewriter";
 import { hasContextPronoun } from "./context/pronounResolver";
 import { TOPIC_CONTEXT } from "./topicContext";
@@ -70,10 +69,6 @@ export function resolveContext(message: string): ContextResolution {
   const lastTopic = getLastTopic();
   const context = getContextSnapshot();
   const normalizedMessage = message.toLowerCase();
-  const questionType = analyzeQuestion(normalizedMessage);
-
-
-
   const hasContextWord = hasContextPronoun(normalizedMessage);
 
   if (hasContextWord && lastTopic) {

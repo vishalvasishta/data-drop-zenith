@@ -1,6 +1,6 @@
 import type { ChatState } from "../types";
 export interface ConversationEvent {
-  role: "user" | "bot";
+  role: "user" | "rememberbot";
 
   message: string;
 

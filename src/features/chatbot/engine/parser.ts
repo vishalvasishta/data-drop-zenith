@@ -202,6 +202,22 @@ function scoreIntent(
   }
   return bestScore;
 }
+const FAQ_KEYWORDS = [
+  "refund",
+  "refund policy",
+  "emi",
+  "installment",
+  "instalment",
+  "payment method",
+  "payment methods",
+  "upi",
+  "credit card",
+  "debit card",
+  "net banking",
+  "scholarship",
+  "discount",
+  "offer",
+];
 export function parseInput(raw: string): ParsedIntent {
   const input = normalizeText(normaliseInput(raw));
   const questionType = analyzeQuestion(input);
@@ -219,6 +235,55 @@ export function parseInput(raw: string): ParsedIntent {
   // Exact menu label match
   const menuState = MENU_LABEL_MAP[stripped] ?? MENU_LABEL_MAP[input];
   if (menuState) return { kind: "navigate", state: menuState };
+  const inputWords = input
+    .split(/\s+/)
+    .filter(word => !STOP_WORDS.has(word));
+
+  // Curriculum topic scoring
+  let bestTopic: typeof CURRICULUM[number] | null = null;
+  let bestTopicScore = 0;
+
+  for (const topic of CURRICULUM) {
+    const searchableText = normalizeText(
+      [
+        topic.title,
+        ...(topic.aliases ?? []),
+      ].join(" ")
+    );
+
+    const titleWords = searchableText
+      .split(/\s+/)
+      .filter(Boolean);
+
+    let score = 0;
+
+    for (const word of inputWords) {
+      if (titleWords.includes(word)) {
+        score++;
+      }
+    }
+
+    // Bonus if the full title appears
+    if (
+      normalizeText(input).includes(
+        normalizeText(topic.title)
+      )
+    ) {
+      score += 5;
+    }
+
+    if (score > bestTopicScore) {
+      bestTopicScore = score;
+      bestTopic = topic;
+    }
+  }
+
+  if (bestTopic && bestTopicScore >= 2) {
+    return {
+      kind: "curriculum-topic",
+      title: bestTopic.title,
+    };
+  }
 
   // Keyword match (single word)
   // Natural language navigation patterns
@@ -249,7 +314,13 @@ export function parseInput(raw: string): ParsedIntent {
       "Intent:", bestIntent,
       "Score:", bestScore,
     );
-
+    console.log(
+      "[Parser Navigate]",
+      input,
+      bestIntent,
+      bestScore,
+      questionType
+    );
     return {
       kind: "navigate",
       state: bestIntent,
@@ -268,10 +339,7 @@ export function parseInput(raw: string): ParsedIntent {
   }
 
   // Curriculum topic match
-  const topicMatch = CURRICULUM.find(
-    (t) => input.includes(t.title.toLowerCase()) || t.title.toLowerCase().includes(input),
-  );
-  if (topicMatch) return { kind: "curriculum-topic", title: topicMatch.title };
+
   const synonym = synonymMatch(input);
 
   if (synonym) {
@@ -292,7 +360,10 @@ export function parseInput(raw: string): ParsedIntent {
         return { kind: "navigate", state: "CONTACT" };
 
       case "eligibility":
-        return { kind: "navigate", state: "ABOUT" };
+        return {
+          kind: "faq-search",
+          query: input,
+        };
 
       default:
         break;
@@ -317,5 +388,21 @@ export function parseInput(raw: string): ParsedIntent {
   if (FAQ_CATEGORIES.includes(faqCategoryStripped.toLowerCase())) {
     return { kind: "faq-search", query: faqCategoryStripped };
   }
+  // FAQ keyword search
+  if (
+    FAQ_KEYWORDS.some(keyword =>
+      input.includes(keyword)
+    )
+  ) {
+    return {
+      kind: "faq-search",
+      query: input,
+    };
+  }
+  console.log(
+    "[Parser Unknown]",
+    input,
+    questionType
+  );
   return { kind: "unknown", raw };
 }

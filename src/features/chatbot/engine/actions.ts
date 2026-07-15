@@ -3,6 +3,7 @@ import type { BotResponse } from "../types";
 import { COURSE_INFO, CURRICULUM, PLACEMENT_STATS, BONUSES } from "../data/knowledgeBase";
 import { MAIN_MENU } from "../data/menuData";
 import { FAQ_DATA } from "../data/faqData";
+import { normalize, tokenize } from "./search";
 import { WELCOME_MESSAGE, ROLE_QUICK_REPLIES } from "../data/conversations/welcome";
 import { MAIN_MENU_PROMPT } from "../data/conversations/mainMenu";
 import { FOLLOW_UP_SUGGESTIONS } from "../data/conversations/followUpSuggestions";
@@ -99,16 +100,16 @@ These aren't self-reported numbers. Every placement is verified — company, rol
   };
 }
 
-export function projectsAction(): BotResponse {
-  return {
-    content: `**25+ production-grade projects** — not toy exercises, not datasets from Kaggle tutorials. These are systems built to run in the real world, reviewed by mentors, and added to your GitHub portfolio.
-
-Three of our alumni have actually deployed their DATADROP projects at their current companies. Here are six of the most impressive:`,
-    quickReplies: withBack(["📋 Full Curriculum", "🏆 Placement", "✅ Enroll Now"]),
-    nextState: "PROJECTS",
-    component: "project-cards",
-  };
-}
+  export function projectsAction(): BotResponse {
+    return {
+      content: `**25+ production-grade projects** — not toy exercises, not datasets from Kaggle tutorials. These are systems built to run in the real world, reviewed by mentors, and added to your GitHub portfolio.
+  
+  Three of our alumni have actually deployed their DATADROP projects at their current companies. Here are six of the most impressive:`,
+      quickReplies: withBack(["📋 Full Curriculum", "🏆 Placement", "✅ Enroll Now"]),
+      nextState: "PROJECTS",
+      component: "project-cards",
+    };
+  }
 
 export function pricingAction(): BotResponse {
   const bonusTotal = "₹12,500+";
@@ -265,13 +266,28 @@ ${topic.description}
 // ── FAQ search ─────────────────────────────────────────────────────────────────
 
 export function searchFAQ(query: string): BotResponse {
-  const q = query.toLowerCase();
-  const matches = FAQ_DATA.filter(
-    (f) =>
-      f.question.toLowerCase().includes(q) ||
-      f.answer.toLowerCase().includes(q) ||
-      f.category.toLowerCase().includes(q),
-  ).slice(0, 6);
+  const normalizedQuery = normalize(query);
+  // Only whole query words of 3+ letters count as a match — a raw substring
+  // check (e.g. "it") would otherwise false-match inside unrelated words
+  // (e.g. "credit", "eligibility").
+  const queryWords = tokenize(query).filter((w) => w.length >= 3);
+
+  const matches = FAQ_DATA.filter((f) => {
+    const question = normalize(f.question);
+    const answer = normalize(f.answer);
+    const category = normalize(f.category);
+    const haystack = `${question} ${answer} ${category}`;
+
+    if (
+      normalizedQuery.length >= 3 &&
+      (question.includes(normalizedQuery) || haystack.includes(normalizedQuery))
+    ) {
+      return true;
+    }
+
+    const haystackWords = new Set(haystack.split(" "));
+    return queryWords.some((word) => haystackWords.has(word));
+  }).slice(0, 6);
 
   if (!matches.length) {
     return {
@@ -280,10 +296,13 @@ export function searchFAQ(query: string): BotResponse {
     };
   }
 
+  const bestAnswer = matches[0];
+
   return {
-    content: `Found ${matches.length} answer${matches.length > 1 ? "s" : ""} for "${query}":`,
-    quickReplies: [BACK, "📞 Talk to Counselor"],
-    component: "faq",
-    faqData: matches,
+    content: bestAnswer.answer,
+    quickReplies: [
+      BACK,
+      "📞 Talk to Counselor",
+    ],
   };
 }
