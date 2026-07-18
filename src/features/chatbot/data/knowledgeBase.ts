@@ -2471,7 +2471,7 @@ export const PAYMENT_INFO = {
     "All payment transactions are encrypted and processed securely.",
 
   refundPolicy:
-    "Refund requests, if applicable, are handled according to the official DATADROP refund policy.",
+  "100% refund within the first 7 days as per the official DATADROP refund policy.",
 
   support:
     "If you experience any payment issues, our support team will assist you as quickly as possible.",

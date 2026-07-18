@@ -203,20 +203,9 @@ function scoreIntent(
   return bestScore;
 }
 const FAQ_KEYWORDS = [
-  "refund",
-  "refund policy",
-  "emi",
-  "installment",
-  "instalment",
-  "payment method",
-  "payment methods",
-  "upi",
-  "credit card",
-  "debit card",
-  "net banking",
   "scholarship",
-  "discount",
-  "offer",
+    "discount",
+    "offer",
 ];
 export function parseInput(raw: string): ParsedIntent {
   const input = normalizeText(normaliseInput(raw));
@@ -306,7 +295,11 @@ export function parseInput(raw: string): ParsedIntent {
   if (
     bestIntent &&
     bestScore >= 2 &&
-    questionType === "unknown"
+    questionType === "unknown" &&
+    !input.includes("who can join") &&
+    !input.includes("can i join") &&
+    !input.includes("can degree students join") &&
+    !input.includes("can diploma students join")
   ) {
     console.log(
       "[Intent Match]",

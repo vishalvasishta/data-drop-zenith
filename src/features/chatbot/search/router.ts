@@ -6,7 +6,9 @@ import { handleRecordings } from "./handlers/recordings";
 import { handleCertificate } from "./handlers/certificate";
 import { handlePricing } from "./handlers/pricing";
 import { handleDuration } from "./handlers/duration";
-import type { QuestionType } from "../engine/context/questionAnalyzer";
+import type {
+  QuestionIntent,
+} from "../engine/context/questionAnalyzer";
 import { handleCurriculum } from "./handlers/curriculum";
 import { handleProjects } from "./handlers/projects";
 import { handlePlacement } from "./handlers/placement";
@@ -17,9 +19,12 @@ export interface KnowledgeRoute {
   topic?: ChatState;
 }
 export function routeKnowledgeIntent(
-  questionType: QuestionType,
-):
-  KnowledgeRoute {
+  intent: QuestionIntent,
+): KnowledgeRoute {
+  
+  
+  const questionType = intent.type;
+  
   console.log("[Eligibility Handler]");
   switch (questionType) {
     case "mentorship":
@@ -39,10 +44,9 @@ export function routeKnowledgeIntent(
       };
     case "pricing":
       return {
-        ...handlePricing(),
+        ...handlePricing(intent),
         topic: "PRICING",
       };
-
     case "certificate":
       return {
         ...handleCertificate(),
@@ -74,13 +78,14 @@ export function routeKnowledgeIntent(
         topic: "CURRICULUM",
       };
     case "eligibility": {
-      const result = handleEligibility();
+      const result = handleEligibility(intent);
 
       return {
         ...result,
         topic: "ABOUT",
       };
     }
+    
 
     // Remaing question types (projects, placement, certificate,
     // eligibility, curriculum, recordings, mentorship, assignments) do not

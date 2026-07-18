@@ -2,33 +2,89 @@ import { ELIGIBILITY } from "../../data/knowledgeBase";
 import { createResponse } from "../../responseFactory";
 import { getFollowUps } from "../followUps";
 import type { KnowledgeRoute } from "../router";
+import type { QuestionIntent } from "../../engine/context/questionAnalyzer";
 
-export function handleEligibility(): KnowledgeRoute {
-  const content = `🎓 ${ELIGIBILITY.minimumQualification}
+export function handleEligibility(
+  intent: QuestionIntent,
+): KnowledgeRoute {
+  if (intent?.subtype === "coding") {
+    return {
+      handled: true,
+      response: createResponse({
+        content: `💻 ${ELIGIBILITY.codingExperience}`,
+        followUpSuggestions: getFollowUps("eligibility"),
+        intent: "eligibility",
+      }),
+    };
+  }
+  if (intent?.subtype === "qualification") {
+    return {
+      handled: true,
+      response: createResponse({
+        content: `🎓 ${ELIGIBILITY.minimumQualification}`,
+        followUpSuggestions: getFollowUps("eligibility"),
+        intent: "eligibility",
+      }),
+    };
+  }
+  if (intent?.subtype === "age") {
+    return {
+      handled: true,
+      response: createResponse({
+        content: `🎂 ${ELIGIBILITY.ageLimit}`,
+        followUpSuggestions: getFollowUps("eligibility"),
+        intent: "eligibility",
+      }),
+    };
+  }
 
-👨‍🎓 Suitable For:
-${ELIGIBILITY.suitableFor.map(item => `• ${item}`).join("\n")}
+  console.log(
+    "[Eligibility Handler]",
+    JSON.stringify(intent, null, 2)
+  );
+  const sections = [
+    ELIGIBILITY.minimumQualification &&
+    `🎓 ${ELIGIBILITY.minimumQualification}`,
 
-💻 Coding Experience:
-${ELIGIBILITY.codingExperience}
+    ELIGIBILITY.suitableFor?.length &&
+    `👨‍🎓 Suitable For:\n${ELIGIBILITY.suitableFor
+      .map(item => `• ${item}`)
+      .join("\n")}`,
 
-📚 Educational Background:
-${ELIGIBILITY.educationBackground}
+    ELIGIBILITY.codingExperience &&
+    `💻 Coding Experience:\n${ELIGIBILITY.codingExperience}`,
 
-🎂 Age Limit:
-${ELIGIBILITY.ageLimit}
+    ELIGIBILITY.educationBackground &&
+    `📚 Educational Background:\n${ELIGIBILITY.educationBackground}`,
 
-💻 Laptop Requirement:
-${ELIGIBILITY.laptop}
+    ELIGIBILITY.ageLimit &&
+    `🎂 Age Limit:\n${ELIGIBILITY.ageLimit}`,
 
-🗣 Language:
-${ELIGIBILITY.language}
+    ELIGIBILITY.laptop &&
+    `💻 Laptop Requirement:\n${ELIGIBILITY.laptop}`,
 
-📅 Attendance:
-${ELIGIBILITY.attendance}
+    ELIGIBILITY.language &&
+    `🗣 Language:\n${ELIGIBILITY.language}`,
 
-⏳ Commitment:
-${ELIGIBILITY.commitment}`;
+    ELIGIBILITY.attendance &&
+    `📅 Attendance:\n${ELIGIBILITY.attendance}`,
+
+    ELIGIBILITY.commitment &&
+    `⏳ Commitment:\n${ELIGIBILITY.commitment}`,
+  ].filter(Boolean);
+  switch (intent.subtype) {
+    case "qualification":
+      return {
+        handled: true,
+        response: createResponse({
+          content: `🎓 ${ELIGIBILITY.minimumQualification}`,
+          followUpSuggestions: getFollowUps("eligibility"),
+          intent: "eligibility",
+        }),
+      };
+  }
+
+  const content = sections.join("\n\n");
 
   return {
     handled: true,

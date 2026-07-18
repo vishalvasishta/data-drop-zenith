@@ -1,7 +1,10 @@
 
 import { createKnowledgeResponse } from "./knowledgeResponse";
 import { routeKnowledgeIntent } from "../search/router";
-import { analyzeQuestion } from "../engine/context/questionAnalyzer";
+import {
+  analyzeQuestion,
+  analyzeIntent,
+} from "../engine/context/questionAnalyzer";
 import { getLastTopic } from "../engine/conversationMemory";
 import { normalizeText } from "../utils/textNormalization";
 import {
@@ -18,9 +21,9 @@ import type { KnowledgeAnswer } from "../types/knowledge";
 export function searchKnowledge(question: string): KnowledgeAnswer {
   const q = normalizeText(question);
   const questionType = analyzeQuestion(q);
+  const intent = analyzeIntent(q);
 
-  const route = routeKnowledgeIntent(questionType);
-
+  const route = routeKnowledgeIntent(intent);  
 
 
   if (route.handled && route.response) {

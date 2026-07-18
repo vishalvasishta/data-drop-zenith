@@ -1,6 +1,12 @@
 import type { ChatState } from "../types";
 import type { BotResponse } from "../types";
-import { COURSE_INFO, CURRICULUM, PLACEMENT_STATS, BONUSES } from "../data/knowledgeBase";
+import {
+  COURSE_INFO,
+  CURRICULUM,
+  PLACEMENT_STATS,
+  BONUSES,
+  PAYMENT_INFO,
+} from "../data/knowledgeBase";
 import { MAIN_MENU } from "../data/menuData";
 import { FAQ_DATA } from "../data/faqData";
 import { normalize, tokenize } from "./search";
@@ -118,18 +124,18 @@ export function pricingAction(): BotResponse {
 
 To put that in perspective: a single 1-on-1 mock interview session at most platforms costs ₹2,000. We include **six** of them, plus everything below — all for ${COURSE_INFO.fee}.
 
-✅ 18 months of live + recorded classes
+✅ ${COURSE_INFO.duration} of ${COURSE_INFO.mode.toLowerCase()}
 ✅ 28 modules across 5 phases
 ✅ 25+ real projects with mentor review
-✅ Industry-recognised certificate
+✅${COURSE_INFO.certificate}
 ✅ Lifetime Discord community (1,000+ engineers)
 ✅ 6 months recorded-session access
 ✅ Dedicated placement counsellor from Month 15
 ✅ Job referrals to 150+ hiring partners
 ✅ All bonuses worth ${bonusTotal} — included FREE
 
-💳 Pay via UPI, debit/credit card, or net banking · Secured by Razorpay
-↩️ 7-day, no-questions-asked refund guarantee`,
+💳 Pay via ${PAYMENT_INFO.methods.join(", ")} · ${PAYMENT_INFO.gateway}
+↩️ ${PAYMENT_INFO.refundPolicy}`,
     quickReplies: withBack(["🎁 Bonuses", "✅ Enroll Now", "📞 Talk to Counselor"]),
     followUpSuggestions: FOLLOW_UP_SUGGESTIONS["PRICING"],
     nextState: "PRICING",
@@ -168,9 +174,9 @@ export function paymentAction(): BotResponse {
   return {
     content: `**Initiating secure payment for ${COURSE_INFO.fee}...**
 
-🔒 256-bit SSL · Secured by Razorpay
-📱 UPI, debit card, credit card, net banking accepted
-↩️ 7-day refund guarantee if you change your mind`,
+🔒 ${PAYMENT_INFO.gateway}
+📱 ${PAYMENT_INFO.methods.join(", ")}
+↩️ ${PAYMENT_INFO.refundPolicy}`,
     quickReplies: withBack(["❓ FAQs", "📞 Talk to Counselor"]),
     nextState: "PAYMENT",
   };

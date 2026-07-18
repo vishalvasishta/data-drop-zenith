@@ -1,3 +1,4 @@
+import { resolveFollowUp } from "../context/followUpResolver";
 import { rememberContext,getConversationMemory, } from "../../engine/conversationMemory";
 import type { BotResponse, ChatState, StudentProfile } from "../../types";
 import { resolveContext } from "../contextResolver";
@@ -23,12 +24,13 @@ export function handleMessage({
 }: HandleMessageRequest): HandleMessageResult {
   // Resolve conversational context
   const context = resolveContext(userInput);
+  const followUp = resolveFollowUp(context.resolvedMessage);
 
 
   // Let the parser handle navigation first
   const parserResult = processInput(
     currentState,
-    userInput,
+    followUp.rewrittenMessage,
   );
 
   if (parserResult.handled) {

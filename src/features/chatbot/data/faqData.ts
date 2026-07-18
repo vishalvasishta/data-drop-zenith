@@ -102,7 +102,7 @@ export const FAQ_DATA: FAQ[] = [
     category: "Fees & Payment",
     question: "Is EMI or instalment payment available?",
     answer:
-      "Yes. You can pay in 3 instalments through Razorpay — no cost EMI on most major credit cards and select debit cards. The first instalment is ₹1,599 at enrollment, with the remaining two over the following 60 days.",
+      "Yes. You can pay in EMI. installemnts starting from just 289 rupees per month ,we offer emi on  many bank`s credit cards",
   },
   {
     id: "faq-fee-3",
